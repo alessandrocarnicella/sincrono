@@ -10,12 +10,12 @@
 	              <div class="float-right">
 	                <p class="mb-0 text-right"></p>
 	                <div class="fluid-container">
-	                  <h3 class="font-weight-medium text-right mb-0">${x.getPersona().getNomePersona()}</h3>
+	                  <h3 class="font-weight-medium text-right mb-0">${x.persona.nomePersona}</h3>
 	                </div>
 	              </div>
 	            </div>
 	            <p class="text-muted mt-3 mb-0">
-	              <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i>é VENERDI 
+	              <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i>
 	            </p>
 	          </div>
 	        </div>

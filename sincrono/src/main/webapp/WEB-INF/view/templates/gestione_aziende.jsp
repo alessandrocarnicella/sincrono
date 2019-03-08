@@ -26,12 +26,12 @@
 								<tr> 
 									<td class="py-1"><img
 										src="../../images/faces-clipart/pic-1.png" alt="image"></td>
-									<td>${x.getNomeAzienda()}</td>
-									<td>${x.getEmailAzienda()}</td>
-									<td>${x.getPivaAzienda()}</td>
+									<td>${x.nomeAzienda}</td>
+									<td>${x.emailAzienda}</td>
+									<td>${x.pivaAzienda}</td>
 									<td class="text-center">
 										<c:choose>
-											<c:when test="${x.getStatusAzienda() eq 1}">
+											<c:when test="${x.statusAzienda eq 1}">
 												<button type="button" class="btn btn-icons btn-rounded btn-success"></button>
 											</c:when>
 											<c:otherwise>

@@ -9,14 +9,14 @@
                 <i class="mdi mdi-cube text-danger icon-lg"></i>
               </div>
               <div class="float-right">
-                <p class="mb-0 text-right">${x.getPivaAzienda()}</p>
+                <p class="mb-0 text-right">${x.pivaAzienda}</p>
                 <div class="fluid-container">
-                  <h3 class="font-weight-medium text-right mb-0">${x.getNomeAzienda()}</h3>
+                  <h3 class="font-weight-medium text-right mb-0">${x.nomeAzienda}</h3>
                 </div>
               </div>
             </div>
             <p class="text-muted mt-3 mb-0">
-              <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i>Telefono N:  ${x.getTelefonoAzienda()}
+              <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i>Telefono N:  ${x.telefonoAzienda}
             </p>
           </div>
         </div>
