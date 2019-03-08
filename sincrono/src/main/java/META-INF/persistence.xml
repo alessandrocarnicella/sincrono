@@ -9,5 +9,6 @@
 		<class>com.sincrono.corso.model.Persona</class>
 		<class>com.sincrono.corso.model.Referente</class>
 		<class>com.sincrono.corso.model.Ril</class>
+		<class>com.sincrono.corso.model.RilPK</class>
 	</persistence-unit>
 </persistence>

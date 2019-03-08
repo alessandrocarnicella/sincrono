@@ -15,17 +15,20 @@ public class Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_persona")
 	private int idPersona;
 
 	@Column(name="cognome_persona")
 	private String cognomePersona;
 
+
 	@Column(name="email_persona")
 	private String emailPersona;
 
 	@Column(name="nome_persona")
 	private String nomePersona;
+
 
 	//bi-directional many-to-one association to Commessa
 	@OneToMany(mappedBy="persona")
@@ -39,9 +42,9 @@ public class Persona implements Serializable {
 	@OneToOne(mappedBy="persona")
 	private Referente referente;
 
-	//bi-directional one-to-one association to Ril
-	@OneToOne(mappedBy="persona")
-	private Ril ril;
+	//bi-directional many-to-one association to Ril
+	@OneToMany(mappedBy="persona")
+	private List<Ril> rils;
 
 	public Persona() {
 	}
@@ -53,6 +56,7 @@ public class Persona implements Serializable {
 	public void setIdPersona(int idPersona) {
 		this.idPersona = idPersona;
 	}
+
 
 	public String getCognomePersona() {
 		return this.cognomePersona;
@@ -69,6 +73,7 @@ public class Persona implements Serializable {
 	public void setEmailPersona(String emailPersona) {
 		this.emailPersona = emailPersona;
 	}
+
 
 	public String getNomePersona() {
 		return this.nomePersona;
@@ -116,12 +121,26 @@ public class Persona implements Serializable {
 		this.referente = referente;
 	}
 
-	public Ril getRil() {
-		return this.ril;
+	public List<Ril> getRils() {
+		return this.rils;
 	}
 
-	public void setRil(Ril ril) {
-		this.ril = ril;
+	public void setRils(List<Ril> rils) {
+		this.rils = rils;
+	}
+
+	public Ril addRil(Ril ril) {
+		getRils().add(ril);
+		ril.setPersona(this);
+
+		return ril;
+	}
+
+	public Ril removeRil(Ril ril) {
+		getRils().remove(ril);
+		ril.setPersona(null);
+
+		return ril;
 	}
 
 }
