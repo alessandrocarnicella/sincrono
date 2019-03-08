@@ -13,15 +13,8 @@ import javax.persistence.*;
 public class Ril implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name="id_personaril")
-	private int idPersonaril;
-
-	@Column(name="anno_ril")
-	private int annoRil;
-
-	@Column(name="mese_ril")
-	private String meseRil;
+	@EmbeddedId
+	private RilPK id;
 
 	@Column(name="ore_cliente")
 	private double oreCliente;
@@ -35,36 +28,20 @@ public class Ril implements Serializable {
 	@Column(name="ore_sede")
 	private double oreSede;
 
-	//bi-directional one-to-one association to Persona
-	@OneToOne
-	@JoinColumn(name="id_personaril")
+	//bi-directional many-to-one association to Persona
+	@ManyToOne
+	@JoinColumn(name="id_personaril", insertable=false, updatable=false)
 	private Persona persona;
 
 	public Ril() {
 	}
 
-	public int getIdPersonaril() {
-		return this.idPersonaril;
+	public RilPK getId() {
+		return this.id;
 	}
 
-	public void setIdPersonaril(int idPersonaril) {
-		this.idPersonaril = idPersonaril;
-	}
-
-	public int getAnnoRil() {
-		return this.annoRil;
-	}
-
-	public void setAnnoRil(int annoRil) {
-		this.annoRil = annoRil;
-	}
-
-	public String getMeseRil() {
-		return this.meseRil;
-	}
-
-	public void setMeseRil(String meseRil) {
-		this.meseRil = meseRil;
+	public void setId(RilPK id) {
+		this.id = id;
 	}
 
 	public double getOreCliente() {
