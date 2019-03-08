@@ -23,7 +23,7 @@
 						<!--  ROW ELENCO AZIENDE -->
 						<div class="row">
 							<c:forEach items="${list_az}" var="x">
-								<tr>
+								<tr> 
 									<td class="py-1"><img
 										src="../../images/faces-clipart/pic-1.png" alt="image"></td>
 									<td>${x.getNomeAzienda()}</td>
