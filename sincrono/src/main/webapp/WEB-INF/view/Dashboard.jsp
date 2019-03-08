@@ -25,7 +25,7 @@
 <meta charset="ISO-8859-1">
 
 <layout:block name="TITLE">
-	<title>LOGIN</title>
+	<title>Dashboard</title>
 </layout:block>
 
 </head>
