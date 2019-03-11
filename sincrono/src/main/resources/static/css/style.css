@@ -16309,3 +16309,19 @@ ul {
     border-left: 3px solid rgba(255, 255, 255, 0.2); } }
 
 /*# sourceMappingURL=maps/style.css.map */
+
+
+
+/* CUSTOM CSS */
+.btn.btn-icons {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.btn-center{
+	margin: auto;
+    text-align: center;
+}
