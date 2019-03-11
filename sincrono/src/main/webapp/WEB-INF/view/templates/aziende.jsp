@@ -10,7 +10,7 @@
                           <label for="searchAziende">Cerca Aziende</label>
                           <input type="text" class="form-control" id="searchAziende" placeholder="Enter...">
                         </div>
-	</div>
+	</div> 
 	<c:forEach items="${list_az}" var="x">
 	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" >
         <div class="card card-statistics">
