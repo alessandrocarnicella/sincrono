@@ -9,15 +9,15 @@
 							un pacco di cazzi di tutti ( però ricordati della Privacy e fai i
 							corsi online !)</p>
 					</div>
-					<div class="col-3">
+					<div class="col-3 btn-center">
 						<div class="form-group">
 							<label for="searchDipendenti">Ricerca ...</label> <input
 								type="text" class="form-control" id="searchGestioneUtenti"
 								placeholder="Enter ....">
 						</div>
 					</div>
-					<div class="col-2">
-						<button type="button" class="btn btn-icons btn-rounded btn-outline-success btn-center">
+					<div class="col-2 btn-center">
+						<button type="button" class="btn btn-icons btn-rounded btn-outline-success  ">
                           <i class="fas fa-plus fa-2x"></i>
                         </button>
 					</div>
