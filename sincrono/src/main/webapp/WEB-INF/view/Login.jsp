@@ -48,7 +48,7 @@
                 <div class="auto-form-wrapper">
                   
                   <!-- TODO: INSERIRE METODO E ACTION -->
-                  <form action="#" method="post">
+                  <form action="Login" method="post">
                     <div class="form-group">
                       <label class="label">Email</label>
                       <div class="input-group">
@@ -64,7 +64,7 @@
                     
                     <div class="form-group">
                       <!-- QUESTO DEVE DIVENTARE UN BUTTON CON TYPE SUBMIT COSI DA MANDARE IN POST I DATI-->
-                      <a class="btn btn-primary submit-btn btn-block" href="Dashboard">Login</a>
+                      <a type="submit" class="btn btn-primary submit-btn btn-block" href="Dashboard">Login</a>
                     </div>
                     
                     <div class="row">
