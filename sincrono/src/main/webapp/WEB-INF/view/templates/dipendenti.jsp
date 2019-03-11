@@ -39,18 +39,13 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 
-$(document).ready(function(){
-  $("#searchDipendenti").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    console.log(value);
-    
-    $("div .fluid-container h3").filter(function() {
-    
-    	if ($(this).text().toLowerCase() != value) {
-    		$(this).parent().parent().parent().parent().parent().parent().toggle();
-    	}          
-    });
-  });
-});
+$(document).ready(function() {
+			$("#searchDipendenti").on("keyup", function() {
+					var value = $(this).val().toLowerCase();
+					$(".fieldName").filter(function() {
+							$(this).closest(".stretch-card").toggle($(this).text().toLowerCase().indexOf(value) > -1)
+						});
+				});
+		});
 </script>
 
