@@ -81,11 +81,16 @@ public class AziendeController {
 		return "GestioneAziende";
 	}
 	
+	
+	
 	@RequestMapping(value = "/GestioneAziendeElimina")
 	public String getGestioneAziendeElimina(Model m, @RequestParam("nomeAzienda") String nomeAzienda){
 		
 		//TODO controlla eliminazione nelle altre tabelle
-		as.deleteById(nomeAzienda);
+		
+		System.out.println(nomeAzienda);
+		
+		
 		
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
