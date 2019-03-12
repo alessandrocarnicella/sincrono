@@ -59,7 +59,16 @@
 											</c:choose>
 										</td>
 										<td>
-											<button type="button" class="btn btn-secondary btn-fw">
+											<button type="button" class="btn btn-secondary btn-fw " id="edit-utente"
+											data-nomep="${x.persona.nomePersona}"  
+											data-cognomep="${x.persona.cognomePersona}"
+											data-emailp="${x.persona.emailPersona}"
+											data-tariffaoraria = "${x.tariffaOraria}"
+											data-nomecat ="${x.categoria.id.nomeCat}"
+											data-ruolocat ="${x.categoria.id.ruoloCat}"
+											
+											data-toggle="modal" 
+											data-target="#modal-edit-utenti">
 												<i class="fas fa-edit"></i>
 											</button>
 										</td>
@@ -74,7 +83,6 @@
 												</button>
 											</form>
 											<!-- FINE COPIA -->
-											
 										</td>
 										<td>
 											<a href="" class="btn btn-secondary btn-fw">
@@ -98,7 +106,7 @@
 </div>
 
 
-
+<!-- MODAL ADD UTENTI -->
 <div class="modal fade" id="modal-add-utenti" role="dialog">
 	<div class="modal-dialog">
 
@@ -172,19 +180,113 @@
 	</div>
 </div>
 
+<!-- MODAL EDIT UTENTI -->
+<div class="modal fade" id="modal-edit-utenti" role="dialog">
+	<div class="modal-dialog">
 
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Edit Utente</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="auto-form-wrapper">
+					<!-- TODO: INSERIRE ACTION E METODO POST -->
+					<form action="GestioneAziendeAdd" method="post">
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" name="cognomePersona" placeholder="Cognome">
+
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" name="nomePersona" placeholder="Nome">
+
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" name="emailPersona" placeholder="Email">
+
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<input type="password" class="form-control" name="passwordDip" placeholder="Password">
+
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" name="nome_cat" placeholder="Es. Programmatore, Segretaria ...">
+
+							</div>
+						</div>
+						<div class="form-group">
+		                    <select class="form-control form-control-sm" name="ruolo_cat">
+	                    	  <option selected="true" disabled="disabled">Ruolo Categoria</option>    
+		                      <option value="amministatore">Amministatore</option>
+		                      <option value="commerciale">Commerciale</option>
+		                      <option value="amministrativo">Amministrativo</option>
+		                      <option value="nessuno">Nessuno</option>
+		                    </select>
+		                  </div>
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" name="tariffaOraria" placeholder="Tariffa Oraria">
+
+							</div>
+						</div>
+						<input type="hidden" name="statusDip" value="1">
+										
+
+						<div class="form-group">
+							<button type="submit" class="btn btn-success submit-btn btn-block">Inserisci Nuovo Dipendente</button>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
 
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-	$(document).ready(
-		function() {
-			$("#searchGestioneUtenti").on("keyup", function() {
-					var value = $(this).val().toLowerCase();
-					$("#table-gestione-utenti tr").filter(function() {
-							$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-						});
-				});
+$(document).ready(function() {
+	$("#searchGestioneUtenti").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#table-gestione-utenti tr").filter(function() {
+		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
 		});
+	});
+	
+	
+	$("#edit-utente").on("click", function() {
+		var nomep = $(this).data("nomep");
+		var cognomep = $(this).data("cognomep");
+		var emailp = $(this).data("emailp");
+		var passwordDip = "**************";
+		var tariffaOraria = $(this).data("tariffaOraria");
+		var nomecat = $(this).data("nomecat");
+		var ruolocat = $(this).data("ruolocat");
+		var tariffaoraria = $(this).data("tariffaoraria");
+		
+		$("#modal-edit-utenti input[name=cognomePersona]").val(cognomep);
+		$("#modal-edit-utenti input[name=nomePersona]").val(nomep);
+		$("#modal-edit-utenti input[name=emailPersona]").val(emailp);
+		$("#modal-edit-utenti input[name=passwordDip]").val(passwordDip);
+		$("#modal-edit-utenti input[name=tariffaOraria]").val(tariffaOraria);
+		$("#modal-edit-utenti input[name=nome_cat]").val(nomecat);
+		$("#modal-edit-utenti input[name=ruolo_cat]").val(ruolocat);
+		$("#modal-edit-utenti input[name=tariffaOraria]").val(tariffaoraria);
+		
+		
+	});
+});
 </script>
