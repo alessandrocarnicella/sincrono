@@ -20,6 +20,8 @@
 <link href="vendors/css/vendor.bundle.addons.css">
 
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/custom.css">
+
 
 <link rel="shortcut icon" href="images/favicon.png" />
 <meta charset="ISO-8859-1">

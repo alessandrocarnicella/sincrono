@@ -22,7 +22,7 @@
               <div class="float-right">
                 <p class="mb-0 text-right">${x.pivaAzienda}</p>
                 <div class="fluid-container">
-                  <h3 class="font-weight-medium text-right mb-0">${x.nomeAzienda}</h3>
+                  <h3 class="font-weight-medium text-right mb-0 fieldNameAzienda">${x.nomeAzienda}</h3>
                 </div>
               </div>
             </div>
@@ -43,7 +43,7 @@ $(document).ready(function(){
   $("#searchAziende").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $(".fieldNameAzienda").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      $(this).closest(".stretch-card").toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
 });

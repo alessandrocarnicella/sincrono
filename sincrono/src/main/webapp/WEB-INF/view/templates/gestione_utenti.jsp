@@ -15,7 +15,7 @@
 						</div>
 					</div>
 					<div class="col-2 btn-center">
-						<button type="button" class="btn btn-icons btn-rounded btn-outline-success  " data-toggle="modal" data-target="#modal-add-utenti">
+						<button type="button" class="btn btn-icons btn-rounded btn-outline-primary  " data-toggle="modal" data-target="#modal-add-utenti">
 							<i class="fas fa-plus fa-2x"></i>
 
 						</button>
@@ -40,7 +40,7 @@
 
 							<!--  ROW ELENCO AZIENDE -->
 							<div class="row">
-								<c:forEach items="${list_utenti}" var="x">
+								<c:forEach items="${list_dip}" var="x">
 									<tr>
 										<td class="py-1"><img src="../../images/faces-clipart/pic-1.png" alt="image"></td>
 										<td>${x.idPersonadip}</td>

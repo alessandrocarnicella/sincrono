@@ -22,7 +22,7 @@ public class DipendenteController {
 	@RequestMapping(value = "/GestioneUtenti")
 	public String getGestioneUtent(Model m) {
 		m.addAttribute("list_dip", dip.findAll());
-		return "GestioneUtent";
+		return "GestioneUtenti";
 	}
 	
 	
