@@ -57,7 +57,7 @@
 													</c:otherwise>
 												</c:choose></td>
 											<td>
-												<button type="button" class="btn btn-secondary btn-fw" data-toggle="modal" data-target="#modal-edit-aziende"
+												<button type="button" class="btn btn-secondary btn-fw" id="edit-aziende" data-toggle="modal" data-target="#modal-edit-aziende"
 												data-namen="${x.nomeAzienda}" 
 												data-email="${x.emailAzienda}"
 												data-address="${x.indirizzoAzienda}"
@@ -80,7 +80,7 @@
 											</form>
 											</td>
 											<td>
-													<form action="GestioneAziendeElimina" method="POST">
+													<form action="GestioneAziendePrint" method="POST">
 						
 												<input type="hidden" name="nomeAzienda" value="${x.nomeAzienda}">
 										
@@ -118,7 +118,7 @@ $(document).ready(function(){
     });
   });
   
-  $(".btn-fw").on("click", function() {
+  $("#edit-aziende").on("click", function() {
 		 var namen = $(this).data("namen");
 		 var email = $(this).data("email");
 		 var address = $(this).data("address");
@@ -128,14 +128,14 @@ $(document).ready(function(){
 		 var telefono = $(this).data("telefono");
 		 var status = $(this).data("status");
 		 
-		$("input[name=nomeAzienda]").val(namen);
-		$("input[name=emailAzienda]").val(email);
-		$("input[name=indirizzoAzienda]").val(address);
-		$("input[name=numdipAzienda]").val(numdip);
-		$("input[name=pivaAzienda]").val(piva);
-		$("input[name=societa]").val(societa);
-		$("input[name=status]").val(status);
-		$("input[name=telefonoAzienda]").val(telefono);
+		$("#modal-edit-aziende input[name=nomeAzienda]").val(namen);
+		$("#modal-edit-aziende input[name=emailAzienda]").val(email);
+		$("#modal-edit-aziende input[name=indirizzoAzienda]").val(address);
+		$("#modal-edit-aziende input[name=numdipAzienda]").val(numdip);
+		$("#modal-edit-aziende input[name=pivaAzienda]").val(piva);
+		$("#modal-edit-aziende input[name=societa]").val(societa);
+		$("#modal-edit-aziende input[name=status]").val(status);
+		$("#modal-edit-aziende input[name=telefonoAzienda]").val(telefono);
 
 
 	  });
