@@ -90,7 +90,7 @@ public class AziendeController {
 		
 		System.out.println(nomeAzienda);
 		
-		
+		as.deleteById(nomeAzienda);
 		
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
