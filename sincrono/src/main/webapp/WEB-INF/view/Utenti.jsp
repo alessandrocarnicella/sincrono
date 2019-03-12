@@ -20,6 +20,7 @@
 <link href="vendors/css/vendor.bundle.addons.css">
 
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/custom.css">
 
 <link rel="shortcut icon" href="images/favicon.png" />
 <meta charset="ISO-8859-1">
@@ -37,7 +38,7 @@
 			<%@ include file="templates/sidebar.jsp"%>
 			<div class="main-panel  padd-55">
 				<div class="content-wrapper">
-					<%@ include file="templates/dipendenti.jsp"%>
+					<%@ include file="templates/utenti.jsp"%>
 				</div>
 				<%@ include file="templates/footer.jsp"%>
 			</div>
