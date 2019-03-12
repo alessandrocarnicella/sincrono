@@ -128,13 +128,13 @@ $(document).ready(function(){
 		 var telefono = $(this).data("telefono");
 		 var status = $(this).data("status");
 		 
-		$("#modal-edit-aziende input[name=nomeAzienda]").val(namen);
+		$("#modal-edit-aziende input[name=nomeAzienda]").val(namen).prop("disabled",true);
 		$("#modal-edit-aziende input[name=emailAzienda]").val(email);
 		$("#modal-edit-aziende input[name=indirizzoAzienda]").val(address);
 		$("#modal-edit-aziende input[name=numdipAzienda]").val(numdip);
 		$("#modal-edit-aziende input[name=pivaAzienda]").val(piva);
 		$("#modal-edit-aziende input[name=societa]").val(societa);
-		$("#modal-edit-aziende input[name=status]").val(status);
+		$("#modal-edit-aziende input[name=statusAzienda]").val(status);
 		$("#modal-edit-aziende input[name=telefonoAzienda]").val(telefono);
 
 
@@ -285,10 +285,22 @@ $(document).ready(function(){
 
 	 			<div class="form-group">
                   	<div class="input-group">
-                    	 <input type="radio" name="statusAzienda" value="1">Attivo
-  						 <input type="radio" name="gender" value="0"> Disattivo<br>
+                    	 <div class="form-group">
+                          <div class="form-radio form-radio-flat">
+                            <label class="form-check-label">
+                              <input type="radio" class="form-check-input" name="statusAzienda" id="flatRadios1" value="1"> Attivo
+                            <i class="input-helper"></i></label>
+                          </div>
+                          <div class="form-radio form-radio-flat danger">
+                            <label class="form-check-label">
+                              <input type="radio" class="form-check-input" name="statusAzienda" id="flatRadios2" value="0"> Disattivo
+                            <i class="input-helper"></i></label>
+                          </div>
+                        </div>
                		</div>
                	</div>
+               
+               
                
                   <button type="submit" class="btn btn-success submit-btn btn-block">Modifica</button>
                </form>
