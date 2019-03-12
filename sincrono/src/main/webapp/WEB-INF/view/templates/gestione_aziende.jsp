@@ -102,7 +102,7 @@ $(document).ready(function(){
         <div class="modal-body">
           <div class="auto-form-wrapper">
           <!-- TODO: INSERIRE ACTION PER INSERT DATABASE -->
-              <form action="#">
+              <form action="GestioneAziendeAdd" method="POST">
               
                 <div class="form-group">
                   <div class="input-group">
@@ -137,7 +137,7 @@ $(document).ready(function(){
                	
                	 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Nome Società">
+                    	<input type="text" class="form-control" placeholder="Nome Società" name="societa">
                		</div>
                	</div>
                	
