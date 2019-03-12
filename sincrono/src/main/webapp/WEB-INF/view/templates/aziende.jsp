@@ -12,7 +12,17 @@
                         </div>
 	</div> 
 	<c:forEach items="${list_az}" var="x">
-	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" >
+	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" 
+	data-namen="${x.nomeAzienda}" 
+	data-namee="${x.emailAzienda}"
+	data-namei="${x.indirizzoAzienda}"
+	data-namedip="${x.numdipAzienda}"
+	data-namep="${x.pivaAzienda}"
+	data-namesoc="${x.societa}"
+	data-namestat="${x.statusAzienda}"
+	
+	
+	data-toggle="modal" data-target="#modal-detail-aziende" >
         <div class="card card-statistics">
           <div class="card-body">
             <div class="clearfix">
@@ -40,14 +50,89 @@
 
 <script>
 $(document).ready(function(){
+	
   $("#searchAziende").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $(".fieldNameAzienda").filter(function() {
       $(this).closest(".stretch-card").toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
+  
+  $(".stretch-card").on("click", function() {
+	 var namen = $(this).data("namen");
+	$("input[name=nomeAzienda]").val(namen).prop("disable",true);
+  });
 });
+
 </script>
+
+
+
+<div class="modal fade" id="modal-detail-aziende" role="dialog" >
+    <div class="modal-dialog">
+    
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Dettagli Azienza</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <div class="auto-form-wrapper">
+          <!-- TODO: INSERIRE ACTION PER INSERT DATABASE -->
+              
+                <div class="form-group">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Nome Azienda" name="nomeAzienda">
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  	<div class="input-group">
+                    	<input type="text" class="form-control" placeholder="Email Azienda" name="emailAzienda">
+            		</div>
+               	</div>
+               		 
+                <div class="form-group">
+                  	<div class="input-group">
+                    	<input type="text" class="form-control" placeholder="Indirizzo" name="indirizzoAzienda">
+               		</div>
+               	</div>
+               	
+               	 <div class="form-group">
+                  	<div class="input-group">
+                    	<input type="text" class="form-control" placeholder="Numero dipendenti" name="numdipAzienda">
+               		</div>
+               	</div>
+               	
+               	
+               	 <div class="form-group">
+                  	<div class="input-group">
+                    	<input type="text" class="form-control" placeholder="Partita IVA" name="pivaAzienda">
+               		</div>
+               	</div>
+               	
+               	 <div class="form-group">
+                  	<div class="input-group">
+                    	<input type="text" class="form-control" placeholder="Nome Società" name="societa">
+               		</div>
+               	</div>
+               	
+               	 <div class="form-group">
+                  	<div class="input-group">
+                    	<input type="text" class="form-control" placeholder="Telefono" name="telefonoAzienda">
+               		</div>
+               	</div>
+               	<input type="hidden" name="statusAzienda" value="1">
+               
+               
+            </div>
+        </div>
+       
+      </div>
+      
+    </div>
+  </div>
 
 	
 	

@@ -15,7 +15,6 @@ public class Azienda implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="nome_azienda")
 	private String nomeAzienda;
 
@@ -31,6 +30,7 @@ public class Azienda implements Serializable {
 	@Column(name="piva_azienda")
 	private String pivaAzienda;
 
+	@Column(name="societa")
 	private String societa;
 
 	@Column(name="status_azienda")
