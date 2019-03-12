@@ -3,7 +3,9 @@ package com.sincrono.corso;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sincrono.corso.model.Azienda;
@@ -80,8 +82,11 @@ public class AziendeController {
 	}
 	
 	@RequestMapping(value = "/GestioneAziendeElimina")
-	public String getGestioneAziendeAElimina(Model m, @RequestParam("id") int id){
-           
+	public String getGestioneAziendeElimina(Model m, @RequestParam("nomeAzienda") String nomeAzienda){
+		
+		//TODO controlla eliminazione nelle altre tabelle
+		as.deleteById(nomeAzienda);
+		
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
 	}

@@ -59,13 +59,16 @@
 													</c:otherwise>
 												</c:choose></td>
 											<td>
-												<button type="button" class="btn btn-secondary btn-fw">
-													<i class="mdi mdi-cloud-download"></i>Modifica
-												</button>
+										
 												
-													<a href="gestioneAziendeElimina?param=${x}" class="btn btn-secondary btn-fw">
-													<i class="fas fa-trash-alt"></i>
-												</a>
+													<form action="GestioneAziendeElimina" method="POST">
+						
+												<input type="hidden" name="nomeAzienda" value="${x.nomeAzienda}">
+										
+												<button type="submit" class="btn btn-secondary btn-fw">
+													<i class="fas fa-trash-alt fa"></i>
+												</button>
+											</form>
 											</td>
 											<td>
 											
