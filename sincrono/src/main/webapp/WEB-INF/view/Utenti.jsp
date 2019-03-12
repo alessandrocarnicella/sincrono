@@ -18,16 +18,14 @@
 <link href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
 <link href="vendors/css/vendor.bundle.base.css">
 <link href="vendors/css/vendor.bundle.addons.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">	
-  
+
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/custom.css">
 
 <link rel="shortcut icon" href="images/favicon.png" />
 <meta charset="ISO-8859-1">
 
 <layout:block name="TITLE">
-	<title>Gestione utenti</title>
+	<title>Utenti</title>
 </layout:block>
 
 </head>
@@ -39,7 +37,7 @@
 			<%@ include file="templates/sidebar.jsp"%>
 			<div class="main-panel  padd-55">
 				<div class="content-wrapper">
-					<%@ include file="templates/gestione_utenti.jsp"%>
+					<%@ include file="templates/dipendenti.jsp"%>
 				</div>
 				<%@ include file="templates/footer.jsp"%>
 			</div>

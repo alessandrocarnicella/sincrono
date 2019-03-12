@@ -25,7 +25,7 @@
 <meta charset="ISO-8859-1">
 
 <layout:block name="TITLE">
-	<title>Dipendenti</title>
+	<title>Gestione Comesse Dipendenti</title>
 </layout:block>
 
 </head>
@@ -37,7 +37,7 @@
 			<%@ include file="templates/sidebar.jsp"%>
 			<div class="main-panel  padd-55">
 				<div class="content-wrapper">
-					<%@ include file="templates/dipendenti.jsp"%>
+					<%@ include file="templates/gestione_commesse_dipendenti.jsp"%>
 				</div>
 				<%@ include file="templates/footer.jsp"%>
 			</div>

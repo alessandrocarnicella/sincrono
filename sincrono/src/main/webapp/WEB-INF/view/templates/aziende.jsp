@@ -1,7 +1,18 @@
 <!--  ROW ELENCO AZIENDE -->
+
+
 <div class="row">
+<div class="col-8">
+		<h3>Elenco Aziende</h3>
+	</div>
+	<div class="col-4">
+		<div class="form-group">
+                          <label for="searchAziende">Cerca Aziende</label>
+                          <input type="text" class="form-control" id="searchAziende" placeholder="Enter...">
+                        </div>
+	</div> 
 	<c:forEach items="${list_az}" var="x">
-	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" >
         <div class="card card-statistics">
           <div class="card-body">
             <div class="clearfix">
@@ -21,9 +32,23 @@
           </div>
         </div>
       </div>
-
+	
 	</c:forEach>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+  $("#searchAziende").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $(".fieldNameAzienda").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
 	
 	
 	
