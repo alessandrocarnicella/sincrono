@@ -91,22 +91,57 @@
 			<div class="modal-body">
 				<div class="auto-form-wrapper">
 					<!-- TODO: INSERIRE ACTION E METODO POST -->
-					<form action="#">
+					<form action="GestioneAziendeAdd" method="post">
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Username">
+								<input type="text" class="form-control" name="cognomePersona" placeholder="Cognome">
 
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="password" class="form-control" placeholder="Password">
+								<input type="text" class="form-control" name="nomePersona" placeholder="Nome">
 
 							</div>
 						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" name="emailPersona" placeholder="Email">
+
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<input type="password" class="form-control" name="passwordDip" placeholder="Password">
+
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" name="nome_cat" placeholder="Es. Programmatore, Segretaria ...">
+
+							</div>
+						</div>
+						<div class="form-group">
+		                    <select class="form-control form-control-sm" name="ruolo_cat">
+	                    	  <option selected="true" disabled="disabled">Ruolo Categoria</option>    
+		                      <option value="amministatore">Amministatore</option>
+		                      <option value="commerciale">Commerciale</option>
+		                      <option value="amministrativo">Amministrativo</option>
+		                      <option value="nessuno">Nessuno</option>
+		                    </select>
+		                  </div>
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" name="tariffaOraria" placeholder="Tariffa Oraria">
+
+							</div>
+						</div>
+						<input type="hidden" name="statusDip" value="1">
+										
 
 						<div class="form-group">
-							<button class="btn btn-success submit-btn btn-block">Inserisci</button>
+							<button type="submit" class="btn btn-success submit-btn btn-block">Inserisci Nuovo Dipendente</button>
 						</div>
 
 					</form>

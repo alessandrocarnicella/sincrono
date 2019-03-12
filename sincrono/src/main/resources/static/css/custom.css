@@ -6,13 +6,21 @@
     text-align: center;
     vertical-align: middle;
 }
+.card.card-statistics:hover{
+	-webkit-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.45); 
+	box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.45);
+}
 
 .btn-center{
 	display: table;
 	margin: auto;
     text-align: center;
 }
+<<<<<<< HEAD
+
+=======
 .modal-content{
 	background-color: white;
 
 }
+>>>>>>> branch 'master' of https://github.com/alessandrocarnicella/sincrono.git
