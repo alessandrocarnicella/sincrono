@@ -57,7 +57,7 @@
 													</c:otherwise>
 												</c:choose></td>
 											<td>
-												<button type="button" class="btn btn-secondary btn-fw" id="edit-aziende" data-toggle="modal" data-target="#modal-edit-aziende"
+												<button type="button" class="btn btn-secondary btn-fw edit-aziende" data-toggle="modal" data-target="#modal-edit-aziende"
 												data-namen="${x.nomeAzienda}" 
 												data-email="${x.emailAzienda}"
 												data-address="${x.indirizzoAzienda}"
@@ -118,7 +118,7 @@ $(document).ready(function(){
     });
   });
   
-  $("#edit-aziende").on("click", function() {
+  $(".edit-aziende").on("click", function() {
 		 var namen = $(this).data("namen");
 		 var email = $(this).data("email");
 		 var address = $(this).data("address");
