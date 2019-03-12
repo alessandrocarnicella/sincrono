@@ -146,7 +146,7 @@ $(document).ready(function(){
                     	<input type="text" class="form-control" placeholder="Telefono" name="telefonoAzienda">
                		</div>
                	</div>
-               	<input type="hidden" name="statusAzienda" value="1">
+               	<input type="hidden" name="statusAzienda"  value="1">
                
                
                 <div class="form-group">
