@@ -33,6 +33,8 @@
 								<th>Persona associata</th>
 								<th class="text-center">Status</th>
 								<th></th>
+								<th></th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -60,6 +62,11 @@
 											<button type="button" class="btn btn-secondary btn-fw">
 												<i class="mdi mdi-cloud-download"></i>Modifica
 											</button>
+										</td>
+										<td>
+											<a href="GestioneUtentiElimina?param=${x}" class="btn btn-secondary btn-fw">
+												<i class="fas fa-trash-alt fa-2x"></i>
+											</a>
 										</td>
 									</tr>
 								</c:forEach>
