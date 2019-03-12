@@ -34,6 +34,7 @@
 									<th>Partita iva</th>
 									<th class="text-center">Status</th>
 									<th></th>
+									
 								</tr>
 							</thead>
 							<tbody>
@@ -61,6 +62,14 @@
 												<button type="button" class="btn btn-secondary btn-fw">
 													<i class="mdi mdi-cloud-download"></i>Modifica
 												</button>
+												
+													<a href="gestioneAziendeElimina?param=${x}" class="btn btn-secondary btn-fw">
+													<i class="fas fa-trash-alt"></i>
+
+												</a>
+											</td>
+											<td>
+											
 											</td>
 										</tr>
 									</c:forEach>
