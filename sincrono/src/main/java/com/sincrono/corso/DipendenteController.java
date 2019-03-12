@@ -12,7 +12,7 @@ public class DipendenteController {
 		
 	@Autowired
 	DipendenteService dip;
-	
+
 	@RequestMapping(value = "/Utenti")
 	public String getUtenti(Model m) {
 		m.addAttribute("list_dip", dip.findAll());
@@ -24,5 +24,6 @@ public class DipendenteController {
 		m.addAttribute("list_dip", dip.findAll());
 		return "GestioneUtent";
 	}
+	
 	
 }
