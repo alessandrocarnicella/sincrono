@@ -66,7 +66,7 @@
 											data-tariffaoraria = "${x.tariffaOraria}"
 											data-nomecat ="${x.categoria.id.nomeCat}"
 											data-ruolocat ="${x.categoria.id.ruoloCat}"
-											
+											data-statusdip = "${x.statusDip}"
 											data-toggle="modal" 
 											data-target="#modal-edit-utenti">
 												<i class="fas fa-edit"></i>
@@ -287,6 +287,7 @@ $(document).ready(function() {
 		var tariffaOraria = $(this).data("tariffaOraria");
 		var nomecat = $(this).data("nomecat");
 		var ruolocat = $(this).data("ruolocat");
+		var statusdip = $(this).data("statusdip");
 		var tariffaoraria = $(this).data("tariffaoraria");
 		
 		$("#modal-edit-utenti input[name=cognomePersona]").val(cognomep);
@@ -296,6 +297,7 @@ $(document).ready(function() {
 		$("#modal-edit-utenti input[name=tariffaOraria]").val(tariffaOraria);
 		$("#modal-edit-utenti input[name=nome_cat]").val(nomecat);
 		$("#modal-edit-utenti input[name=ruolo_cat] select").val(ruolocat);
+		$("#modal-edit-utenti input[name=statusDip]").val(statusdip);
 		$("#modal-edit-utenti input[name=tariffaOraria]").val(tariffaoraria);
 		
 		
