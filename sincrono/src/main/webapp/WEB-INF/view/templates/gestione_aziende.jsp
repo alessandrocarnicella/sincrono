@@ -137,7 +137,7 @@ $(document).ready(function(){
                	
                	 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Nome Società">
+                    	<input type="text" class="form-control" placeholder="Nome Società" name="societa">
                		</div>
                	</div>
                	
@@ -146,7 +146,7 @@ $(document).ready(function(){
                     	<input type="text" class="form-control" placeholder="Telefono" name="telefonoAzienda">
                		</div>
                	</div>
-               	<input type="hidden" name="statusAzienda" value="1">
+               	<input type="hidden" name="statusAzienda"  value="1">
                
                
                 <div class="form-group">
