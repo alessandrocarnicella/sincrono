@@ -16,11 +16,13 @@
 	margin: auto;
     text-align: center;
 }
-<<<<<<< HEAD
-
-=======
 .modal-content{
 	background-color: white;
 
 }
->>>>>>> branch 'master' of https://github.com/alessandrocarnicella/sincrono.git
+.table td{
+	padding:15px;
+}
+.btn.btn-fw {
+    min-width: auto;
+}
