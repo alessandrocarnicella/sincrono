@@ -14,12 +14,13 @@
 	<c:forEach items="${list_az}" var="x">
 	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" 
 	data-namen="${x.nomeAzienda}" 
-	data-namee="${x.emailAzienda}"
-	data-namei="${x.indirizzoAzienda}"
-	data-namedip="${x.numdipAzienda}"
-	data-namep="${x.pivaAzienda}"
-	data-namesoc="${x.societa}"
-	data-namestat="${x.statusAzienda}"
+	data-email="${x.emailAzienda}"
+	data-address="${x.indirizzoAzienda}"
+	data-numdip="${x.numdipAzienda}"
+	data-piva="${x.pivaAzienda}"
+	data-societa="${x.societa}"
+	data-telefono="${x.telefonoAzienda}"
+	data-status="${x.statusAzienda}"
 	
 	
 	data-toggle="modal" data-target="#modal-detail-aziende" >
@@ -60,7 +61,24 @@ $(document).ready(function(){
   
   $(".stretch-card").on("click", function() {
 	 var namen = $(this).data("namen");
-	$("input[name=nomeAzienda]").val(namen).prop("disable",true);
+	 var email = $(this).data("email");
+	 var address = $(this).data("address");
+	 var numdip = $(this).data("numdip");
+	 var piva = $(this).data("piva");
+	 var societa = $(this).data("societa");
+	 var telefono = $(this).data("telefono");
+	 var status = $(this).data("status");
+	 
+	$("input[name=nomeAzienda]").val(namen).prop("disabled",true);
+	$("input[name=emailAzienda]").val(email).prop("disabled",true);
+	$("input[name=indirizzoAzienda]").val(address).prop("disabled",true);
+	$("input[name=numdipAzienda]").val(numdip).prop("disabled",true);
+	$("input[name=pivaAzienda]").val(piva).prop("disabled",true);
+	$("input[name=societa]").val(societa).prop("disabled",true);
+	$("input[name=status]").val(status).prop("disabled",true);
+	$("input[name=telefonoAzienda]").val(telefono).prop("disabled",true);
+
+
   });
 });
 
