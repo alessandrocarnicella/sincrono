@@ -28,4 +28,11 @@
 .btn.btn-fw{
 	min-width:auto;
 }
+.form-radio.form-radio-flat label input:checked + .input-helper:after{
+	content: "";
+}
 
+.form-radio.form-radio-flat.danger label input:checked + .input-helper:before{
+	background: #e65251!important;
+    border-color: #e65251!important;
+}
