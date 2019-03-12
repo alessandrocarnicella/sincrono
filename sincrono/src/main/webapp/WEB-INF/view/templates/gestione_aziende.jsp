@@ -161,7 +161,6 @@ $(document).ready(function(){
         </div>
         <div class="modal-body">
           <div class="auto-form-wrapper">
-          <!-- TODO: INSERIRE ACTION PER INSERT DATABASE -->
               <form action="GestioneAziendeAdd" method="POST">
               
                 <div class="form-group">
@@ -233,14 +232,13 @@ $(document).ready(function(){
     
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Modifica Azienza</h4>
+          <h4 class="modal-title">Edit Azienza</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
           
         </div>
         <div class="modal-body">
           <div class="auto-form-wrapper">
-          <!-- TODO: INSERIRE ACTION PER INSERT DATABASE -->
-              
+              <form action="GestioneAziendeUpdate" method="POST">
                 <div class="form-group">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Nome Azienda" name="nomeAzienda">
@@ -283,10 +281,17 @@ $(document).ready(function(){
                     	<input type="text" class="form-control" placeholder="Telefono" name="telefonoAzienda">
                		</div>
                	</div>
-               	<input type="hidden" name="statusAzienda" value="1">
+               
+
+	 			<div class="form-group">
+                  	<div class="input-group">
+                    	 <input type="radio" name="statusAzienda" value="1">Attivo
+  						 <input type="radio" name="gender" value="0"> Disattivo<br>
+               		</div>
+               	</div>
                
                   <button type="submit" class="btn btn-success submit-btn btn-block">Modifica</button>
-               
+               </form>
             </div>
         </div>
        
