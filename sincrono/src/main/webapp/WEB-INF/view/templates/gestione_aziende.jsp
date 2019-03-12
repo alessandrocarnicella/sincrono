@@ -22,15 +22,7 @@
 						<i class="fas fa-plus fa-2x"></i></button>
 					</div>
 				</div>
-					<div class="table-responsive" 
-						data-namen="${x.nomeAzienda}" 
-						data-email="${x.emailAzienda}"
-						data-address="${x.indirizzoAzienda}"
-						data-numdip="${x.numdipAzienda}"
-						data-piva="${x.pivaAzienda}"
-						data-societa="${x.societa}"
-						data-telefono="${x.telefonoAzienda}"
-						data-status="${x.statusAzienda}">
+					<div class="table-responsive" >
 						<table class="table table-striped" id="table-gestione-aziende" >
 							<thead>
 								<tr>
@@ -65,7 +57,15 @@
 													</c:otherwise>
 												</c:choose></td>
 											<td>
-												<button type="button" class="btn btn-secondary btn-fw" data-toggle="modal" data-target="#modal-edit-aziende">
+												<button type="button" class="btn btn-secondary btn-fw" data-toggle="modal" data-target="#modal-edit-aziende"
+												data-namen="${x.nomeAzienda}" 
+												data-email="${x.emailAzienda}"
+												data-address="${x.indirizzoAzienda}"
+												data-numdip="${x.numdipAzienda}"
+												data-piva="${x.pivaAzienda}"
+												data-societa="${x.societa}"
+												data-telefono="${x.telefonoAzienda}"
+												data-status="${x.statusAzienda}">
 													<i class="fas fa-edit"></i>
 												</button>
 											</td>
@@ -80,9 +80,14 @@
 											</form>
 											</td>
 											<td>
-													<a href="gestioneAziendePrint?param=${x}" class="btn btn-secondary btn-fw">
+													<form action="GestioneAziendeElimina" method="POST">
+						
+												<input type="hidden" name="nomeAzienda" value="${x.nomeAzienda}">
+										
+												<button type="submit" class="btn btn-secondary btn-fw">
 													<i class="fas fa-print"></i>
-												</a>
+												</button>
+											</form>
 											</td>
 											
 
@@ -113,7 +118,7 @@ $(document).ready(function(){
     });
   });
   
-  $("#table-gestione-aziende").on("click", function() {
+  $(".btn-fw").on("click", function() {
 		 var namen = $(this).data("namen");
 		 var email = $(this).data("email");
 		 var address = $(this).data("address");
@@ -137,6 +142,9 @@ $(document).ready(function(){
   
 });
 </script>
+
+
+
 
 
   <!--  QUESTO è IL MODAL PER L'ADD -->
@@ -212,6 +220,10 @@ $(document).ready(function(){
       
     </div>
   </div>
+  
+  
+  
+  
   
   
   <!--  QUESTO è IL MODAL PER L'EDIT -->
