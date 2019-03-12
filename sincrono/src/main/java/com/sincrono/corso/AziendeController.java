@@ -40,6 +40,15 @@ public class AziendeController {
 		
 		boolean error = false;
 		
+		//TODO mancano alcuni controlli su interi 
+		if(nomeAzienda.isEmpty()|| emailAzienda.isEmpty() || indirizzoAzienda.isEmpty()  || pivaAzienda.isEmpty() || societa.equals(null) || telefonoAzienda.isEmpty()) {
+			System.out.println("fallito1");
+			error = true;
+			m.addAttribute("error_insert_azienda", error);
+			m.addAttribute("list_az", as.findAll());
+			return "GestioneAziende";
+		}
+	
 		if(as.findByNomeAzienda(nomeAzienda).isEmpty() && as.findByEmailAzienda(emailAzienda).isEmpty() && as.findByPivaAzienda(pivaAzienda).isEmpty()) {
 			error = false;
 			
@@ -54,7 +63,6 @@ public class AziendeController {
 			azienda.setPivaAzienda(pivaAzienda);
 			as.save(azienda);
 	
-			
 		}else {
 			System.out.println("fallito");
 			error = true;
@@ -62,6 +70,7 @@ public class AziendeController {
 			m.addAttribute("list_az", as.findAll());
 			return "GestioneAziende";
 		}
+		
 		System.out.println("non fallito");
 		m.addAttribute("error_insert_azienda", error);
 		m.addAttribute("list_az", as.findAll());

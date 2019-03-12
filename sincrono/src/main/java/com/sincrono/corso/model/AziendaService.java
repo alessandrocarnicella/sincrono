@@ -17,4 +17,6 @@ public interface AziendaService extends JpaRepository<Azienda, String> {
 	@Query("SELECT a.pivaAzienda FROM Azienda a where  a.pivaAzienda = :pivaAzienda")
 	List<String>  findByPivaAzienda(@Param("pivaAzienda") String pivaAzienda);
 	
+
+	
 }
