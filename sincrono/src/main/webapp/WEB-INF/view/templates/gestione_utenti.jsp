@@ -34,7 +34,7 @@
 								<th class="text-center">Status</th>
 								<th></th>
 								<th></th>
-								
+								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -60,12 +60,25 @@
 										</td>
 										<td>
 											<button type="button" class="btn btn-secondary btn-fw">
-												<i class="mdi mdi-cloud-download"></i>Modifica
+												<i class="fas fa-edit"></i>
 											</button>
 										</td>
 										<td>
-											<a href="GestioneUtentiElimina?param=${x}" class="btn btn-secondary btn-fw">
-												<i class="fas fa-trash-alt fa-2x"></i>
+											<!-- TODO: copia qui -->
+											<form action="GestioneUtentiElimina" method="POST">
+						
+												<input type="hidden" name="utente" value="${x}">
+										
+												<button type="submit" class="btn btn-secondary btn-fw">
+													<i class="fas fa-trash-alt fa"></i>
+												</button>
+											</form>
+											<!-- FINE COPIA -->
+											
+										</td>
+										<td>
+											<a href="" class="btn btn-secondary btn-fw">
+												<i class="fas fa-print"></i>
 											</a>
 										</td>
 									</tr>
