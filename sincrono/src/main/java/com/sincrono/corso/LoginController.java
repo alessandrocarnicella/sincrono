@@ -52,7 +52,7 @@ public class LoginController {
 		
 		/*dipendente.get().getCategoria().getId().getNomeCat()*/
 		
-		m.addAttribute("categoria", dipendente);
+		m.addAttribute("dipendente", dipendente);
 		m.addAttribute("error_login", false);
 		return "Dashboard";
 	}

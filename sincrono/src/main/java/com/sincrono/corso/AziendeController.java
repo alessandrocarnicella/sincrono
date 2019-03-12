@@ -87,10 +87,23 @@ public class AziendeController {
 	public String getGestioneAziendeElimina(Model m, @RequestParam("nomeAzienda") String nomeAzienda){
 		
 		//TODO controlla eliminazione nelle altre tabelle
-		
-		System.out.println(nomeAzienda);
-		
+			
 		as.deleteById(nomeAzienda);
+		
+		m.addAttribute("list_az", as.findAll());
+		return "GestioneAziende";
+	}
+	
+	@RequestMapping(value = "/GestioneAziendeUpdate")
+	public String getGestioneAziendeModifica(Model m, @RequestParam("nomeAzienda") String nomeAzienda,
+            @RequestParam("emailAzienda") String emailAzienda, @RequestParam("indirizzoAzienda") String indirizzoAzienda,
+            @RequestParam("numdipAzienda") Integer numdipAzienda, @RequestParam("pivaAzienda") String pivaAzienda,
+            @RequestParam("societa") String societa ,@RequestParam("telefonoAzienda") String telefonoAzienda,
+            @RequestParam("statusAzienda") byte statusAzienda){
+		
+		//TODO controlla eliminazione nelle altre tabelle
+	
+		as.updateAzienda(nomeAzienda, emailAzienda, indirizzoAzienda, numdipAzienda, pivaAzienda, societa, statusAzienda, telefonoAzienda);
 		
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
