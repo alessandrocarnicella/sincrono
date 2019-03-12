@@ -68,9 +68,6 @@ $(document).ready(function(){
 	 var societa = $(this).data("societa");
 	 var telefono = $(this).data("telefono");
 	 var status = $(this).data("status");
-
-	 
-	 
 	 
 	$("input[name=nomeAzienda]").val(namen).prop("disabled",true);
 	$("input[name=emailAzienda]").val(email).prop("disabled",true);
@@ -80,10 +77,6 @@ $(document).ready(function(){
 	$("input[name=societa]").val(societa).prop("disabled",true);
 	$("input[name=status]").val(status).prop("disabled",true);
 	$("input[name=telefonoAzienda]").val(telefono).prop("disabled",true);
-
-
-	
-
 
 
   });
