@@ -59,21 +59,21 @@
 											</c:choose>
 										</td>
 										<td>
-											<button type="button" class="btn btn-secondary btn-fw " id="edit-utente"
-											data-nomep="${x.persona.nomePersona}"  
-											data-cognomep="${x.persona.cognomePersona}"
-											data-emailp="${x.persona.emailPersona}"
-											data-tariffaoraria = "${x.tariffaOraria}"
-											data-nomecat ="${x.categoria.id.nomeCat}"
-											data-ruolocat ="${x.categoria.id.ruoloCat}"
-											data-statusdip = "${x.statusDip}"
-											data-toggle="modal" 
-											data-target="#modal-edit-utenti">
+											<button type="button" class="btn btn-secondary btn-fw edit-utente" 
+												data-nomep="${x.persona.nomePersona}"  
+												data-cognomep="${x.persona.cognomePersona}"
+												data-emailp="${x.persona.emailPersona}"
+												data-tariffaoraria = "${x.tariffaOraria}"
+												data-nomecat ="${x.categoria.id.nomeCat}"
+												data-ruolocat ="${x.categoria.id.ruoloCat}"
+												data-statusdip = "${x.statusDip}"
+												data-toggle="modal" 
+												data-target="#modal-edit-utenti">
 												<i class="fas fa-edit"></i>
 											</button>
 										</td>
 										<td>
-											<!-- TODO: copia qui -->
+											<!-- START Elimina utente -->
 											<form action="GestioneUtentiElimina" method="POST">
 						
 												<input type="hidden" name="utente" value="${x}">
@@ -82,12 +82,14 @@
 													<i class="fas fa-trash-alt fa"></i>
 												</button>
 											</form>
-											<!-- FINE COPIA -->
+											<!-- FINE Elimina utente -->
 										</td>
 										<td>
+											<!-- START STAMPA UTENTE -->
 											<a href="" class="btn btn-secondary btn-fw">
 												<i class="fas fa-print"></i>
 											</a>
+											<!-- END STAMPA UTENTE -->
 										</td>
 									</tr>
 								</c:forEach>
@@ -279,7 +281,7 @@ $(document).ready(function() {
 	});
 	
 	
-	$("#edit-utente").on("click", function() {
+	$(".edit-utente").on("click", function() {
 		var nomep = $(this).data("nomep");
 		var cognomep = $(this).data("cognomep");
 		var emailp = $(this).data("emailp");
@@ -289,6 +291,8 @@ $(document).ready(function() {
 		var ruolocat = $(this).data("ruolocat");
 		var statusdip = $(this).data("statusdip");
 		var tariffaoraria = $(this).data("tariffaoraria");
+		
+		console.log(nomep);
 		
 		$("#modal-edit-utenti input[name=cognomePersona]").val(cognomep);
 		$("#modal-edit-utenti input[name=nomePersona]").val(nomep);
