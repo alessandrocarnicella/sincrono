@@ -26,17 +26,21 @@ public class LoginController {
 	AziendaService as;
 	
 	@RequestMapping(value = "/")
-	public String getHome(Model m) {
+	public String getHome(Model m, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		boolean isLogged = false;
+		session.setAttribute("isLogged", isLogged);
 		m.addAttribute("error_login", false);
+		
 		return "Login";
 	}
 	
 	@RequestMapping(value = "/Dashboard")
 	public String getDashboard(Model m, @RequestParam("email") String email,
             @RequestParam("password") String password, HttpServletRequest request ) {	
-		
-		boolean isLogged =  false;
+				
 		HttpSession session = request.getSession();
+		boolean isLogged = (boolean) request.getSession().getAttribute("isLogged");
 		
 		int dipId = 0;
 		Optional<Dipendente> dipendente;
