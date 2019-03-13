@@ -48,11 +48,11 @@
 											<td>${x.pivaAzienda}</td>
 											<td class="text-center"><c:choose>
 													<c:when test="${x.statusAzienda eq 1}">
-														<button type="button"
+														<button type="button" onclick="prova_s()"
 															class="btn btn-icons btn-rounded btn-success"></button>
 													</c:when>
 													<c:otherwise>
-														<button type="button"
+														<button type="button" onclick="prova_d()"
 															class="btn btn-icons btn-rounded btn-danger"></button>
 													</c:otherwise>
 												</c:choose></td>
@@ -136,11 +136,33 @@ $(document).ready(function(){
 		$("#modal-edit-aziende input[name=societa]").val(societa);
 		$("#modal-edit-aziende input[name=statusAzienda]").val(status);
 		$("#modal-edit-aziende input[name=telefonoAzienda]").val(telefono);
-
-
 	  });
   
+  
+
+
+  
 });
+
+function prova_d() {
+		$.notify({
+			// options
+			message: 'STUPIDAAAAAAAAAA' 
+		},{
+			// settings
+			type: 'danger'
+		});
+	};
+
+function prova_s() {
+	$.notify({
+		// options
+		message: 'Yeah' 
+	},{
+		// settings
+		type: 'success'
+	});
+};
 </script>
 
 
@@ -165,44 +187,44 @@ $(document).ready(function(){
               
                 <div class="form-group">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Nome Azienda" name="nomeAzienda">
+                    <input type="text" class="form-control" placeholder="Nome Azienda" name="nomeAzienda" required>
                   </div>
                 </div>
                 
                 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Email Azienda" name="emailAzienda">
+                    	<input type="text" class="form-control" placeholder="Email Azienda" name="emailAzienda" required>
             		</div>
                	</div>
                		 
                 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Indirizzo" name="indirizzoAzienda">
+                    	<input type="text" class="form-control" placeholder="Indirizzo" name="indirizzoAzienda" required>
                		</div>
                	</div>
                	
                	 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Numero dipendenti" name="numdipAzienda">
+                    	<input type="text" class="form-control" placeholder="Numero dipendenti" name="numdipAzienda" required>
                		</div>
                	</div>
                	
                	
                	 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Partita IVA" name="pivaAzienda">
+                    	<input type="text" class="form-control" placeholder="Partita IVA" name="pivaAzienda" required>
                		</div>
                	</div>
                	
                	 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Nome Società" name="societa">
+                    	<input type="text" class="form-control" placeholder="Nome Società" name="societa" required>
                		</div>
                	</div>
                	
                	 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Telefono" name="telefonoAzienda">
+                    	<input type="text" class="form-control" placeholder="Telefono" name="telefonoAzienda" required>
                		</div>
                	</div>
                	<input type="hidden" name="statusAzienda"  value="1">
@@ -225,6 +247,8 @@ $(document).ready(function(){
   
   
   
+  
+  
   <!--  QUESTO è IL MODAL PER L'EDIT -->
   
   <div class="modal fade" id="modal-edit-aziende" role="dialog" >
@@ -239,46 +263,48 @@ $(document).ready(function(){
         <div class="modal-body">
           <div class="auto-form-wrapper">
               <form action="GestioneAziendeUpdate" method="POST">
+              
+              
                 <div class="form-group">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Nome Azienda" name="nomeAzienda">
+                    <input type="text" class="form-control" placeholder="Nome Azienda" name="nomeAzienda" required>
                   </div>
                 </div>
                 
                 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Email Azienda" name="emailAzienda">
+                    	<input type="text" class="form-control" placeholder="Email Azienda" name="emailAzienda" required>
             		</div>
                	</div>
                		 
                 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Indirizzo" name="indirizzoAzienda">
+                    	<input type="text" class="form-control" placeholder="Indirizzo" name="indirizzoAzienda" required>
                		</div>
                	</div>
                	
                	 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Numero dipendenti" name="numdipAzienda">
+                    	<input type="text" class="form-control" placeholder="Numero dipendenti" name="numdipAzienda" required>
                		</div>
                	</div>
                	
                	
                	 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Partita IVA" name="pivaAzienda">
+                    	<input type="text" class="form-control" placeholder="Partita IVA" name="pivaAzienda" required>
                		</div>
                	</div>
                	
                	 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Nome Società" name="societa">
+                    	<input type="text" class="form-control" placeholder="Nome Società" name="societa" required>
                		</div>
                	</div>
                	
                	 <div class="form-group">
                   	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Telefono" name="telefonoAzienda">
+                    	<input type="text" class="form-control" placeholder="Telefono" name="telefonoAzienda" required>
                		</div>
                	</div>
                
@@ -288,12 +314,12 @@ $(document).ready(function(){
                     	 <div class="form-group">
                           <div class="form-radio form-radio-flat">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="statusAzienda" id="flatRadios1" value="1"> Attivo
+                              <input type="radio" class="form-check-input" name="statusAzienda" id="flatRadios1" value="1" required> Attivo
                             <i class="input-helper"></i></label>
                           </div>
                           <div class="form-radio form-radio-flat danger">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="statusAzienda" id="flatRadios2" value="0"> Disattivo
+                              <input type="radio" class="form-check-input" name="statusAzienda" id="flatRadios2" value="0" required> Disattivo
                             <i class="input-helper"></i></label>
                           </div>
                         </div>
@@ -302,7 +328,7 @@ $(document).ready(function(){
                
                
                
-                  <button type="submit" class="btn btn-success submit-btn btn-block">Modifica</button>
+                  <button  type="submit" class="btn btn-success submit-btn btn-block">Modifica</button>
                </form>
             </div>
         </div>

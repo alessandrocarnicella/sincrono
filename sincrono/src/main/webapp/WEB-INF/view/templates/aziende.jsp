@@ -11,39 +11,33 @@
                           <input type="text" class="form-control" id="searchAziende" placeholder="Enter...">
                         </div>
 	</div> 
+	
 	<c:forEach items="${list_az}" var="x">
-	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" 
-	data-namen="${x.nomeAzienda}" 
-	data-email="${x.emailAzienda}"
-	data-address="${x.indirizzoAzienda}"
-	data-numdip="${x.numdipAzienda}"
-	data-piva="${x.pivaAzienda}"
-	data-societa="${x.societa}"
-	data-telefono="${x.telefonoAzienda}"
-	data-status="${x.statusAzienda}"
-	
-	
-	data-toggle="modal" data-target="#modal-detail-aziende" >
-        <div class="card card-statistics">
-          <div class="card-body">
-            <div class="clearfix">
-              <div class="float-left">
-                <i class="mdi mdi-cube text-danger icon-lg"></i>
-              </div>
-              <div class="float-right">
-                <p class="mb-0 text-right">${x.pivaAzienda}</p>
-                <div class="fluid-container">
-                  <h3 class="font-weight-medium text-right mb-0 fieldNameAzienda">${x.nomeAzienda}</h3>
-                </div>
-              </div>
-            </div>
-            <p class="text-muted mt-3 mb-0">
-              <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i>Telefono N:  ${x.telefonoAzienda}
-            </p>
-          </div>
-        </div>
-      </div>
-	
+		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" data-toggle="modal" data-target="#modal-detail-aziende"
+			data-namen="${x.nomeAzienda}" 
+			data-email="${x.emailAzienda}"
+			data-address="${x.indirizzoAzienda}"
+			data-numdip="${x.numdipAzienda}"
+			data-piva="${x.pivaAzienda}"
+			data-societa="${x.societa}"
+			data-telefono="${x.telefonoAzienda}"
+			data-status="${x.statusAzienda}">
+	        
+	        <div class="card card-statistics">
+	          <div class="card-body">
+	            <div class="clearfix">
+	              <div class="float-left">
+	              	
+	              	<h3 class="px18 font-weight-medium mb-0 fieldNameAzienda">${x.nomeAzienda}</h3>
+	            
+	                <p class="mb-0">${x.pivaAzienda}</p>
+	               	 <p class="text-muted mt-3 mb-0">Telefono N:  ${x.telefonoAzienda}</p>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	  
+	    </div>
 	</c:forEach>
 </div>
 
@@ -84,7 +78,14 @@ $(document).ready(function(){
 
 </script>
 
+<style>
+	
+	.px18{
+    font-size:18px!important;
+ }
+	
 
+</style>
 
 <div class="modal fade" id="modal-detail-aziende" role="dialog" >
     <div class="modal-dialog">
