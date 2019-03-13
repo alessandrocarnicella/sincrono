@@ -5,9 +5,7 @@
 				<div class="row">
 					<div class="col-7">
 						<h4 class="card-title">Gestione utenti</h4>
-						<p class="card-description">Puoi modificare le aziende e farti
-							un pacco di cazzi di tutti ( però ricordati della Privacy e fai i
-							corsi online !)</p>
+						<p class="card-description">Puoi modificare le aziende </p>
 					</div>
 					<div class="col-3 m-auto">
 						<div class="form-group">
@@ -26,6 +24,7 @@
 				<div class="table-responsive">
 					<table class="table table-striped" id="table-gestione-utenti">
 						<thead>
+							<!-- ROW INTESTAZIONE TABLE -->
 							<tr>
 								<th>User</th>
 								<th>Identificativo</th>
@@ -37,9 +36,8 @@
 								<th></th>
 							</tr>
 						</thead>
+						
 						<tbody>
-
-
 							<!--  ROW ELENCO UTENTI -->
 							<div class="row">
 								<c:forEach items="${list_dip}" var="x">
@@ -95,12 +93,8 @@
 									</tr>
 								</c:forEach>
 							</div>
-
-
-
-
-
 						</tbody>
+						
 					</table>
 				</div>
 			</div>
@@ -121,7 +115,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="auto-form-wrapper">
-					<!-- TODO: INSERIRE ACTION E METODO POST -->
+				
 					<form action="GestioneUtentiAdd" method="post">
 						<div class="form-group">
 							<div class="input-group">
@@ -164,7 +158,7 @@
 		                  </div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="tariffaOraria" placeholder="Tariffa Oraria">
+								<input type="text" class="form-control" name="tariffaoraria" placeholder="Tariffa Oraria">
 
 							</div>
 						</div>
@@ -199,36 +193,36 @@
 					<form action="GestioneUtenteUpdate" method="post">
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="cognomePersona" placeholder="Cognome">
+								<input type="text" class="form-control" name="cognomePersona" placeholder="Cognome" required>
 
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="nomePersona" placeholder="Nome">
+								<input type="text" class="form-control" name="nomePersona" placeholder="Nome" required>
 
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="emailPersona" placeholder="Email">
+								<input type="text" class="form-control" name="emailPersona" placeholder="Email" required>
 
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="password" class="form-control" name="passwordDip" placeholder="Password">
+								<input type="password" class="form-control" name="passwordDip" placeholder="Password" required>
 
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="nome_cat" placeholder="Es. Programmatore, Segretaria ...">
+								<input type="text" class="form-control" name="nome_cat" placeholder="Es. Programmatore, Segretaria ..." required>
 
 							</div>
 						</div>
 						<div class="form-group">
-		                    <select class="form-control form-control-sm" name="ruolo_cat">   
+		                    <select class="form-control form-control-sm" name="ruolo_cat" >   
 		                      <option value="amministratore">Amministratore</option>
 		                      <option value="commerciale">Commerciale</option>
 		                      <option value="amministrativo">Amministrativo</option>
@@ -237,14 +231,14 @@
 		                  </div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="tariffaOraria" placeholder="Tariffa Oraria" required>
+								<input type="text" class="form-control" name="tariffaoraria" placeholder="Tariffa Oraria" required>
 
 							</div>
 						</div>
 						
 						<div class="form-group">
                         	<div class="input-group">
-								<input type="text" class="form-control" name="idpersona">
+								<input type="hidden" class="form-control" name="idpersona" >
 
 							</div>
 						</div>
@@ -253,12 +247,12 @@
 						<div class="form-group">
                           <div class="form-radio form-radio-flat">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="statusDip"  value="1" checked=""> Attivo
+                              <input type="radio" class="form-check-input" name="statusDip"  value="1" checked="" required> Attivo
                             <i class="input-helper"></i></label>
                           </div>
                           <div class="form-radio form-radio-flat danger">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="statusDip"  value="0"> Disattivo
+                              <input type="radio" class="form-check-input" name="statusDip"  value="0" required> Disattivo
                             <i class="input-helper "></i></label>
                           </div>
                         </div>		
@@ -292,22 +286,21 @@ $(document).ready(function() {
 		var cognomep = $(this).data("cognomep");
 		var emailp = $(this).data("emailp");
 		var passwordDip = "**************";
-		var tariffaOraria = $(this).data("tariffaOraria");
+		var tariffaoraria = $(this).data("tariffaoraria");
 		var nomecat = $(this).data("nomecat");
 		var ruolocat = $(this).data("ruolocat");
 		var statusdip = $(this).data("statusdip");
 		var idpersona = $(this).data("idpersona");
-		console.log(idpersona);
 		
 		$("#modal-edit-utenti input[name=cognomePersona]").val(cognomep);
 		$("#modal-edit-utenti input[name=nomePersona]").val(nomep);
 		$("#modal-edit-utenti input[name=emailPersona]").val(emailp);
 		$("#modal-edit-utenti input[name=passwordDip]").val(passwordDip);
-		$("#modal-edit-utenti input[name=tariffaOraria]").val(tariffaOraria);
+		$("#modal-edit-utenti input[name=tariffaoraria]").val(tariffaoraria);
 		$("#modal-edit-utenti input[name=nome_cat]").val(nomecat);
 		$("#modal-edit-utenti input[name=ruolo_cat] select").val(ruolocat);
 		$("#modal-edit-utenti input[name=statusDip]").val(statusdip);
-		$("#modal-edit-utenti input[name=idpersona]").val(idpersona).prop("disabled", true);
+		$("#modal-edit-utenti input[name=idpersona]").val(idpersona);
 		
 		
 	});

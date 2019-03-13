@@ -7,6 +7,7 @@
 <%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance"
 	prefix="layout"%>
 
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -48,6 +49,11 @@
                   
                   <!-- TODO: INSERIRE METODO E ACTION -->
                   <form action="Dashboard" method="post">
+                  	<div class="form-group">
+						
+							<!-- TODO: inserire controllo sul campo boolean error_logged -->
+						     <p class="text-danger"> Amministratore Maiale </p>             		
+                   	</div>
                     <div class="form-group">
                       <label class="label">Email</label>
                       <div class="input-group">
