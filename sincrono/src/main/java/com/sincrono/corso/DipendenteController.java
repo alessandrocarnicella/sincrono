@@ -3,6 +3,8 @@ package com.sincrono.corso;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,24 +33,39 @@ public class DipendenteController {
 	PersonaService per;
 
 	@RequestMapping(value = "/Utenti")
-	public String getUtenti(Model m) {
+	public String getUtenti(Model m, HttpServletRequest request) {
+		
+		if(!(boolean) request.getSession().getAttribute("isLogged")) {
+			return "Login";
+		}
+		
 		m.addAttribute("list_dip", dip.findAll());
 		return "Utenti";
 	}
 
 	@RequestMapping(value = "/GestioneUtenti")
-	public String getGestioneUtent(Model m) {
+	public String getGestioneUtent(Model m,HttpServletRequest request) {
+		
+		if(!(boolean) request.getSession().getAttribute("isLogged")) {
+			return "Login";
+		}
+		
 		m.addAttribute("list_dip", dip.findAll());
 		return "GestioneUtenti";
 	}
 
 	@RequestMapping(value = "/GestioneUtentiAdd")
-	public String getGestioneAziendeAdd(Model m, @RequestParam("cognomePersona") String cognomePersona,
+	public String getGestioneAziendeAdd(Model m, HttpServletRequest request,
+			@RequestParam("cognomePersona") String cognomePersona,
 			@RequestParam("nomePersona") String nomePersona, @RequestParam("emailPersona") String emailPersona,
 			@RequestParam("passwordDip") String passwordDip, @RequestParam("nome_cat") String nome_cat,
 			@RequestParam("ruolo_cat") String ruolo_cat ,@RequestParam("tariffaOraria") double tariffaOraria,
 			@RequestParam("statusDip") byte statusDip) {
 
+		if(!(boolean) request.getSession().getAttribute("isLogged")) {
+			return "Login";
+		}
+		
 		boolean error = false;
 
 		if(per.findByEmailPersona(emailPersona).isEmpty()) {
@@ -105,7 +122,12 @@ public class DipendenteController {
 	}	
 	
 	@RequestMapping(value = "/GestioneUtentiElimina")
-	public String getGestioneUtentiElimina(Model m, @RequestParam("idPersonadip") Integer idPersonadip){
+	public String getGestioneUtentiElimina(Model m, HttpServletRequest request,
+			@RequestParam("idPersonadip") Integer idPersonadip){
+		
+		if(!(boolean) request.getSession().getAttribute("isLogged")) {
+			return "Login";
+		}
 		
 		dip.deleteById(idPersonadip);
 		per.deleteById(idPersonadip);
@@ -116,7 +138,7 @@ public class DipendenteController {
 	}
 	
 	@RequestMapping(value = "/GestioneUtenteUpdate")
-	public String getGestioneAziendeModifica(Model m, 
+	public String getGestioneAziendeModifica(Model m, HttpServletRequest request,
 			@RequestParam("idpersona") Integer idPersonadip,
 			@RequestParam("cognomePersona") String cognomePersona,
 			@RequestParam("nomePersona") String nomePersona, 
@@ -126,6 +148,10 @@ public class DipendenteController {
 			@RequestParam("ruolo_cat") String ruolo_cat ,
 			@RequestParam("tariffaOraria") double tariffaOraria,
 			@RequestParam("statusDip") byte statusDip){
+			
+		if(!(boolean) request.getSession().getAttribute("isLogged")) {
+			return "Login";
+		}
 		
 		CategoriaPK categoriaPk = new  CategoriaPK();
 		categoriaPk.setNomeCat(nome_cat);

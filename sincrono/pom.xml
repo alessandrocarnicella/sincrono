@@ -65,6 +65,11 @@
 		    <version>0.3.RELEASE</version>
 		    <scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.5.10</version>
+		</dependency>
 	</dependencies>
 
 	<build>
