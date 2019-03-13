@@ -52,7 +52,7 @@
 															class="btn btn-icons btn-rounded btn-success"></button>
 													</c:when>
 													<c:otherwise>
-														<button type="button" onclick="prova_d()"
+														<button type="button" 
 															class="btn btn-icons btn-rounded btn-danger"></button>
 													</c:otherwise>
 												</c:choose></td>
@@ -128,7 +128,7 @@ $(document).ready(function(){
 		 var telefono = $(this).data("telefono");
 		 var status = $(this).data("status");
 		 
-		$("#modal-edit-aziende input[name=nomeAzienda]").val(namen).prop("disabled",true);
+		$("#modal-edit-aziende input[name=nomeAzienda]").val(namen);
 		$("#modal-edit-aziende input[name=emailAzienda]").val(email);
 		$("#modal-edit-aziende input[name=indirizzoAzienda]").val(address);
 		$("#modal-edit-aziende input[name=numdipAzienda]").val(numdip);
@@ -144,6 +144,12 @@ $(document).ready(function(){
   
 });
 
+function prova_maialino() {
+	$('#modal-add-aziende').on('hidden.bs.modal', function () {
+		prova_d();
+	})
+};
+
 function prova_d() {
 		$.notify({
 			// options
@@ -151,7 +157,9 @@ function prova_d() {
 		},{
 			// settings
 			type: 'danger'
-		});
+		}
+			
+		);
 	};
 
 function prova_s() {
@@ -229,11 +237,12 @@ function prova_s() {
                	</div>
                	<input type="hidden" name="statusAzienda"  value="1">
                
-               
-                <div class="form-group">
-                  <button type="submit" class="btn btn-success submit-btn btn-block">Inserisci</button>
+               	<div class="form-group">
+                  <button onclick="prova_maialino()" type="submit" class="btn btn-success submit-btn btn-block">Inserisci</button>
                 </div>
+                
               </form>
+              	
             </div>
         </div>
        
@@ -267,7 +276,7 @@ function prova_s() {
               
                 <div class="form-group">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Nome Azienda" name="nomeAzienda" required>
+                    <input type="hidden" class="form-control" placeholder="Nome Azienda" name="nomeAzienda" required>
                   </div>
                 </div>
                 
