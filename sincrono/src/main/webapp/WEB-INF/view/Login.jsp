@@ -50,10 +50,10 @@
                   <form action="Dashboard" method="post">
                   	<div class="form-group">
                   	
-                  	<c:set var="loginFlag" scope="session" value="${login_error}" />
+                  	<c:set var="loginFlag" scope="session" value="${error_login}" />
 					
-					<c:if test="${loginFlag eq false}">
-		  				<p>Login Errato</p>
+					<c:if test="${loginFlag eq true}">
+		  				<p class="text-danger">Login Errato</p>
 					</c:if>
 			
                   	
@@ -89,11 +89,6 @@
                   </form>
                   
                 </div>
-                <ul class="auth-footer">
-                  <li><a href="#">Conditions</a></li>
-                  <li><a href="#">Help</a></li>
-                  <li><a href="#">Terms</a></li>
-                </ul>
               </div>
             </div>
           </div>
