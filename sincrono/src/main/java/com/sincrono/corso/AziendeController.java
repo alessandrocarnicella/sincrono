@@ -41,16 +41,6 @@ public class AziendeController {
             @RequestParam("statusAzienda") byte statusAzienda) {
 		
 		boolean error = false;
-		
-		//TODO mancano alcuni controlli
-		if(nomeAzienda.isEmpty()|| emailAzienda.isEmpty() || indirizzoAzienda.isEmpty()  || pivaAzienda.isEmpty() || societa.equals(null) || telefonoAzienda.isEmpty()) {
-			
-			error = true;
-			
-			m.addAttribute("error_insert_azienda", error);
-			m.addAttribute("list_az", as.findAll());
-			return "GestioneAziende";
-		}
 	
 		if(as.findByNomeAzienda(nomeAzienda).isEmpty() && as.findByEmailAzienda(emailAzienda).isEmpty() && as.findByPivaAzienda(pivaAzienda).isEmpty()) {
 			
@@ -100,8 +90,6 @@ public class AziendeController {
             @RequestParam("numdipAzienda") Integer numdipAzienda, @RequestParam("pivaAzienda") String pivaAzienda,
             @RequestParam("societa") String societa ,@RequestParam("telefonoAzienda") String telefonoAzienda,
             @RequestParam("statusAzienda") byte statusAzienda){
-		
-		//TODO controlla eliminazione nelle altre tabelle
 	
 		as.updateAzienda(nomeAzienda, emailAzienda, indirizzoAzienda, numdipAzienda, pivaAzienda, societa, statusAzienda, telefonoAzienda);
 		

@@ -21,8 +21,14 @@ public interface AziendaService extends JpaRepository<Azienda, String> {
 
 	@Transactional
 	@Modifying
-	@Query("UPDATE Azienda SET nomeAzienda=:nomeAzienda, emailAzienda=:emailAzienda, indirizzoAzienda=:indirizzoAzienda, numdipAzienda=:numdipAzienda , pivaAzienda=:pivaAzienda, societa=:societa, statusAzienda=:statusAzienda, telefonoAzienda=:telefonoAzienda where nomeAzienda=:nomeAzienda")
-	void updateAzienda(@Param("nomeAzienda") String nomeAzienda,@Param("emailAzienda") String emailAzienda,@Param("indirizzoAzienda") String indirizzoAzienda,
-			@Param("numdipAzienda") Integer numdipAzienda, @Param("pivaAzienda") String pivaAzienda, @Param("societa") String societa,@Param("statusAzienda") byte statusAzienda,@Param("telefonoAzienda") String telefonoAzienda);
+	@Query("UPDATE Azienda SET emailAzienda=:emailAzienda, indirizzoAzienda=:indirizzoAzienda, numdipAzienda=:numdipAzienda , pivaAzienda=:pivaAzienda, societa=:societa, statusAzienda=:statusAzienda, telefonoAzienda=:telefonoAzienda where nomeAzienda=:nomeAzienda")
+	void updateAzienda(@Param("nomeAzienda") String nomeAzienda,
+			@Param("emailAzienda") String emailAzienda,
+			@Param("indirizzoAzienda") String indirizzoAzienda,
+			@Param("numdipAzienda") Integer numdipAzienda, 
+			@Param("pivaAzienda") String pivaAzienda, 
+			@Param("societa") String societa,
+			@Param("statusAzienda") byte statusAzienda,
+			@Param("telefonoAzienda") String telefonoAzienda);
 
 }

@@ -67,6 +67,7 @@
 												data-nomecat ="${x.categoria.id.nomeCat}"
 												data-ruolocat ="${x.categoria.id.ruoloCat}"
 												data-statusdip = "${x.statusDip}"
+												data-idpersona = "${x.idPersonadip}"
 												data-toggle="modal" 
 												data-target="#modal-edit-utenti">
 												<i class="fas fa-edit"></i>
@@ -76,7 +77,7 @@
 											<!-- START Elimina utente -->
 											<form action="GestioneUtentiElimina" method="POST">
 						
-												<input type="hidden" name="utente" value="${x}">
+												<input type="hidden" name=idPersonadip value="${x.idPersonadip}">
 										
 												<button type="submit" class="btn btn-secondary btn-fw">
 													<i class="fas fa-trash-alt fa"></i>
@@ -155,7 +156,7 @@
 						<div class="form-group">
 		                    <select class="form-control form-control-sm" name="ruolo_cat">
 	                    	  <option selected="true" disabled="disabled">Ruolo Categoria</option>    
-		                      <option value="amministatore">Amministatore</option>
+		                      <option value="amministratore">Amministratore</option>
 		                      <option value="commerciale">Commerciale</option>
 		                      <option value="amministrativo">Amministrativo</option>
 		                      <option value="nessuno">Nessuno</option>
@@ -228,7 +229,7 @@
 						</div>
 						<div class="form-group">
 		                    <select class="form-control form-control-sm" name="ruolo_cat">   
-		                      <option value="amministatore">Amministatore</option>
+		                      <option value="amministratore">Amministratore</option>
 		                      <option value="commerciale">Commerciale</option>
 		                      <option value="amministrativo">Amministrativo</option>
 		                      <option value="nessuno">Nessuno</option>
@@ -236,7 +237,14 @@
 		                  </div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="tariffaOraria" placeholder="Tariffa Oraria">
+								<input type="text" class="form-control" name="tariffaOraria" placeholder="Tariffa Oraria" required>
+
+							</div>
+						</div>
+						
+						<div class="form-group">
+                        	<div class="input-group">
+								<input type="text" class="form-control" name="idpersona">
 
 							</div>
 						</div>
@@ -254,8 +262,6 @@
                             <i class="input-helper "></i></label>
                           </div>
                         </div>		
-						
-
 						<div class="form-group">
 							<button type="submit" class="btn btn-success submit-btn btn-block">Modifica</button>
 						</div>
@@ -290,9 +296,8 @@ $(document).ready(function() {
 		var nomecat = $(this).data("nomecat");
 		var ruolocat = $(this).data("ruolocat");
 		var statusdip = $(this).data("statusdip");
-		var tariffaoraria = $(this).data("tariffaoraria");
-		
-		console.log(nomep);
+		var idpersona = $(this).data("idpersona");
+		console.log(idpersona);
 		
 		$("#modal-edit-utenti input[name=cognomePersona]").val(cognomep);
 		$("#modal-edit-utenti input[name=nomePersona]").val(nomep);
@@ -302,7 +307,7 @@ $(document).ready(function() {
 		$("#modal-edit-utenti input[name=nome_cat]").val(nomecat);
 		$("#modal-edit-utenti input[name=ruolo_cat] select").val(ruolocat);
 		$("#modal-edit-utenti input[name=statusDip]").val(statusdip);
-		$("#modal-edit-utenti input[name=tariffaOraria]").val(tariffaoraria);
+		$("#modal-edit-utenti input[name=idpersona]").val(idpersona).prop("disabled", true);
 		
 		
 	});
