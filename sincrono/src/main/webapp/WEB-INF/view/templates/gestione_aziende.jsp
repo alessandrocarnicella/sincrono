@@ -144,11 +144,6 @@ $(document).ready(function(){
   
 });
 
-function prova_maialino() {
-	$('#modal-add-aziende').on('hidden.bs.modal', function () {
-		prova_d();
-	})
-};
 
 function prova_d() {
 		$.notify({
@@ -156,7 +151,10 @@ function prova_d() {
 			message: 'STUPIDAAAAAAAAAA' 
 		},{
 			// settings
-			type: 'danger'
+			type: 'danger',
+			z_index: 2000,
+			delay: 5000
+			
 		}
 			
 		);
@@ -238,7 +236,7 @@ function prova_s() {
                	<input type="hidden" name="statusAzienda"  value="1">
                
                	<div class="form-group">
-                  <button onclick="prova_maialino()" type="submit" class="btn btn-success submit-btn btn-block">Inserisci</button>
+                  <button type="submit" onclick="prova_d()" class="btn btn-success submit-btn btn-block">Inserisci</button>
                 </div>
                 
               </form>
