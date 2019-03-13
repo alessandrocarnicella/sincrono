@@ -7,7 +7,6 @@
 <%@ page import="com.sincrono.corso.model.Dipendente"%>
 	
 	
-
 <%		
 		
 		Optional<Dipendente> optDip = (Optional)session.getAttribute("dipendente");

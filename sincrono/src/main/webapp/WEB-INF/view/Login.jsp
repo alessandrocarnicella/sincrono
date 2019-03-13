@@ -6,7 +6,7 @@
 
 <%@ taglib uri="http://kwonnam.pe.kr/jsp/template-inheritance"
 	prefix="layout"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 
@@ -47,12 +47,20 @@
               <div class="col-lg-4 mx-auto">
                 <div class="auto-form-wrapper">
                   
-                  <!-- TODO: INSERIRE METODO E ACTION -->
                   <form action="Dashboard" method="post">
                   	<div class="form-group">
+                  	
+                  	<c:set var="loginFlag" scope="session" value="${login_error}" />
+					
+					<c:if test="${loginFlag eq false}">
+		  				<p>Login Errato</p>
+					</c:if>
+			
+                  	
+                  	
 						
 							<!-- TODO: inserire controllo sul campo boolean error_logged -->
-						     <p class="text-danger"> Amministratore Maiale </p>             		
+						               		
                    	</div>
                     <div class="form-group">
                       <label class="label">Email</label>
