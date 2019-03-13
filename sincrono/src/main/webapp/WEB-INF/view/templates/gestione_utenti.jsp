@@ -245,12 +245,12 @@
 						<div class="form-group">
                           <div class="form-radio form-radio-flat">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="statusDip" id="flatRadios1" value="1" checked=""> Attivo
+                              <input type="radio" class="form-check-input" name="statusDip"  value="1" checked=""> Attivo
                             <i class="input-helper"></i></label>
                           </div>
                           <div class="form-radio form-radio-flat danger">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="statusDip" id="flatRadios2" value="0"> Disattivo
+                              <input type="radio" class="form-check-input" name="statusDip"  value="0"> Disattivo
                             <i class="input-helper "></i></label>
                           </div>
                         </div>		

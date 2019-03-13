@@ -2,6 +2,9 @@ package com.sincrono.corso;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +33,10 @@ public class LoginController {
 	
 	@RequestMapping(value = "/Dashboard")
 	public String getDashboard(Model m, @RequestParam("email") String email,
-            @RequestParam("password") String password) {	
+            @RequestParam("password") String password, HttpServletRequest request ) {	
+		
+		boolean isLogged =  false;
+		HttpSession session = request.getSession();
 		
 		int dipId = 0;
 		Optional<Dipendente> dipendente;
@@ -42,6 +48,8 @@ public class LoginController {
 		
 		if(dipId == 0) {
 			m.addAttribute("error_login", true);
+			isLogged =  false;
+			session.setAttribute("isLogged", isLogged);
 			return "Login";
 		}
 			
@@ -52,7 +60,11 @@ public class LoginController {
 		
 		/*dipendente.get().getCategoria().getId().getNomeCat()*/
 		
-		m.addAttribute("dipendente", dipendente);
+		
+		isLogged =  true;
+		//m.addAttribute("dipendente", dipendente);
+		session.setAttribute("isLogged", isLogged);	
+		session.setAttribute("dipendente", dipendente);		
 		m.addAttribute("error_login", false);
 		return "Dashboard";
 	}
