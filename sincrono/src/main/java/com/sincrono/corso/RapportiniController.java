@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sincrono.corso.model.Dipendente;
 import com.sincrono.corso.model.Ril;
@@ -66,27 +67,68 @@ public class RapportiniController {
 	}
 
 	@RequestMapping(value = "/RapportiniInserisci")
-	public String getRapportiniInserisci(Model m, HttpServletRequest request) {
-
-		// mi recupero la persona 
+	public String getRapportiniInserisci(Model m, HttpServletRequest request,
+			@RequestParam("meseRil") String meseRil,
+			@RequestParam("annoRil") Integer annoRil, 
+			@RequestParam("oreCliente") double oreCliente,
+			@RequestParam("oreFerie") double oreFerie, 
+			@RequestParam("orePermessi") double orePermessi,
+			@RequestParam("oreSede") double oreSede) {
+		 
 		/*Blocco accesso alla pagina se non loggato*/		
 		if(!isLog(request))
 			return "Login";
 
-		// lista tutti rapportini persona 
+		
+		Optional<Dipendente> dip = (Optional<Dipendente>) request.getSession().getAttribute("dipendente");
+	
+		RilPK rilPK = new RilPK();
+		rilPK.setIdPersonaril(dip.get().getIdPersonadip());
+		rilPK.setMeseRil(meseRil);
+		rilPK.setAnnoRil(annoRil);
+		
+		if(rils.findById(rilPK).isPresent()) {
+			
+			m.addAttribute("error_insert_ril", true);
+			return "Rapportini";
+		}
+		
+		Ril ril = new Ril();
+		ril.setId(rilPK);
+		ril.setOreCliente(oreCliente);
+		ril.setOreFerie(oreFerie);
+		ril.setOrePermessi(orePermessi);
+		ril.setOreSede(oreSede);
+		rils.save(ril);
+		
+		List<Ril> listRil = trovaTuttiRil(dip.get());
+		m.addAttribute("list_ril", listRil);
+		m.addAttribute("error_insert_ril", true);
 		return "Rapportini";
 	}
 
 
 	@RequestMapping(value = "/RapportiniElimina")
-	public String getRapportiniElimina(Model m, HttpServletRequest request) {
+	public String getRapportiniElimina(Model m, HttpServletRequest request,
+			@RequestParam("meseRilElimina") String meseRil,
+			@RequestParam("annoRilElimina") Integer annoRil) {
 
-		// mi recupero la persona 
 		/*Blocco accesso alla pagina se non loggato*/		
 		if(!isLog(request))
 			return "Login";
-
-		// lista tutti rapportini persona 
+		
+		Optional<Dipendente> dip = (Optional<Dipendente>) request.getSession().getAttribute("dipendente");
+		
+		RilPK rilPK = new RilPK();
+		rilPK.setIdPersonaril(dip.get().getIdPersonadip());
+		rilPK.setMeseRil(meseRil);
+		rilPK.setAnnoRil(annoRil);
+		
+		rils.deleteById(rilPK);
+		
+		List<Ril> listRil = trovaTuttiRil(dip.get());
+		m.addAttribute("list_ril", listRil);
+		m.addAttribute("error_insert_ril", true);
 		return "Rapportini";
 	}
 
