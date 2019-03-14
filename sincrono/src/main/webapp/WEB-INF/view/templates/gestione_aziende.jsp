@@ -72,7 +72,7 @@
 											<td>
 												<form action="GestioneAziendeElimina" method="POST">
 						
-													<input type="hidden" name="nomeAzienda" value="${x.nomeAzienda}">
+													<input type="hidden" name="nomeAziendaElimina" value="${x.nomeAzienda}">
 											
 													<button type="submit" class="btn btn-secondary btn-fw">
 														<i class="fas fa-trash-alt fa"></i>
@@ -82,7 +82,7 @@
 											<td>
 												<form action="GestioneAziendePrint" method="POST">
 						
-													<input type="hidden" name="nomeAzienda" value="${x.nomeAzienda}">
+													<input type="hidden" name="nomeAziendaPrint" value="${x.nomeAzienda}">
 													<input type="hidden" name="emailAzienda" value="${x.emailAzienda}">
 													<input type="hidden" name="indirizzoAzienda" value="${x.indirizzoAzienda}">
 													<input type="hidden" name="numdipAzienda" value="${x.numdipAzienda}">

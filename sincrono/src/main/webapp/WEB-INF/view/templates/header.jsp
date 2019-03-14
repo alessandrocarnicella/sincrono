@@ -4,19 +4,19 @@
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-center">
   	 
-  		<a href="" type="button" class="btn btn-success btn-fw">
+  		<button class="btn btn-primary">
            <i class="fas fa-check-circle"></i>${sessionScope.categoria}
-        </a>
+        </button>
 		
 		<ul class="navbar-nav navbar-nav-right">        
 	        <li class="nav-item dropdown d-none d-xl-inline-block">
               <span class="profile-text">	
-              		Ciao, ${sessionScope.username}!
+              		Ciao ${sessionScope.username} !
               </span>   
               <span class="ml-3">
-              	 <a href="Logout" type="button" class="btn btn-danger btn-fw">
+              	 <button href="Logout" class="btn btn-danger">
               		<i class="fas fa-sign-out-alt"></i>Logout
-          		 </a>
+          		 </button>
               </span>           
 			</li>
         </ul>
