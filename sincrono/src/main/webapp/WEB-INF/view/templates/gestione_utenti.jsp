@@ -247,7 +247,7 @@
 						<div class="form-group">
                           <div class="form-radio form-radio-flat">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="statusDip"  value="1" checked="" required> Attivo
+                              <input type="radio" class="form-check-input" name="statusDip"  value="1" required> Attivo
                             <i class="input-helper"></i></label>
                           </div>
                           <div class="form-radio form-radio-flat danger">

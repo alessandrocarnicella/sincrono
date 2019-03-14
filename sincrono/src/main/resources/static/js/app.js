@@ -90,7 +90,7 @@ $(document).ready(function(){
 		var tariffaoraria = $(this).data("tariffaoraria");
 		var nomecat = $(this).data("nomecat");
 		var ruolocat = $(this).data("ruolocat");
-		var statusdip = $(this).data("statusdip");
+		var statusdip = $(this).data("statusDip");
 		var idpersona = $(this).data("idpersona");
 
 		$("#modal-edit-utenti input[name=cognomePersona]").val(cognomep);
