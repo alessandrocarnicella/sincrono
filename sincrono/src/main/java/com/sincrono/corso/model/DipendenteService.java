@@ -12,6 +12,17 @@ public interface DipendenteService extends JpaRepository<Dipendente, Integer> {
 	@Query("SELECT p.idPersona FROM Dipendente d, Persona p where (p.idPersona = d.idPersonadip and d.passwordDip = :password and p.emailPersona = :email and d.statusDip = 1)")
 	int existUser(@Param("password") String password, @Param("email") String email);
 
+	@Query("SELECT p.idPersona FROM Dipendente d, Persona p where (p.idPersona = d.idPersonadip and p.emailPersona = :email)")
+	int existUserByEmail(@Param("email") String email);
+	
+	
+	@Transactional
+	@Modifying
+	@Query("UPDATE Dipendente SET passwordDip=:passwordDip where idPersonadip=:idPersonadip")
+	void updatePswDip(@Param("idPersonadip") Integer idPersonadip,
+			@RequestParam("new_password") String passwordDip);
+			
+	
 	@Transactional
 	@Modifying
 	@Query("UPDATE Dipendente SET statusDip=:statusDip, passwordDip=:passwordDip, tariffaOraria=:tariffaOraria, nome_cat=:nome_cat, ruolo_cat=:ruolo_cat where idPersonadip=:idPersonadip")

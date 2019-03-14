@@ -1,6 +1,7 @@
 package com.sincrono.corso;
 
 import java.util.Optional;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -81,5 +82,38 @@ public class LoginController {
 		m.addAttribute("error_login", false);
 		return "Login";
 	}
+	
+	protected String getRandomPsw() {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < 18) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        String saltStr = salt.toString();
+        return saltStr;
+
+    }
+	
+	@RequestMapping(value = "/ForgotPassword")
+	public String getForgotPassword() {
+		return "ForgotPassword";
+	}
+	
+	
+	@RequestMapping(value = "/RecuperaPsw")
+	public String getLoginNewPsw(Model m,@RequestParam("recupero_email") String recupero_email) {
+
+		int dip_id = dip.existUserByEmail(recupero_email);
+		String new_password = getRandomPsw();
+		dip.updatePswDip(dip_id, new_password);
+
+		m.addAttribute("new_psw", new_password);
+		
+		return "Login";
+	}
+	
+	
 	
 }
