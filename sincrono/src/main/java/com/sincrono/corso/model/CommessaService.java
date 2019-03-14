@@ -10,5 +10,8 @@ public interface CommessaService extends JpaRepository<Commessa, Integer> {
 	
 	@Query("SELECT com.idCommessa FROM Commessa com WHERE com.azienda = :nomeAzienda")
 	List<Integer> findIdCommessaByAziendaName(@Param("nomeAzienda") Azienda nomeAzienda);
-
+	
+	@Query("SELECT com.idCommessa FROM Commessa com WHERE com.persona = :persona")
+	int findIdRefByPersona(@Param("persona") Persona persona);
+	
 }

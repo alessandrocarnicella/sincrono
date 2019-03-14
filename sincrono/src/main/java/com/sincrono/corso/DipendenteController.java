@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sincrono.corso.model.Categoria;
 import com.sincrono.corso.model.CategoriaPK;
 import com.sincrono.corso.model.CategoriaService;
+import com.sincrono.corso.model.CommessaService;
 import com.sincrono.corso.model.Dipendente;
 import com.sincrono.corso.model.DipendenteService;
 import com.sincrono.corso.model.Persona;
@@ -29,6 +30,9 @@ public class DipendenteController {
 
 	@Autowired
 	PersonaService per;
+
+	@Autowired
+	CommessaService coms;
 
 	@RequestMapping(value = "/Utenti")
 	public String getUtenti(Model m, HttpServletRequest request) {
@@ -53,11 +57,11 @@ public class DipendenteController {
 	}
 
 	@RequestMapping(value = "/GestioneUtentiAdd")
-	public String getGestioneAziendeAdd(Model m, HttpServletRequest request,
+	public String getGestioneUtentiAdd(Model m, HttpServletRequest request,
 			@RequestParam("cognomePersona") String cognomePersona,
 			@RequestParam("nomePersona") String nomePersona, 
 			@RequestParam("emailPersona") String emailPersona,
-			@RequestParam("passwordDip") String passwordDip, 
+			@RequestParam("password_dip") String passwordDip, 
 			@RequestParam("nome_cat") String nome_cat,
 			@RequestParam("ruolo_cat") String ruolo_cat,
 			@RequestParam("tariffaoraria") double tariffaOraria,
@@ -120,8 +124,19 @@ public class DipendenteController {
 		if(!isLog(request)) 
 			return "Login";
 
+		Optional<Persona> pers = (Optional<Persona>)per.findById(idPersonadip);
+		
+		try {
+			
+			int idCommessa = coms.findIdRefByPersona(pers.get());
+			coms.deleteById(idCommessa);
+		}catch(Exception e) {
+
+		}
+
 		dip.deleteById(idPersonadip);
 		per.deleteById(idPersonadip);
+
 
 		m.addAttribute("list_dip", dip.findAll());
 
