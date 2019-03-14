@@ -64,8 +64,9 @@
 												data-tariffaoraria = "${x.tariffaOraria}"
 												data-nomecat ="${x.categoria.id.nomeCat}"
 												data-ruolocat ="${x.categoria.id.ruoloCat}"
-												data-statusdip = "${x.statusDip}"
+												data-status_dip = "${x.statusDip}"
 												data-idpersona = "${x.idPersonadip}"
+												data-password_dip = "${x.passwordDip}"
 												data-toggle="modal" 
 												data-target="#modal-edit-utenti">
 												<i class="fas fa-edit"></i>
@@ -119,36 +120,36 @@
 					<form action="GestioneUtentiAdd" method="post">
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="cognomePersona" placeholder="Cognome">
+								<input type="text" class="form-control" name="cognomePersona" placeholder="Cognome" required>
 
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="nomePersona" placeholder="Nome">
+								<input type="text" class="form-control" name="nomePersona" placeholder="Nome" required>
 
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="emailPersona" placeholder="Email">
+								<input type="text" class="form-control" name="emailPersona" placeholder="Email" required>
 
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="password" class="form-control" name="passwordDip" placeholder="Password">
+								<input type="text" class="form-control" name="password_dip" placeholder="Password" required>
 
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="nome_cat" placeholder="Es. Programmatore, Segretaria ...">
+								<input type="text" class="form-control" name="nome_cat" placeholder="Es. Programmatore, Segretaria ..." required>
 
 							</div>
 						</div>
 						<div class="form-group">
-		                    <select class="form-control form-control-sm" name="ruolo_cat">
+		                    <select class="form-control form-control-sm" name="ruolo_cat"  required>
 	                    	  <option selected="true" disabled="disabled">Ruolo Categoria</option>    
 		                      <option value="amministratore">Amministratore</option>
 		                      <option value="commerciale">Commerciale</option>
@@ -158,7 +159,7 @@
 		                  </div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="tariffaoraria" placeholder="Tariffa Oraria">
+								<input type="text" class="form-control" name="tariffaoraria" placeholder="Tariffa Oraria"  required>
 
 							</div>
 						</div>
@@ -211,7 +212,7 @@
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<input type="password" class="form-control" name="passwordDip" placeholder="Password" required>
+								<input type="text" class="form-control" name="password_dip" placeholder="Password" required>
 
 							</div>
 						</div>
@@ -222,7 +223,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-		                    <select class="form-control form-control-sm" name="ruolo_cat" >   
+		                    <select class="form-control form-control-sm" name="ruolo_cat"  required>   
 		                      <option value="amministratore">Amministratore</option>
 		                      <option value="commerciale">Commerciale</option>
 		                      <option value="amministrativo">Amministrativo</option>
@@ -237,25 +238,27 @@
 						</div>
 						
 						<div class="form-group">
-                        	<div class="input-group">
-								<input type="hidden" class="form-control" name="idpersona" >
-
-							</div>
-						</div>
-						
-						
-						<div class="form-group">
                           <div class="form-radio form-radio-flat">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="statusDip"  value="1" required> Attivo
+                              <input type="radio" class="form-check-input" name="status_dip" id="status_dip_true" value="1" required> Attivo
                             <i class="input-helper"></i></label>
                           </div>
                           <div class="form-radio form-radio-flat danger">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="statusDip"  value="0" required> Disattivo
+                              <input type="radio" class="form-check-input" name="status_dip" id="status_dip_false" value="0" required> Disattivo
                             <i class="input-helper "></i></label>
                           </div>
                         </div>		
+                        
+                        						
+						<div class="form-group">
+                        	<div class="input-group">
+								<input type="hidden" class="form-control" name="idpersona" >
+							</div>
+						</div>
+						
+                        
+                        
 						<div class="form-group">
 							<button type="submit" class="btn btn-success submit-btn btn-block">Modifica</button>
 						</div>
@@ -267,9 +270,3 @@
 
 	</div>
 </div>
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-</script>

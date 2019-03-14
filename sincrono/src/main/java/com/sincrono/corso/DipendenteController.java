@@ -134,11 +134,11 @@ public class DipendenteController {
 			@RequestParam("cognomePersona") String cognomePersona,
 			@RequestParam("nomePersona") String nomePersona, 
 			@RequestParam("emailPersona") String emailPersona,
-			@RequestParam("passwordDip") String passwordDip, 
+			@RequestParam("password_dip") String passwordDip, 
 			@RequestParam("nome_cat") String nome_cat,
 			@RequestParam("ruolo_cat") String ruolo_cat ,
 			@RequestParam("tariffaoraria") double tariffaOraria,
-			@RequestParam("statusDip") byte statusDip){
+			@RequestParam("status_dip") byte statusDip){
 
 		/*Blocco accesso alla pagina se non loggato*/		
 		if(!isLog(request)) 

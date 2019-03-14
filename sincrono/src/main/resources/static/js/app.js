@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	console.log("ciaooooooooooooooooooooo");
 	
 	// FUNZIONE PER RICERCA NELLA PAGINA AZIENDA
 	$("#searchAziende").on("keyup", function() {
@@ -86,24 +85,32 @@ $(document).ready(function(){
 		var nomep = $(this).data("nomep");
 		var cognomep = $(this).data("cognomep");
 		var emailp = $(this).data("emailp");
-		var passwordDip = $(this).data("passwordDip");
+		var password_dip = $(this).data("password_dip");
 		var tariffaoraria = $(this).data("tariffaoraria");
 		var nomecat = $(this).data("nomecat");
 		var ruolocat = $(this).data("ruolocat");
-		var statusdip = $(this).data("statusDip");
+		var status_dip = $(this).data("status_dip");
 		var idpersona = $(this).data("idpersona");
 
 		$("#modal-edit-utenti input[name=cognomePersona]").val(cognomep);
 		$("#modal-edit-utenti input[name=nomePersona]").val(nomep);
 		$("#modal-edit-utenti input[name=emailPersona]").val(emailp);
-		$("#modal-edit-utenti input[name=passwordDip]").val(passwordDip);
+		$("#modal-edit-utenti input[name=password_dip]").val(password_dip);
 		$("#modal-edit-utenti input[name=tariffaoraria]").val(tariffaoraria);
 		$("#modal-edit-utenti input[name=nome_cat]").val(nomecat);
-		$("#modal-edit-utenti input[name=ruolo_cat] select").val(ruolocat);
-		$("#modal-edit-utenti input[name=statusDip]").val(statusdip);
+		$("#modal-edit-utenti input[name=ruolo_cat] select").val(ruolocat);	
 		$("#modal-edit-utenti input[name=idpersona]").val(idpersona);
+		
+		console.log(status_dip);
+		if(status_dip == 1){
+			$("#status_dip_true").prop('checked',true);
+			console.log("if");
+		}else{
+			console.log("else");
+			$("#status_dip_false").prop('checked',true);
+		}
 
-
+		
 	});
 	
 	
