@@ -27,8 +27,10 @@ public class LoginController {
 	
 	@RequestMapping(value = "/")
 	public String getHome(Model m, HttpServletRequest request) {
+		
 		HttpSession session = request.getSession();
 		boolean isLogged = false;
+		
 		session.setAttribute("isLogged", isLogged);
 		m.addAttribute("error_login", false);
 		
@@ -36,10 +38,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/Dashboard")
-	public String getDashboard(Model m, @RequestParam("email") String email,
-            @RequestParam("password") String password, HttpServletRequest request ) {	
-				
-		HttpSession session = request.getSession();
+	public String getDashboard(Model m, HttpServletRequest request, 
+			@RequestParam("email") String email,
+            @RequestParam("password") String password) {	
+		
 		boolean isLogged = (boolean) request.getSession().getAttribute("isLogged");
 		
 		int dipId = 0;
@@ -53,7 +55,7 @@ public class LoginController {
 		if(dipId == 0) {
 			m.addAttribute("error_login", true);
 			isLogged =  false;
-			session.setAttribute("isLogged", isLogged);
+			request.getSession().setAttribute("isLogged", isLogged);
 			return "Login";
 		}
 			
@@ -61,15 +63,23 @@ public class LoginController {
 	
 		m.addAttribute("list_aziende", as.findAll());
 		m.addAttribute("list_dipendenti", dip.findAll());
-		
-		/*dipendente.get().getCategoria().getId().getNomeCat()*/
-		
-		
+	
 		isLogged =  true;
-		//m.addAttribute("dipendente", dipendente);
-		session.setAttribute("isLogged", isLogged);	
-		session.setAttribute("dipendente", dipendente);		
+		request.getSession().setAttribute("isLogged", isLogged);	
+		request.getSession().setAttribute("dipendente", dipendente);		
 		m.addAttribute("error_login", false);
 		return "Dashboard";
 	}
+	
+	@RequestMapping(value = "/Logout")
+	public String getLogout(Model m, HttpServletRequest request) {
+		
+		request.getSession().invalidate();
+		request.getSession().removeAttribute("isLogged");
+		request.getSession().removeAttribute("dipendente");
+		
+		m.addAttribute("error_login", false);
+		return "Login";
+	}
+	
 }

@@ -5,14 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itextpdf.text.BaseColor;
@@ -27,6 +23,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.sincrono.corso.model.Azienda;
 import com.sincrono.corso.model.AziendaService;
+import com.sincrono.corso.model.ReferenteService;
 
 @Controller
 public class AziendeController {
@@ -35,12 +32,15 @@ public class AziendeController {
 	@Autowired
 	AziendaService as;
 	
+	@Autowired
+	ReferenteService ref;
+	
 	@RequestMapping(value = "/Aziende")
 	public String getAziende(Model m, HttpServletRequest request) {
-				
-		if(!(boolean) request.getSession().getAttribute("isLogged")) {
+		
+		/*Blocco accesso alla pagina se non loggato*/		
+		if(!isLog(request))
 			return "Login";
-		}
 		
 		m.addAttribute("list_az", as.findAll());
 		return "Aziende";
@@ -48,9 +48,11 @@ public class AziendeController {
 	
 	@RequestMapping(value = "/GestioneAziende")
 	public String getGestioneAziende(Model m, HttpServletRequest request) {
-		if(!(boolean) request.getSession().getAttribute("isLogged")) {
+		
+		/*Blocco accesso alla pagina se non loggato*/		
+		if(!isLog(request)) 
 			return "Login";
-		}
+		
 		m.addAttribute("error_insert_azienda", false);
 
 		m.addAttribute("list_az", as.findAll());
@@ -60,13 +62,18 @@ public class AziendeController {
 	@RequestMapping(value = "/GestioneAziendeAdd")
 	public String getGestioneAziendeAdd(Model m,HttpServletRequest request, 
 			@RequestParam("nomeAzienda") String nomeAzienda,
-            @RequestParam("emailAzienda") String emailAzienda, @RequestParam("indirizzoAzienda") String indirizzoAzienda,
-            @RequestParam("numdipAzienda") Integer numdipAzienda, @RequestParam("pivaAzienda") String pivaAzienda,
-            @RequestParam("societa") String societa ,@RequestParam("telefonoAzienda") String telefonoAzienda,
+            @RequestParam("emailAzienda") String emailAzienda, 
+            @RequestParam("indirizzoAzienda") String indirizzoAzienda,
+            @RequestParam("numdipAzienda") Integer numdipAzienda, 
+            @RequestParam("pivaAzienda") String pivaAzienda,
+            @RequestParam("societa") String societa,
+            @RequestParam("telefonoAzienda") String telefonoAzienda,
             @RequestParam("statusAzienda") byte statusAzienda) {
-		if(!(boolean) request.getSession().getAttribute("isLogged")) {
+		
+		/*Blocco accesso alla pagina se non loggato*/		
+		if(!isLog(request))
 			return "Login";
-		}
+		
 		boolean error = false;
 	
 		if(as.findByNomeAzienda(nomeAzienda).isEmpty() && as.findByEmailAzienda(emailAzienda).isEmpty() && as.findByPivaAzienda(pivaAzienda).isEmpty()) {
@@ -104,9 +111,9 @@ public class AziendeController {
 	public String getGestioneAziendeElimina(Model m, HttpServletRequest request, 
 			@RequestParam("nomeAzienda") String nomeAzienda){
 		
-		if(!(boolean) request.getSession().getAttribute("isLogged")) {
+		/*Blocco accesso alla pagina se non loggato*/		
+		if(!isLog(request))
 			return "Login";
-		}
 			
 		as.deleteById(nomeAzienda);
 		
@@ -115,16 +122,19 @@ public class AziendeController {
 	}
 	
 	@RequestMapping(value = "/GestioneAziendeUpdate")
-	public String getGestioneAziendeModifica(Model m,HttpServletRequest request,
+	public String getGestioneAziendeModifica(Model m, HttpServletRequest request,
 			@RequestParam("nomeAzienda") String nomeAzienda,
-            @RequestParam("emailAzienda") String emailAzienda, @RequestParam("indirizzoAzienda") String indirizzoAzienda,
-            @RequestParam("numdipAzienda") Integer numdipAzienda, @RequestParam("pivaAzienda") String pivaAzienda,
-            @RequestParam("societa") String societa ,@RequestParam("telefonoAzienda") String telefonoAzienda,
+            @RequestParam("emailAzienda") String emailAzienda, 
+            @RequestParam("indirizzoAzienda") String indirizzoAzienda,
+            @RequestParam("numdipAzienda") Integer numdipAzienda, 
+            @RequestParam("pivaAzienda") String pivaAzienda,
+            @RequestParam("societa") String societa,
+            @RequestParam("telefonoAzienda") String telefonoAzienda,
             @RequestParam("statusAzienda") byte statusAzienda){
-	
-		if(!(boolean) request.getSession().getAttribute("isLogged")) {
+		
+		/*Blocco accesso alla pagina se non loggato*/
+		if(!isLog(request))
 			return "Login";
-		}
 		
 		as.updateAzienda(nomeAzienda, emailAzienda, indirizzoAzienda, numdipAzienda, pivaAzienda, societa, statusAzienda, telefonoAzienda);
 		
@@ -141,10 +151,10 @@ public class AziendeController {
 			@RequestParam("pivaAzienda") String pivaAzienda,
 			@RequestParam("societa") String societa ,
 			@RequestParam("telefonoAzienda") String telefonoAzienda) {
-
-		if(!(boolean) request.getSession().getAttribute("isLogged")) {
+		
+		/*Blocco accesso alla pagina se non loggato*/		
+		if(!isLog(request))
 			return "Login";
-		}
 		
 		Document document = new Document();
 		try {
@@ -195,12 +205,10 @@ public class AziendeController {
 		
 		
 		PdfPTable table2 = new PdfPTable(2);
-
-
 		//---------------- add header -------
 		Font font_header2 = new Font(FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.BLACK);
 
-		PdfPCell header2 = new PdfPCell(new Phrase("Dettaglio Azienda",font_header));
+		PdfPCell header2 = new PdfPCell(new Phrase("Dettaglio Referente",font_header));
 		header2.setColspan(2);
 		header2.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		header2.setBorderWidth(1);
@@ -209,6 +217,10 @@ public class AziendeController {
 		header2.setPaddingBottom(7f);
 		table2.addCell(header2);
 
+		
+		//--------------------------------------------------
+				
+		//String telefonoRef = ref.findTelefonoByAziendaName(nomeAzienda);
 			
 		//-----------------Table Cells Label/Value------------------
 
@@ -217,20 +229,9 @@ public class AziendeController {
 		table2.setSpacingAfter(30);
 		table2.setSpacingBefore(30);
 
-		table2.addCell(new Phrase("Nome",font_label));
-		table2.addCell(new Phrase(nomeAzienda,font_val));
-		table2.addCell(new Phrase("Società",font_label));
-		table2.addCell(new Phrase(societa,font_val));
-		table2.addCell(new Phrase("Email",font_label));
-		table2.addCell(new Phrase(emailAzienda,font_val));
-		table2.addCell(new Phrase("Telefono",font_label));
-		table2.addCell(new Phrase(telefonoAzienda,font_val));
-		table2.addCell(new Phrase("Partita Iva",font_label));
-		table2.addCell(new Phrase(pivaAzienda,font_val));
-		table2.addCell(new Phrase("Indirizzo Azienda",font_label));
-		table2.addCell(new Phrase(indirizzoAzienda,font_val));
-		table2.addCell(new Phrase("Numero Dipendenti",font_label));
-		table2.addCell(new Phrase(Integer.toString(numdipAzienda),font_val));
+		//table2.addCell(new Phrase("Telefono",font_label));
+//		table2.addCell(new Phrase(telefonoRef,font_val));
+	
 		
 		
 		try {
@@ -250,8 +251,13 @@ public class AziendeController {
 
 	}
 
-	
-	
+	/*Blocco accesso alla pagina se non loggato*/		
+	private boolean isLog(HttpServletRequest request) {
+		if(!(boolean) request.getSession().getAttribute("isLogged")) {
+			return false;
+		}
+		return true;
+	}
 	
 	
 	
