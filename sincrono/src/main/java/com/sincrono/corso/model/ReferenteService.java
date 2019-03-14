@@ -6,7 +6,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface ReferenteService extends JpaRepository<Referente, Integer> {
 	
-	@Query("SELECT a.telefonoRef FROM Referente a where  a.azienda = :nomeAzienda")
-	String findTelefonoByAziendaName(@Param("nomeAzienda") String nomeAzienda);
+	@Query("SELECT r.idRef FROM Referente r WHERE r.azienda = :nomeAzienda")
+	int findIdRefByAziendaName(@Param("nomeAzienda") Azienda nomeAzienda);
+
 
 }

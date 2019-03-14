@@ -24,7 +24,6 @@ public class RapportiniController {
 	@Autowired
 	RilService rils;
 
-
 	@RequestMapping(value = "/Rapportini")
 	public String getRapportini(Model m, HttpServletRequest request) {
 
@@ -138,6 +137,8 @@ public class RapportiniController {
 		/*Blocco accesso alla pagina se non loggato*/		
 		if(!isLog(request))
 			return "Login";
+		
+		
 
 		return "GestioneCommesseDipendenti";
 	}

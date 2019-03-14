@@ -3,6 +3,8 @@ package com.sincrono.corso;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.sincrono.corso.model.Azienda;
 import com.sincrono.corso.model.AziendaService;
+import com.sincrono.corso.model.Commessa;
+import com.sincrono.corso.model.CommessaService;
+import com.sincrono.corso.model.Referente;
 import com.sincrono.corso.model.ReferenteService;
 
 @Controller
@@ -34,6 +39,9 @@ public class AziendeController {
 	
 	@Autowired
 	ReferenteService ref;
+	
+	@Autowired
+	CommessaService com;
 	
 	@RequestMapping(value = "/Aziende")
 	public String getAziende(Model m, HttpServletRequest request) {
@@ -144,31 +152,31 @@ public class AziendeController {
 	
 	@RequestMapping("/GestioneAziendePrint")
 	public String getPrint(Model m, HttpServletRequest request,  
-			@RequestParam("nomeAzienda") String nomeAzienda,
+			@RequestParam("nomeAziendaPrint") String nomeAzienda,
 			@RequestParam("emailAzienda") String emailAzienda, 
 			@RequestParam("indirizzoAzienda") String indirizzoAzienda,
 			@RequestParam("numdipAzienda") Integer numdipAzienda, 
 			@RequestParam("pivaAzienda") String pivaAzienda,
 			@RequestParam("societa") String societa ,
 			@RequestParam("telefonoAzienda") String telefonoAzienda) {
-		
+
 		/*Blocco accesso alla pagina se non loggato*/		
 		if(!isLog(request))
 			return "Login";
-		
+
 		Document document = new Document();
 		try {
 			String home = System.getProperty("user.home");
 			home = home + "/Downloads/";
-			PdfWriter.getInstance(document, new FileOutputStream(new File(home+"DETTAGLIO_AZIENDA.pdf")));
+			PdfWriter.getInstance(document, new FileOutputStream(new File(home+"DETTAGLIO_AZIENDA_"+nomeAzienda+".pdf")));
 		} catch (FileNotFoundException | DocumentException e) {
 			e.printStackTrace();
 		}
 
 		document.open();
-		
+
 		PdfPTable table = new PdfPTable(2);
-		
+
 		//---------------- add header -------
 		Font font_header = new Font(FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.BLACK);
 
@@ -186,7 +194,7 @@ public class AziendeController {
 		Font font_label  = new Font(FontFamily.HELVETICA, 11, Font.BOLD, BaseColor.BLACK);
 		Font font_val = new Font(FontFamily.HELVETICA, 11, Font.NORMAL, BaseColor.BLACK);
 		table.setPaddingTop(0f);
-		
+
 
 		table.addCell(new Phrase("Nome",font_label));
 		table.addCell(new Phrase(nomeAzienda,font_val));
@@ -202,46 +210,129 @@ public class AziendeController {
 		table.addCell(new Phrase(indirizzoAzienda,font_val));
 		table.addCell(new Phrase("Numero Dipendenti",font_label));
 		table.addCell(new Phrase(Integer.toString(numdipAzienda),font_val));
-		
-		
-		PdfPTable table2 = new PdfPTable(2);
-		//---------------- add header -------
-		Font font_header2 = new Font(FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.BLACK);
 
-		PdfPCell header2 = new PdfPCell(new Phrase("Dettaglio Referente",font_header));
-		header2.setColspan(2);
-		header2.setBackgroundColor(BaseColor.LIGHT_GRAY);
-		header2.setBorderWidth(1);
-		header2.setHorizontalAlignment(Element.ALIGN_CENTER);
-		header2.setPaddingTop(0f);
-		header2.setPaddingBottom(7f);
-		table2.addCell(header2);
-
-		
-		//--------------------------------------------------
-				
-		//String telefonoRef = ref.findTelefonoByAziendaName(nomeAzienda);
-			
-		//-----------------Table Cells Label/Value------------------
-
-		Font font_label2  = new Font(FontFamily.HELVETICA, 11, Font.BOLD, BaseColor.BLACK);
-		Font font_val2 = new Font(FontFamily.HELVETICA, 11, Font.NORMAL, BaseColor.BLACK);
-		table2.setSpacingAfter(30);
-		table2.setSpacingBefore(30);
-
-		//table2.addCell(new Phrase("Telefono",font_label));
-//		table2.addCell(new Phrase(telefonoRef,font_val));
-	
-		
-		
 		try {
 			document.add(table);
+		} catch (DocumentException e1) {
 			
-			document.add(table2);
-		} catch (DocumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
+		
+		//-------------------TABELLA REFERENTE--------------
+
+		PdfPTable table2 = new PdfPTable(2);
+
+		Azienda azienda = new Azienda();
+
+		azienda.setNomeAzienda(nomeAzienda);
+		azienda.setEmailAzienda(emailAzienda);
+		azienda.setNumdipAzienda(numdipAzienda);
+		azienda.setIndirizzoAzienda(indirizzoAzienda);
+		azienda.setPivaAzienda(pivaAzienda);
+		azienda.setSocieta(societa);
+		azienda.setTelefonoAzienda(telefonoAzienda);
+
+
+		try {
+			
+			int idRef = ref.findIdRefByAziendaName(azienda);
+			Optional<Referente> referente = ref.findById(idRef);
+			
+			//---------------- add header -------
+			//		Font font_header2 = new Font(FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.BLACK);
+
+			PdfPCell header2 = new PdfPCell(new Phrase("Dettaglio Referente",font_header));
+			header2.setColspan(2);
+			header2.setBackgroundColor(BaseColor.LIGHT_GRAY);
+			header2.setBorderWidth(1);
+			header2.setHorizontalAlignment(Element.ALIGN_CENTER);
+			header2.setPaddingTop(0f);
+			header2.setPaddingBottom(7f);
+			table2.addCell(header2);
+
+			//-----------------Table Cells Label/Value------------------
+
+			table2.addCell(new Phrase("Id Referente",font_label));
+			table2.addCell(new Phrase(Integer.toString(referente.get().getIdRef()),font_val));
+			table2.addCell(new Phrase("Nome",font_label));
+			table2.addCell(new Phrase(referente.get().getPersona().getNomePersona(),font_val));
+			table2.addCell(new Phrase("Cognome",font_label));
+			table2.addCell(new Phrase(referente.get().getPersona().getCognomePersona(),font_val));
+			table2.addCell(new Phrase("Email",font_label));
+			table2.addCell(new Phrase(referente.get().getPersona().getEmailPersona(),font_val));
+			table2.addCell(new Phrase("Telefono",font_label));
+			table2.addCell(new Phrase(referente.get().getTelefonoRef(),font_val));
+
+			table2.setSpacingAfter(30);
+			table2.setSpacingBefore(30);
+
+			
+			try {
+
+				document.add(table2);
+			} catch (DocumentException e) {
+				
+				e.printStackTrace();
+			}
+			
+			
+			
+		}catch(Exception e) {
+
+
+		}
+
+
+
+
+
+		//-------------------TABELLA COMMESSA--------------
+
+
+
+		List<Integer> idCommessaList = com.findIdCommessaByAziendaName(azienda);
+
+		for (Integer id : idCommessaList) {
+
+			PdfPTable table3 = new PdfPTable(2);
+
+			Optional<Commessa> commessa = com.findById(id);
+			System.out.println(commessa.get().getNomeCommessa());
+			//---------------- add header -------
+
+			PdfPCell header3 = new PdfPCell(new Phrase("Dettaglio Commessa n° " + Integer.toString(id),font_header));
+			header3.setColspan(2);
+			header3.setBackgroundColor(BaseColor.LIGHT_GRAY);
+			header3.setBorderWidth(1);
+			header3.setHorizontalAlignment(Element.ALIGN_CENTER);
+			header3.setPaddingTop(0f);
+			header3.setPaddingBottom(7f);
+			table3.addCell(header3);
+
+			//-----------------Table Cells Label/Value------------------
+
+			table3.addCell(new Phrase("Id Commessa",font_label));
+			table3.addCell(new Phrase(Integer.toString(commessa.get().getIdCommessa()),font_val));
+			table3.addCell(new Phrase("Nome",font_label));
+			table3.addCell(new Phrase(commessa.get().getNomeCommessa(),font_val));
+			table3.addCell(new Phrase("Dipendente associato",font_label));
+			table3.addCell(new Phrase(commessa.get().getPersona().getNomePersona() + " " + commessa.get().getPersona().getCognomePersona() ,font_val));
+			table3.addCell(new Phrase("Tariffa cliente",font_label));
+			table3.addCell(new Phrase(Double.toString(commessa.get().getTariffaCliente()),font_val));
+			table3.addCell(new Phrase("Azienda",font_label));
+			table3.addCell(new Phrase(commessa.get().getAzienda().getNomeAzienda(),font_val));
+
+			table3.setSpacingAfter(10);
+			table3.setSpacingBefore(10);
+
+			try {
+				document.add(table3);
+			} catch (DocumentException e) {
+				e.printStackTrace();
+			}
+
+		}
+
 
 		document.close();
 
@@ -250,6 +341,7 @@ public class AziendeController {
 		return "GestioneAziende";
 
 	}
+
 
 	/*Blocco accesso alla pagina se non loggato*/		
 	private boolean isLog(HttpServletRequest request) {
