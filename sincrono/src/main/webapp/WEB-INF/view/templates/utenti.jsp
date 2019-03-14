@@ -19,7 +19,7 @@
 			data-tariffaoraria = "${x.tariffaOraria}"
 			data-nomecat ="${x.categoria.id.nomeCat}"
 			data-ruolocat ="${x.categoria.id.ruoloCat}"
-			
+			data-passwordDip ="${x.password_dip}"
 			data-toggle="modal" 
 			data-target="#modal-detail-utenti">
 			

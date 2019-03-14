@@ -51,6 +51,7 @@ $(document).ready(function(){
 		var societa = $(this).data("societa");
 		var telefono = $(this).data("telefono");
 		var status = $(this).data("status");
+		
 
 		$("#modal-edit-aziende input[name=nomeAzienda]").val(namen);
 		$("#modal-edit-aziende input[name=emailAzienda]").val(email);
@@ -85,7 +86,7 @@ $(document).ready(function(){
 		var nomep = $(this).data("nomep");
 		var cognomep = $(this).data("cognomep");
 		var emailp = $(this).data("emailp");
-		var passwordDip = "**************";
+		var passwordDip = $(this).data("passwordDip");
 		var tariffaoraria = $(this).data("tariffaoraria");
 		var nomecat = $(this).data("nomecat");
 		var ruolocat = $(this).data("ruolocat");
