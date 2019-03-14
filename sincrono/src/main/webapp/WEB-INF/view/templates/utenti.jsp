@@ -12,7 +12,7 @@
 
 	<c:forEach items="${list_dip}" var="x">
 		<div
-			class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" 
+			class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" id="stretch-card-utenti"
 			data-nomep="${x.persona.nomePersona}"  
 			data-cognomep="${x.persona.cognomePersona}"
 			data-emailp="${x.persona.emailPersona}"

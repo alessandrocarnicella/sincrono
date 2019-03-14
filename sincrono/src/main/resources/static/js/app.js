@@ -18,8 +18,8 @@ $(document).ready(function(){
 	});
 		  
 	
-	// RERCUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM SHOW AZIENDA)
-	$(".stretch-card").on("click", function() {
+	// RECUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM SHOW AZIENDA
+	$("#stretch-card-aziende").on("click", function() {
 		var namen = $(this).data("namen");
 		var email = $(this).data("email");
 		var address = $(this).data("address");
@@ -29,19 +29,19 @@ $(document).ready(function(){
 		var telefono = $(this).data("telefono");
 		var status = $(this).data("status");
 
-		$("input[name=nomeAzienda]").val(namen).prop("disabled",true);
-		$("input[name=emailAzienda]").val(email).prop("disabled",true);
-		$("input[name=indirizzoAzienda]").val(address).prop("disabled",true);
-		$("input[name=numdipAzienda]").val(numdip).prop("disabled",true);
-		$("input[name=pivaAzienda]").val(piva).prop("disabled",true);
-		$("input[name=societa]").val(societa).prop("disabled",true);
-		$("input[name=status]").val(status).prop("disabled",true);
-		$("input[name=telefonoAzienda]").val(telefono).prop("disabled",true);
+		$("#modal-detail-aziende input[name=nomeAzienda]").val(namen).prop("disabled",true);
+		$("#modal-detail-aziende input[name=emailAzienda]").val(email).prop("disabled",true);
+		$("#modal-detail-aziende input[name=indirizzoAzienda]").val(address).prop("disabled",true);
+		$("#modal-detail-aziende input[name=numdipAzienda]").val(numdip).prop("disabled",true);
+		$("#modal-detail-aziende input[name=pivaAzienda]").val(piva).prop("disabled",true);
+		$("#modal-detail-aziende input[name=societa]").val(societa).prop("disabled",true);
+		$("#modal-detail-aziende input[name=status]").val(status).prop("disabled",true);
+		$("#modal-detail-aziende input[name=telefonoAzienda]").val(telefono).prop("disabled",true);
 	});
 		
 
 
-	// RERCUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM EDIT AZIENDA) 
+	// RERCUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM EDIT AZIENDA
 	$(".edit-aziende").on("click", function() {
 		var namen = $(this).data("namen");
 		var email = $(this).data("email");
@@ -80,7 +80,7 @@ $(document).ready(function(){
 	});
 	
 
-	// RECUPERA I DATI DA DATA E RIEMPIE LA FORM EDIT UTENTI
+	// RECUPERA I DATI DAI DATANAME E RIEMPIE LA FORM EDIT UTENTI
 	$(".edit-utente").on("click", function() {
 		var nomep = $(this).data("nomep");
 		var cognomep = $(this).data("cognomep");
@@ -107,7 +107,7 @@ $(document).ready(function(){
 	
 	
 	// RECUPERA I DATI DA DATA E RIEMPIE LA FORM SHOW UTENTI
-	$(".stretch-card").on("click", function() {
+	$("#stretch-card-utenti").on("click", function() {
 		var nomep = $(this).data("nomep");
 		var cognomep = $(this).data("cognomep");
 		var emailp = $(this).data("emailp");
@@ -117,14 +117,14 @@ $(document).ready(function(){
 		var ruolocat = $(this).data("ruolocat");
 		var tariffaoraria = $(this).data("tariffaoraria");
 
-		$("input[name=cognomePersona]").val(cognomep).prop( "disabled", true ).css('textTransform', 'capitalize');
-		$("input[name=nomePersona]").val(nomep).prop( "disabled", true ).css('textTransform', 'capitalize');
-		$("input[name=emailPersona]").val(emailp).prop( "disabled", true );
-		$("input[name=passwordDip]").val(passwordDip).prop( "disabled", true );
-		$("input[name=tariffaOraria]").val(tariffaOraria).prop( "disabled", true );
-		$("input[name=nome_cat]").val(nomecat).prop("disabled", true ).css('textTransform', 'capitalize');
-		$("input[name=ruolo_cat]").val(ruolocat).prop( "disabled", true ).css('textTransform', 'capitalize');
-		$("input[name=tariffaOraria]").val(tariffaoraria + "Euro").prop( "disabled", true );
+		$("#modal-detail-utenti input[name=cognomePersona]").val(cognomep).prop( "disabled", true ).css('textTransform', 'capitalize');
+		$("#modal-detail-utenti input[name=nomePersona]").val(nomep).prop( "disabled", true ).css('textTransform', 'capitalize');
+		$("#modal-detail-utenti input[name=emailPersona]").val(emailp).prop( "disabled", true );
+		$("#modal-detail-utenti input[name=passwordDip]").val(passwordDip).prop( "disabled", true );
+		$("#modal-detail-utenti input[name=tariffaOraria]").val(tariffaOraria).prop( "disabled", true );
+		$("#modal-detail-utenti input[name=nome_cat]").val(nomecat).prop("disabled", true ).css('textTransform', 'capitalize');
+		$("#modal-detail-utenti input[name=ruolo_cat]").val(ruolocat).prop( "disabled", true ).css('textTransform', 'capitalize');
+		$("#modal-detail-utenti input[name=tariffaOraria]").val(tariffaoraria + "Euro").prop( "disabled", true );
 
 
 	});
@@ -141,7 +141,7 @@ $(document).ready(function(){
 
 	
 	
-	function prova_d() {
+	function notify_danger() {
 		$.notify({
 			// options
 			message: 'STUPIDAAAAAAAAAA' 
@@ -155,8 +155,19 @@ $(document).ready(function(){
 
 		);
 	};
+	
+	function notify_warning() {
+		$.notify({
+			// options
+			message: 'Yeah' 
+		},{
+			// settings
+			type: 'warning'
+		});
 
-	function prova_s() {
+	};
+
+	function notify_success() {
 		$.notify({
 			// options
 			message: 'Yeah' 
