@@ -56,7 +56,8 @@
 											<td>
 												<form action="RapportiniElimina" method="POST">
 						
-													<input type="hidden" name="idRil" value="${x.id.idPersonaril}">
+													<input type="hidden" name="meseRilElimina" value="${x.id.meseRil}">
+													<input type="hidden" name="annoRilElimina" value="${x.id.annoRil}">
 											
 													<button type="submit" class="btn btn-secondary btn-fw">
 														<i class="fas fa-trash-alt fa"></i>
@@ -88,19 +89,44 @@
         </div>
         <div class="modal-body">
           <div class="auto-form-wrapper">
-              <form action="GestioneRilAdd" method="POST">
+              <form action="RapportiniInserisci" method="POST">
               
-                <div class="form-group">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Mese" name="meseRil" required>
-                  </div>
-                </div>
+                
                 
                 <div class="form-group">
-                  	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Anno" name="annoRil" required>
-            		</div>
-               	</div>
+		                    <select class="form-control form-control-sm" name="meseRil">
+	                    	  <option selected="true" disabled="disabled">Mese</option>    
+		                      <option value="gennaio">Gennaio</option>
+		                      <option value="febbraio">Febbraio</option>
+		                      <option value="marzo">Marzo</option>
+		                      <option value="aprile">Aprile</option>
+		                      <option value="maggio">Maggio</option>
+		                      <option value="giugno">Giugno</option>
+		                      <option value="luglio">Luglio</option>
+		                      <option value="agosto">Agosto</option>
+		                      <option value="settembre">Settembre</option>
+		                      <option value="ottobre">Ottobre</option>
+		                      <option value="novembre">Novembre</option>
+		                      <option value="dicembre">Dicembre</option>
+		                    </select>
+		                  </div>
+		                  
+		                  
+		                  <div class="form-group">
+		                    <select class="form-control form-control-sm" name="annoRil">
+	                    	  <option selected="true" disabled="disabled">Anno</option>    
+		                      <option value="2015">2015</option>
+		                      <option value="2016">2016</option>
+		                      <option value="2017">2017</option>
+		                      <option value="2018">2018</option>
+		                      <option value="2019">2019</option>
+		                     
+		                    </select>
+		                  </div>
+         
+         
+                
+                
                		 
                 <div class="form-group">
                   	<div class="input-group">
