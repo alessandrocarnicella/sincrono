@@ -43,49 +43,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<script>
-$(document).ready(function(){
-	
-  $("#searchAziende").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $(".fieldNameAzienda").filter(function() {
-      $(this).closest(".stretch-card").toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-  
-  $(".stretch-card").on("click", function() {
-	 var namen = $(this).data("namen");
-	 var email = $(this).data("email");
-	 var address = $(this).data("address");
-	 var numdip = $(this).data("numdip");
-	 var piva = $(this).data("piva");
-	 var societa = $(this).data("societa");
-	 var telefono = $(this).data("telefono");
-	 var status = $(this).data("status");
-	 
-	$("input[name=nomeAzienda]").val(namen).prop("disabled",true);
-	$("input[name=emailAzienda]").val(email).prop("disabled",true);
-	$("input[name=indirizzoAzienda]").val(address).prop("disabled",true);
-	$("input[name=numdipAzienda]").val(numdip).prop("disabled",true);
-	$("input[name=pivaAzienda]").val(piva).prop("disabled",true);
-	$("input[name=societa]").val(societa).prop("disabled",true);
-	$("input[name=status]").val(status).prop("disabled",true);
-	$("input[name=telefonoAzienda]").val(telefono).prop("disabled",true);
 
 
-  });
-});
 
-</script>
-
-<style>
-	
-	.px18{
-    font-size:18px!important;
- }
-	
-
-</style>
 
 <div class="modal fade" id="modal-detail-aziende" role="dialog" >
     <div class="modal-dialog">

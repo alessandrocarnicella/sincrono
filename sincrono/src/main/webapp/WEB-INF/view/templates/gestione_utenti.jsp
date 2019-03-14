@@ -272,37 +272,4 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$(document).ready(function() {
-	$("#searchGestioneUtenti").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#table-gestione-utenti tr").filter(function() {
-		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
-	});
-	
-	
-	$(".edit-utente").on("click", function() {
-		var nomep = $(this).data("nomep");
-		var cognomep = $(this).data("cognomep");
-		var emailp = $(this).data("emailp");
-		var passwordDip = "**************";
-		var tariffaoraria = $(this).data("tariffaoraria");
-		var nomecat = $(this).data("nomecat");
-		var ruolocat = $(this).data("ruolocat");
-		var statusdip = $(this).data("statusdip");
-		var idpersona = $(this).data("idpersona");
-		
-		$("#modal-edit-utenti input[name=cognomePersona]").val(cognomep);
-		$("#modal-edit-utenti input[name=nomePersona]").val(nomep);
-		$("#modal-edit-utenti input[name=emailPersona]").val(emailp);
-		$("#modal-edit-utenti input[name=passwordDip]").val(passwordDip);
-		$("#modal-edit-utenti input[name=tariffaoraria]").val(tariffaoraria);
-		$("#modal-edit-utenti input[name=nome_cat]").val(nomecat);
-		$("#modal-edit-utenti input[name=ruolo_cat] select").val(ruolocat);
-		$("#modal-edit-utenti input[name=statusDip]").val(statusdip);
-		$("#modal-edit-utenti input[name=idpersona]").val(idpersona);
-		
-		
-	});
-});
 </script>

@@ -37,6 +37,8 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
 <link href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
 <link href="vendors/css/vendor.bundle.base.css">
 <link href="vendors/css/vendor.bundle.addons.css">
@@ -89,11 +91,8 @@
 <script src="js/off-canvas.js"></script>
 <script src="js/misc.js"></script>
 <script src="js/dashboard.js"></script>
+<script src="js/app.js"></script>
 
-<style>
-.nav .nav-item.dropdown .dropdown-toggle:after, .navbar-nav .nav-item.dropdown .dropdown-toggle:after{
-  content: none;
-}
-</style>
+
 
 </html>

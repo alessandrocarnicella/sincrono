@@ -70,23 +70,29 @@
 												</button>
 											</td>
 											<td>
-													<form action="GestioneAziendeElimina" method="POST">
+												<form action="GestioneAziendeElimina" method="POST">
 						
-												<input type="hidden" name="nomeAzienda" value="${x.nomeAzienda}">
-										
-												<button type="submit" class="btn btn-secondary btn-fw">
-													<i class="fas fa-trash-alt fa"></i>
-												</button>
-											</form>
+													<input type="hidden" name="nomeAzienda" value="${x.nomeAzienda}">
+											
+													<button type="submit" class="btn btn-secondary btn-fw">
+														<i class="fas fa-trash-alt fa"></i>
+													</button>
+												</form>
 											</td>
 											<td>
-													<form action="GestioneAziendePrint" method="POST">
+												<form action="GestioneAziendePrint" method="POST">
 						
-												<input type="hidden" name="nomeAzienda" value="${x.nomeAzienda}">
-										
-												<button type="submit" class="btn btn-secondary btn-fw">
-													<i class="fas fa-print"></i>
-												</button>
+													<input type="hidden" name="nomeAzienda" value="${x.nomeAzienda}">
+													<input type="hidden" name="emailAzienda" value="${x.emailAzienda}">
+													<input type="hidden" name="indirizzoAzienda" value="${x.indirizzoAzienda}">
+													<input type="hidden" name="numdipAzienda" value="${x.numdipAzienda}">
+													<input type="hidden" name="telefonoAzienda" value="${x.telefonoAzienda}">
+													<input type="hidden" name="societa" value="${x.societa}">
+													<input type="hidden" name="pivaAzienda" value="${x.pivaAzienda}">
+											
+													<button type="submit" class="btn btn-secondary btn-fw">
+														<i class="fas fa-print"></i>
+													</button>
 											</form>
 											</td>
 											
@@ -107,70 +113,6 @@
 	
 	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script>
-
-$(document).ready(function(){
-  $("#searchGestioneAziende").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#table-gestione-aziende tr").not('thead tr').filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-  
-  $(".edit-aziende").on("click", function() {
-		 var namen = $(this).data("namen");
-		 var email = $(this).data("email");
-		 var address = $(this).data("address");
-		 var numdip = $(this).data("numdip");
-		 var piva = $(this).data("piva");
-		 var societa = $(this).data("societa");
-		 var telefono = $(this).data("telefono");
-		 var status = $(this).data("status");
-		 
-		$("#modal-edit-aziende input[name=nomeAzienda]").val(namen);
-		$("#modal-edit-aziende input[name=emailAzienda]").val(email);
-		$("#modal-edit-aziende input[name=indirizzoAzienda]").val(address);
-		$("#modal-edit-aziende input[name=numdipAzienda]").val(numdip);
-		$("#modal-edit-aziende input[name=pivaAzienda]").val(piva);
-		$("#modal-edit-aziende input[name=societa]").val(societa);
-		$("#modal-edit-aziende input[name=statusAzienda]").val(status);
-		$("#modal-edit-aziende input[name=telefonoAzienda]").val(telefono);
-	  });
-  
-  
-
-
-  
-});
-
-
-function prova_d() {
-		$.notify({
-			// options
-			message: 'STUPIDAAAAAAAAAA' 
-		},{
-			// settings
-			type: 'danger',
-			z_index: 2000,
-			delay: 5000
-			
-		}
-			
-		);
-	};
-
-function prova_s() {
-	$.notify({
-		// options
-		message: 'Yeah' 
-	},{
-		// settings
-		type: 'success'
-	});
-};
-</script>
-
 
 
 

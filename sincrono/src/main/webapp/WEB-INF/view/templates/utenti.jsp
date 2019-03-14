@@ -45,47 +45,6 @@
 	</c:forEach>
 
 </div>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-
-$(document).ready(function() {
-		$("#searchDipendenti").on("keyup", function() {
-			var value = $(this).val().toLowerCase();
-			$(".fieldName").filter(function() {
-					$(this).closest(".stretch-card").toggle($(this).text().toLowerCase().indexOf(value) > -1)
-				});
-		});
-		
-		$(".stretch-card").on("click", function() {
-			var nomep = $(this).data("nomep");
-			var cognomep = $(this).data("cognomep");
-			var emailp = $(this).data("emailp");
-			var passwordDip = "**************";
-			var tariffaOraria = $(this).data("tariffaOraria");
-			var nomecat = $(this).data("nomecat");
-			var ruolocat = $(this).data("ruolocat");
-			var tariffaoraria = $(this).data("tariffaoraria");
-			
-			$("input[name=cognomePersona]").val(cognomep).prop( "disabled", true ).css('textTransform', 'capitalize');
-			$("input[name=nomePersona]").val(nomep).prop( "disabled", true ).css('textTransform', 'capitalize');
-			$("input[name=emailPersona]").val(emailp).prop( "disabled", true );
-			$("input[name=passwordDip]").val(passwordDip).prop( "disabled", true );
-			$("input[name=tariffaOraria]").val(tariffaOraria).prop( "disabled", true );
-			$("input[name=nome_cat]").val(nomecat).prop("disabled", true ).css('textTransform', 'capitalize');
-			$("input[name=ruolo_cat]").val(ruolocat).prop( "disabled", true ).css('textTransform', 'capitalize');
-			$("input[name=tariffaOraria]").val(tariffaoraria + "Euro").prop( "disabled", true );
-			
-			
-		});
-	});
-
-
-</script>
-
-
-
-
 
 
 <div class="modal fade" id="modal-detail-utenti" role="dialog">
