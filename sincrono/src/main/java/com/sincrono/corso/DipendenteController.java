@@ -60,7 +60,7 @@ public class DipendenteController {
 			@RequestParam("passwordDip") String passwordDip, 
 			@RequestParam("nome_cat") String nome_cat,
 			@RequestParam("ruolo_cat") String ruolo_cat,
-			@RequestParam("tariffaOraria") double tariffaOraria,
+			@RequestParam("tariffaoraria") double tariffaOraria,
 			@RequestParam("statusDip") byte statusDip) {
 
 		/*Blocco accesso alla pagina se non loggato*/		
@@ -137,7 +137,7 @@ public class DipendenteController {
 			@RequestParam("passwordDip") String passwordDip, 
 			@RequestParam("nome_cat") String nome_cat,
 			@RequestParam("ruolo_cat") String ruolo_cat ,
-			@RequestParam("tariffaOraria") double tariffaOraria,
+			@RequestParam("tariffaoraria") double tariffaOraria,
 			@RequestParam("statusDip") byte statusDip){
 
 		/*Blocco accesso alla pagina se non loggato*/		

@@ -13,7 +13,9 @@
 	</div> 
 	
 	<c:forEach items="${list_az}" var="x">
-		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" data-toggle="modal" data-target="#modal-detail-aziende"
+		<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" id="stretch-card-aziende" 
+			data-toggle="modal" 
+			data-target="#modal-detail-aziende"
 			data-namen="${x.nomeAzienda}" 
 			data-email="${x.emailAzienda}"
 			data-address="${x.indirizzoAzienda}"

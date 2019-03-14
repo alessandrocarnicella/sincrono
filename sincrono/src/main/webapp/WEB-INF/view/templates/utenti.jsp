@@ -12,14 +12,14 @@
 
 	<c:forEach items="${list_dip}" var="x">
 		<div
-			class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" 
+			class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" id="stretch-card-utenti"
 			data-nomep="${x.persona.nomePersona}"  
 			data-cognomep="${x.persona.cognomePersona}"
 			data-emailp="${x.persona.emailPersona}"
 			data-tariffaoraria = "${x.tariffaOraria}"
 			data-nomecat ="${x.categoria.id.nomeCat}"
 			data-ruolocat ="${x.categoria.id.ruoloCat}"
-			
+			data-passwordDip ="${x.password_dip}"
 			data-toggle="modal" 
 			data-target="#modal-detail-utenti">
 			
