@@ -130,8 +130,13 @@ $(document).ready(function(){
 	});
 		
 
-	  
-	
+	//FUNZIONE PER RICERCA IN RAPPORTINI  
+	$("#searchRapportini").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#table-gestione-ril tr").not('thead tr').filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	});
 
 
 	function prova_d() {
