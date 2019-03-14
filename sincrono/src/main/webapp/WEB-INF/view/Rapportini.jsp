@@ -65,6 +65,6 @@
 <script src="js/off-canvas.js"></script>
 <script src="js/misc.js"></script>
 <script src="js/dashboard.js"></script>
-
+<script src="js/app.js"></script>
 
 </html>

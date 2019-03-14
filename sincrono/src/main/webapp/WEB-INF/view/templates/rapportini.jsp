@@ -10,7 +10,7 @@
 						</div>
 						<div class="col-3 m-auto">
 							<div class="form-group">
-								<label for="searchRapportini">Cerca Ril</label> 
+								<label for="searchRil">Cerca Ril</label> 
 								<input
 									type="text" class="form-control" id="searchRapportini"
 									placeholder="Enter...">
@@ -27,7 +27,6 @@
 							<thead>
 								<tr>
 									
-									<th>Id Rapportino</th>
 									<th>Mese</th>
 									<th>Anno</th>
 									<th>Ore in Sede</th>
@@ -46,19 +45,18 @@
 									<c:forEach items="${list_ril}" var="x">
 										<tr>
 											
-											<td>${x.id}</td>
-											<td>${x.geId.meseRil}</td>
-											<td>${x.geId.annoRil}</td>
-											<td>${x.oreSede}</td>
-											<td>${x.oreCliente}</td>
-											<td>${x.oreFerie}</td>
-											<td>${x.orePermessi}</td>
+											<td class="text-center">${x.id.meseRil}</td>
+											<td class="text-center">${x.id.annoRil}</td>
+											<td class="text-center">${x.oreSede}</td>
+											<td class="text-center">${x.oreCliente}</td>
+											<td class="text-center">${x.oreFerie}</td>
+											<td class="text-center">${x.orePermessi}</td>
 											
 										
 											<td>
 												<form action="RapportiniElimina" method="POST">
 						
-													<input type="hidden" name="idRil" value="${x.getId.idPersonaril}">
+													<input type="hidden" name="idRil" value="${x.id.idPersonaril}">
 											
 													<button type="submit" class="btn btn-secondary btn-fw">
 														<i class="fas fa-trash-alt fa"></i>
