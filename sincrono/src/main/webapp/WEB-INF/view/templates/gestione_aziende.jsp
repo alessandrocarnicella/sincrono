@@ -39,28 +39,24 @@
 							</thead>
 							<tbody>
 
-<%
-
-System.out.println(request.getAttribute("list_az"));
-				%>
 
 								<!--  ROW ELENCO AZIENDE -->
 								<div class="row" >
 								
 									<c:forEach items="${list_az}" var="x">
-									
+										<c:forEach items="${x.referentes}" var="y">
 										<tr>
 											
 											<td>${x.nomeAzienda}</td>
 											<td>${x.emailAzienda}</td>
 											<td>${x.pivaAzienda}</td>
-											<td><button type="submit" class="btn btn-secondary btn-fw ref-aziende" data-toggle="modal" data-target="#modal-ref-aziende"
-<%-- 											data-idref="${x.getReferentes().get(0).persona.idPersona}" --%>
-<%-- 											data-nomeref="${x.getReferentes().get(0).persona.nomePersona}" --%>
-<%-- 											data-cognomeref="${x.getReferentes().get(0).persona.cognomePersona}" --%>
-<%-- 											data-emailref="${x.getReferentes().get(0).persona.emailPersona}" --%>
-<%-- 											data-telefonoref="${x.getReferentes().get(0).telefonoRef}" --%>
-<%-- 											data-aziendaref="${x.getReferentes().get(0).azienda.nomeAzienda}" --%>
+											<td><button type="submit" class="btn btn-secondary btn-fw" id="ref-aziende" data-toggle="modal" data-target="#modal-ref-aziende"
+											data-idref="${y.persona.idPersona}"
+											data-nomeref="${y.persona.nomePersona}"
+											data-cognomeref="${y.persona.cognomePersona}"
+											data-emailref="${y.persona.emailPersona}"
+											data-telefonoref="${y.telefonoRef}"
+											data-aziendaref="${y.azienda.nomeAzienda}"
 											>
 														<i class="fas fa-user-astronaut"></i>
 
@@ -105,12 +101,12 @@ System.out.println(request.getAttribute("list_az"));
 												<form action="GestioneAziendePrint" method="POST">
 						
 													<input type="hidden" name="nomeAziendaPrint" value="${x.nomeAzienda}">
-<%-- 													<input type="hidden" name="emailAzienda" value="${x.emailAzienda}"> --%>
-<%-- 													<input type="hidden" name="indirizzoAzienda" value="${x.indirizzoAzienda}"> --%>
-<%-- 													<input type="hidden" name="numdipAzienda" value="${x.numdipAzienda}"> --%>
-<%-- 													<input type="hidden" name="telefonoAzienda" value="${x.telefonoAzienda}"> --%>
-<%-- 													<input type="hidden" name="societa" value="${x.societa}"> --%>
-<%-- 													<input type="hidden" name="pivaAzienda" value="${x.pivaAzienda}"> --%>
+													<input type="hidden" name="emailAzienda" value="${x.emailAzienda}">
+													<input type="hidden" name="indirizzoAzienda" value="${x.indirizzoAzienda}">
+													<input type="hidden" name="numdipAzienda" value="${x.numdipAzienda}">
+													<input type="hidden" name="telefonoAzienda" value="${x.telefonoAzienda}">
+													<input type="hidden" name="societa" value="${x.societa}">
+													<input type="hidden" name="pivaAzienda" value="${x.pivaAzienda}">
 											
 													<button type="submit" class="btn btn-secondary btn-fw">
 														<i class="fas fa-print"></i>
@@ -121,6 +117,7 @@ System.out.println(request.getAttribute("list_az"));
 
 										</tr>
 									</c:forEach>
+								</c:forEach>
 								</div>
 
 
@@ -337,7 +334,7 @@ System.out.println(request.getAttribute("list_az"));
     
     <c:if test="${ref eq false}">
     
-  		 <div class="modal-content">
+  		 <div class="modal-content ">
         <div class="modal-header">
           <h4 class="modal-title">Inserisci Referente</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
