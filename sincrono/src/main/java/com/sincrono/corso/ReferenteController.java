@@ -46,7 +46,14 @@ public class ReferenteController {
 		Optional<Azienda> a_opt = as.findById(nomeAzienda);
 		Azienda a = (Azienda)a_opt.get();
 
-		int id_ref = ref.findIdRefByAziendaName(a);	
+		int id_ref = 0;
+		
+		try {
+			id_ref = ref.findIdRefByAziendaName(a);	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		if(id_ref>0) {
 			System.out.println(id_ref);
 			request.getSession().setAttribute("has_ref", true);
