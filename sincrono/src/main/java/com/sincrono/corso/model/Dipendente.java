@@ -1,6 +1,8 @@
 package com.sincrono.corso.model;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -39,6 +41,11 @@ public class Dipendente implements Serializable {
 	@JoinColumn(name="id_personadip")
 	private Persona persona;
 
+	//bi-directional many-to-one association to Cespiti
+		@OneToMany(mappedBy="dipendente")
+		private List<Cespiti> cespitis;
+	
+	
 	public Dipendente() {
 	}
 
@@ -89,5 +96,25 @@ public class Dipendente implements Serializable {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
+	public List<Cespiti> getCespitis() {
+		return this.cespitis;
+	}
 
+	public void setCespitis(List<Cespiti> cespitis) {
+		this.cespitis = cespitis;
+	}
+
+	public Cespiti addCespiti(Cespiti cespiti) {
+		getCespitis().add(cespiti);
+		cespiti.setDipendente(this);
+
+		return cespiti;
+	}
+
+	public Cespiti removeCespiti(Cespiti cespiti) {
+		getCespitis().remove(cespiti);
+		cespiti.setDipendente(null);
+
+		return cespiti;
+	}
 }
