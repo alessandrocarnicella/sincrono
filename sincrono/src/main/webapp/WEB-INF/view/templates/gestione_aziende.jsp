@@ -1,7 +1,6 @@
 
 <div class="row">
 	<div class="col-lg-12 grid-margin stretch-card">
-	qua ${sessionScope.has_ref}
 		<div class="card">
 			<div class="card-body">
 				<div class="row">
@@ -51,17 +50,23 @@
 											<td>${x.nomeAzienda}</td>
 											<td>${x.emailAzienda}</td>
 											<td>${x.pivaAzienda}</td>
-											<td><button type="submit" class="btn btn-secondary btn-fw" id="ref-aziende" data-toggle="modal" data-target="#modal-ref-aziende"
-											data-idref="${y.persona.idPersona}"
-											data-nomeref="${y.persona.nomePersona}"
-											data-cognomeref="${y.persona.cognomePersona}"
-											data-emailref="${y.persona.emailPersona}"
-											data-telefonoref="${y.telefonoRef}"
-											data-aziendaref="${y.azienda.nomeAzienda}"
-											>
-														<i class="fas fa-user-astronaut"></i>
-
-													</button></td>
+											<td>
+											<form action="Referente" method="post">
+												<input type="hidden" name="nomeAzienda" value="${x.nomeAzienda}">
+											
+												<button type="submit" class="btn btn-secondary btn-fw" id="ref-aziende" data-toggle="modal" data-target="#modal-ref-aziende"
+												data-idref="${y.persona.idPersona}"
+												data-nomeref="${y.persona.nomePersona}"
+												data-cognomeref="${y.persona.cognomePersona}"
+												data-emailref="${y.persona.emailPersona}"
+												data-telefonoref="${y.telefonoRef}"
+												data-aziendaref="${y.azienda.nomeAzienda}"
+												>
+															<i class="fas fa-user-astronaut"></i>
+	
+														</button>
+											</form>		
+											</td>
 											
 											
 											

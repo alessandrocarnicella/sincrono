@@ -43,19 +43,23 @@ public class ReferenteController {
 		if(!isLog(request))
 			return "Login";
 		
-		List<String> list_aziende = as.findByNomeAzienda(nomeAzienda);
-		if(!list_aziende.isEmpty()) {
-			int id_ref = ref.findIdRefByAziendaNameString(nomeAzienda);	
-			if(id_ref>0) {
-				request.getSession().setAttribute("has_ref", true);
-				request.getSession().setAttribute("id_ref", id_ref);			
-			}else {
-				request.getSession().setAttribute("has_ref", false);
-			}
+		Optional<Azienda> a_opt = as.findById(nomeAzienda);
+		Azienda a = (Azienda)a_opt.get();
+
+		int id_ref = ref.findIdRefByAziendaName(a);	
+		if(id_ref>0) {
+			System.out.println(id_ref);
+			request.getSession().setAttribute("has_ref", true);
+			request.getSession().setAttribute("id_ref", id_ref);
+			
+			m.addAttribute("list_az", as.findAll());
+			return "GestioneReferenteEdit";
+		}else {
+			request.getSession().setAttribute("has_ref", false);
+			m.addAttribute("list_az", as.findAll());
+			return "GestioneReferenteAdd";
 		}
 
-		m.addAttribute("list_az", as.findAll());
-		return "GestioneAziende";
 	}
 	
 	
