@@ -37,10 +37,13 @@ public class DipendenteController {
 	@RequestMapping(value = "/Utenti")
 	public String getUtenti(Model m, HttpServletRequest request) {
 
-		/*Blocco accesso alla pagina se non loggato*/		
+		/*Blocca l'accesso alla pagina se non loggato */		
+		
 		if(!isLog(request)) 
 			return "Login";
 
+		/* Aggiunge i parametri necessari in sessione */
+		
 		m.addAttribute("list_dip", dip.findAll());
 		return "Utenti";
 	}
@@ -48,10 +51,13 @@ public class DipendenteController {
 	@RequestMapping(value = "/GestioneUtenti")
 	public String getGestioneUtent(Model m,HttpServletRequest request) {
 
-		/*Blocco accesso alla pagina se non loggato*/		
+		/* Blocca l'accesso alla pagina se non loggato */	
+		
 		if(!isLog(request))
 			return "Login";
 
+		/* Aggiunge i parametri necessari in sessione */
+		
 		m.addAttribute("list_dip", dip.findAll());
 		return "GestioneUtenti";
 	}
@@ -67,24 +73,32 @@ public class DipendenteController {
 			@RequestParam("tariffaoraria") double tariffaOraria,
 			@RequestParam("statusDip") byte statusDip) {
 
-		/*Blocco accesso alla pagina se non loggato*/		
+		/*Blocca l'accesso alla pagina se non loggato */		
 		if(!isLog(request)) 
 			return "Login";
 
 		boolean error = false;
 
+		/* Controlla l'esistena della persona tramite email */
+		
 		if(per.findByEmailPersona(emailPersona).isEmpty()) {
 
 			CategoriaPK categoriaPk = new  CategoriaPK();
 			categoriaPk.setNomeCat(nome_cat);
 			categoriaPk.setRuoloCat(ruolo_cat);
 
+			/* Se non esiste crea la perosna */
+			
 			Persona persona = new Persona();
 			persona.setNomePersona(nomePersona);
 			persona.setCognomePersona(cognomePersona);
 			persona.setEmailPersona(emailPersona);
+			
+			/* Aggiungo la persona */
 			per.save(persona);
 
+			/* Crea il dipendente associato alla persona */
+			
 			Dipendente dipendente =  new Dipendente();
 			dipendente.setStatusDip(statusDip);
 			dipendente.setPasswordDip(passwordDip);
@@ -92,6 +106,9 @@ public class DipendenteController {
 			dipendente.setIdPersonadip(persona.getIdPersona());
 
 			Categoria categoria = new Categoria();
+			
+			/* Controlla se esiste la categoria e se non esiste la crea */
+			
 			try {
 				Optional<Categoria> opCat = cat.findById(categoriaPk);
 				categoria = opCat.get();
@@ -101,16 +118,22 @@ public class DipendenteController {
 			}
 
 			dipendente.setCategoria(categoria);
+			
+			/* Aggiungo la persona */
 			dip.save(dipendente);
 		}else {
-
 			error = true;
+			
+			/* Aggiunge i parametri necessari in sessione */
+			
 			m.addAttribute("error_insert_persona", error);
 			m.addAttribute("list_dip", dip.findAll());
 			return "GestioneUtenti";
 		}
-
 		error = false;
+		
+		/* Aggiunge i parametri necessari in sessione */
+		
 		m.addAttribute("error_insert_persona", error);
 		m.addAttribute("list_dip", dip.findAll());
 		return "GestioneUtenti";
@@ -120,26 +143,31 @@ public class DipendenteController {
 	public String getGestioneUtentiElimina(Model m, HttpServletRequest request,
 			@RequestParam("idPersonadip") Integer idPersonadip){
 
-		/*Blocco accesso alla pagina se non loggato*/		
+		/*Blocca l'accesso alla pagina se non loggato*/	
+		
 		if(!isLog(request)) 
 			return "Login";
 
+		
 		Optional<Persona> pers = (Optional<Persona>)per.findById(idPersonadip);
 		
+		/* Elimina la commessa associata alla persona */
 		try {
-			
 			int idCommessa = coms.findIdRefByPersona(pers.get());
 			coms.deleteById(idCommessa);
 		}catch(Exception e) {
 
 		}
 
+		/* Elimina il dipendente associato alla persona */
 		dip.deleteById(idPersonadip);
+		
+		/* Elimina la persona  */
 		per.deleteById(idPersonadip);
 
-
+		/* Aggiunge i parametri necessari in sessione */
+		
 		m.addAttribute("list_dip", dip.findAll());
-
 		return "GestioneUtenti";
 	}
 
@@ -155,7 +183,8 @@ public class DipendenteController {
 			@RequestParam("tariffaoraria") double tariffaOraria,
 			@RequestParam("status_dip") byte statusDip){
 
-		/*Blocco accesso alla pagina se non loggato*/		
+		/*Blocca l'accesso alla pagina se non loggato*/	
+		
 		if(!isLog(request)) 
 			return "Login";
 
@@ -165,6 +194,7 @@ public class DipendenteController {
 
 		Categoria categoria = new Categoria();
 
+		/* Controlla se esiste la categoria e se non esiste la crea */
 		try {
 			Optional<Categoria> opCat = cat.findById(categoriaPk);
 			categoria = opCat.get();
@@ -172,16 +202,21 @@ public class DipendenteController {
 			categoria.setId(categoriaPk);
 			cat.save(categoria);
 		}
-
+		
+		/* Aggiorno la persona */
 		per.updatePersona(idPersonadip, cognomePersona, nomePersona, emailPersona);
 
+		/* Aggiorno il dipendente */
 		dip.updateDipendente(idPersonadip, passwordDip, nome_cat, ruolo_cat, tariffaOraria, statusDip);
 
+		/* Aggiunge i parametri necessari in sessione */
+		
 		m.addAttribute("list_dip", dip.findAll());
 		return "GestioneUtenti";
 	}
 
-	/*Blocco accesso alla pagina se non loggato*/		
+	/*Blocco accesso alla pagina se non loggato*/
+	
 	private boolean isLog(HttpServletRequest request) {
 		if(!(boolean) request.getSession().getAttribute("isLogged")) {
 			return false;
