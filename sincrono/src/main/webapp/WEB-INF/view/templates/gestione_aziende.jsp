@@ -51,21 +51,24 @@
 											<td>${x.emailAzienda}</td>
 											<td>${x.pivaAzienda}</td>
 											<td>
-											<form action="Referente" method="post">
-												<input type="hidden" name="nomeAzienda" value="${x.nomeAzienda}">
-											
-												<button type="submit" class="btn btn-secondary btn-fw" id="ref-aziende" data-toggle="modal" data-target="#modal-ref-aziende"
+												<form action="Referente" method="post">
+													<input type="hidden" name="nomeAzienda" value="${x.nomeAzienda}">
+												
+													<button type="submit" class="btn btn-secondary btn-fw">
+														<i class="fas fa-user-astronaut"></i>
+													</button>
+												</form>	
+												
+												<input type="hidden" id="ref-aziende" data-toggle="modal" data-target="#modal-ref-aziende"
 												data-idref="${y.persona.idPersona}"
 												data-nomeref="${y.persona.nomePersona}"
 												data-cognomeref="${y.persona.cognomePersona}"
 												data-emailref="${y.persona.emailPersona}"
 												data-telefonoref="${y.telefonoRef}"
 												data-aziendaref="${y.azienda.nomeAzienda}"
-												>
-															<i class="fas fa-user-astronaut"></i>
-	
-														</button>
-											</form>		
+												/>
+											
+												
 											</td>
 											
 											
@@ -362,8 +365,6 @@
       </div> <!-- CLOSE MODAL CONTENTE 1 -->
 
     </c:if>
-
-
     <c:if test="${ref eq true}">
 
       <div class="modal-content">
@@ -419,13 +420,22 @@
 
       </div> <!-- MODAL CONTENT CLOSE 2 -->
 
-
     </c:if>
-
 
   </div>
 </div>
 	
 	
-	
+<c:set var="count" scope="session" value="${count}" />
+<c:if test="${count eq 1}">
+	<!-- jQuery -->
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript">
+		$(window).load(function() {
+		    $("#ref-aziende").click();
+		});
+	</script>
+<c:set var="count" scope="session" value="0" />
+</c:if>
+
 

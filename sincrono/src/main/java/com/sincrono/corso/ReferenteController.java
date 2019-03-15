@@ -52,14 +52,14 @@ public class ReferenteController {
 			request.getSession().setAttribute("has_ref", true);
 			request.getSession().setAttribute("id_ref", id_ref);
 			
-			m.addAttribute("list_az", as.findAll());
-			return "GestioneReferenteEdit";
 		}else {
 			request.getSession().setAttribute("has_ref", false);
-			m.addAttribute("list_az", as.findAll());
-			return "GestioneReferenteAdd";
+			
 		}
-
+		
+		m.addAttribute("list_az", as.findAll());
+		m.addAttribute("count", 1);
+		return "GestioneAziende";
 	}
 	
 	
