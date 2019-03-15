@@ -1,6 +1,7 @@
 
 <div class="row">
 	<div class="col-lg-12 grid-margin stretch-card">
+	qua ${sessionScope.has_ref}
 		<div class="card">
 			<div class="card-body">
 				<div class="row">
@@ -219,12 +220,6 @@
   
   <!--  QUESTO è IL MODAL PER L'EDIT -->
   
-  
-  
-  
-  
-  
-  
   <div class="modal fade" id="modal-edit-aziende" role="dialog" >
     <div class="modal-dialog">
     
@@ -314,142 +309,118 @@
 
 	
 	
-	
-	
-	
-	
-	
-	
 	<!-- QUESTO è IL MODAL PER IL REFERENTE -->
-	
-	
-	
-	
-	
- <div class="modal fade" id="modal-ref-aziende" role="dialog" >
-    <div class="modal-dialog">
-    
-    
-    <c:set var = "ref" scope = "session" value = "${has_ref}"/>
-    
+<div class="modal fade" id="modal-ref-aziende" role="dialog">
+  <div class="modal-dialog">
+    <c:set var="ref" scope="session" value="${has_ref}" />
     <c:if test="${ref eq false}">
     
-  		 <div class="modal-content ">
+      <div class="modal-content ">
         <div class="modal-header">
           <h4 class="modal-title">Inserisci Referente</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-          
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
           <div class="auto-form-wrapper">
-              <form action="GestioneReferenteAdd" method="POST">
-              
-                <div class="form-group">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Nome" name="nome_ref_add" required>
-                  </div>
+            <form action="GestioneReferenteAdd" method="POST">
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Nome" name="nome_ref_add" required>
                 </div>
-                
-                <div class="form-group">
-                  	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Cognome" name="cognome_ref_add" required>
-            		</div>
-               	</div>
-               		 
-                <div class="form-group">
-                  	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Email" name="email_ref_add" required>
-               		</div>
-               	</div>
-               	
-               	 <div class="form-group">
-                  	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Telefono" name="telefono_ref_add" required>
-               		</div>
-               	</div>
-               
-               	<div class="form-group">
-                  <button type="submit" class="btn btn-success submit-btn btn-block">Inserisci</button>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Cognome" name="cognome_ref_add" required>
                 </div>
-                
-              </form>
-              	
-            </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Email" name="email_ref_add" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Telefono" name="telefono_ref_add" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-success submit-btn btn-block">Inserisci</button>
+              </div>
+            </form>
+          </div>
         </div>
-       
-      </div>
-      
-    </div>
-  </div>
-  
-	</c:if>
-	
-	
-	<c:if test="${true eq true}">
-  	
-  	<div class="modal-content">
+      </div> <!-- CLOSE MODAL CONTENTE 1 -->
+
+    </c:if>
+
+
+    <c:if test="${ref eq true}">
+
+      <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">Visualizza Referente</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-          
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
         </div>
         <div class="modal-body">
           <div class="auto-form-wrapper">
-              <form action="GestioneReferenteEdit" method="POST">
-              
-                <div class="form-group">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Nome" name="nome_ref_edit" required>
-                  </div>
+            <form action="GestioneReferenteEdit" method="POST">
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Nome" name="nome_ref_edit" required>
                 </div>
-                
-                <div class="form-group">
-                  	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Cognome" name="cognome_ref_edit" required>
-            		</div>
-               	</div>
-               		 
-                <div class="form-group">
-                  	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Email" name="email_ref_edit" required>
-               		</div>
-               	</div>
-               	
-               	 <div class="form-group">
-                  	<div class="input-group">
-                    	<input type="text" class="form-control" placeholder="Telefono" name="telefono_ref_edit" required>
-               		</div>
-               	</div>
-               
-               	<div class="form-group row">
-               		<div class="col-4">  <button id="edit-ref" type="button" class="btn btn-warning submit-btn btn-block">Modifica</button></div>                
-                	<div class="col-4">  <button id="save-ref" type="submit" class="btn btn-success submit-btn btn-block">Salva</button></div>                
-                	<div class="col-4">  <button id="delete-ref" type="submit" class="btn btn-danger submit-btn btn-block">Elimina</button></div>                
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Cognome" name="cognome_ref_edit" required>
                 </div>
-                
-              </form>
-              	
-            </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Email" name="email_ref_edit" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Telefono" name="telefono_ref_edit" required>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-4">
+                  <button id="edit-ref" type="button" class="btn btn-warning submit-btn btn-block">Modifica</button>
+                </div>
+                <div class="col-4">
+                  <button id="save-ref" type="submit" class="btn btn-success submit-btn btn-block">Salva</button>
+                </div>
+                <div class="col-4">
+                  <button id="delete-ref" type="submit" class="btn btn-danger submit-btn btn-block">Elimina</button>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
         </div>
-       
-      </div>
-      
-    </div>
+
+      </div> <!-- MODAL CONTENT CLOSE 2 -->
+
+
+    </c:if>
+
+
   </div>
-	</c:if>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-     
-
-
+</div>
+	
+	
+	
 
