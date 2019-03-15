@@ -62,9 +62,11 @@ public class AziendeController {
 			return "Login";
 		
 		m.addAttribute("error_insert_azienda", false);
-
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
+	
+		
+
 	}
 	
 	@RequestMapping(value = "/GestioneAziendeAdd")

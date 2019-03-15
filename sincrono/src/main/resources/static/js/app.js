@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	
+	console.log("simona the white");
 	// FUNZIONE PER RICERCA NELLA PAGINA AZIENDA
 	$("#searchAziende").on("keyup", function() {
 		var value = $(this).val().toLowerCase();
@@ -62,6 +62,32 @@ $(document).ready(function(){
 		$("#modal-edit-aziende input[name=telefonoAzienda]").val(telefono);
 	});
 	  
+	
+	
+	// RERCUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM EDIT REFERENTE
+	$("#ref-aziende").on("click", function() {
+		var idref = $(this).data("idref");
+		var nomeref = $(this).data("nomeref");
+		var cognomeref = $(this).data("cognomeref");
+		var emailref = $(this).data("emailref");
+		var telefonoref = $(this).data("telefonoref");
+		var aziendaref = $(this).data("aziendaref");
+		
+		console.log(cognomeref);
+		$("#modal-ref-aziende input[name=nome_ref_edit]").val(nomeref).prop("disabled",true);
+		$("#modal-ref-aziende input[name=cognome_ref_edit]").val(cognomeref).prop("disabled",true);
+		$("#modal-ref-aziende input[name=email_ref_edit]").val(emailref).prop("disabled",true);
+		$("#modal-ref-aziende input[name=telefono_ref_edit]").val(telefonoref).prop("disabled",true);
+		$("#modal-ref-aziende input[name=azienda_ref_edit]").val(aziendaref).prop("disabled",true);
+
+	});
+	
+	  
+	
+	
+	
+	
+	
 
 	// FUNZIONE PER RICERCA IN GESTIONE UTENTI
 	$("#searchGestioneUtenti").on("keyup", function() {

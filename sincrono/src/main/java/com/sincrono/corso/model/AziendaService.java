@@ -30,5 +30,6 @@ public interface AziendaService extends JpaRepository<Azienda, String> {
 			@Param("societa") String societa,
 			@Param("statusAzienda") byte statusAzienda,
 			@Param("telefonoAzienda") String telefonoAzienda);
-
+	
+	
 }

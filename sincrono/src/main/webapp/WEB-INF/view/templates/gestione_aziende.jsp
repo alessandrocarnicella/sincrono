@@ -17,6 +17,7 @@
 							
 						</div>
 					</div>
+					
 					<div class="col-2 btn-center">
 					<button type="button" class="btn btn-icons btn-rounded btn-outline-primary btn-center" data-toggle="modal" data-target="#modal-add-aziende">
 						<i class="fas fa-plus fa-2x"></i></button>
@@ -30,6 +31,7 @@
 									<th>Nome Azienda</th>
 									<th>Email</th>
 									<th>Partita iva</th>
+									<th>Referente</th>
 									<th class="text-center">Status</th>
 									<th></th>
 
@@ -40,12 +42,34 @@
 
 								<!--  ROW ELENCO AZIENDE -->
 								<div class="row" >
+								
 									<c:forEach items="${list_az}" var="x">
+										<c:forEach items="${x.referentes}" var="y">
 										<tr>
 											
 											<td>${x.nomeAzienda}</td>
 											<td>${x.emailAzienda}</td>
 											<td>${x.pivaAzienda}</td>
+											<td>
+											<form action="Referente" method="post">
+												<input type="hidden" name="nomeAzienda" value="${x.nomeAzienda}">
+											
+												<button type="submit" class="btn btn-secondary btn-fw" id="ref-aziende" data-toggle="modal" data-target="#modal-ref-aziende"
+												data-idref="${y.persona.idPersona}"
+												data-nomeref="${y.persona.nomePersona}"
+												data-cognomeref="${y.persona.cognomePersona}"
+												data-emailref="${y.persona.emailPersona}"
+												data-telefonoref="${y.telefonoRef}"
+												data-aziendaref="${y.azienda.nomeAzienda}"
+												>
+															<i class="fas fa-user-astronaut"></i>
+	
+														</button>
+											</form>		
+											</td>
+											
+											
+											
 											<td class="text-center"><c:choose>
 													<c:when test="${x.statusAzienda eq 1}">
 														<button type="button" onclick="prova_s()"
@@ -99,6 +123,7 @@
 
 										</tr>
 									</c:forEach>
+								</c:forEach>
 								</div>
 
 
@@ -289,7 +314,118 @@
 
 	
 	
+	<!-- QUESTO è IL MODAL PER IL REFERENTE -->
+<div class="modal fade" id="modal-ref-aziende" role="dialog">
+  <div class="modal-dialog">
+    <c:set var="ref" scope="session" value="${has_ref}" />
+    <c:if test="${ref eq false}">
+    
+      <div class="modal-content ">
+        <div class="modal-header">
+          <h4 class="modal-title">Inserisci Referente</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="auto-form-wrapper">
+            <form action="GestioneReferenteAdd" method="POST">
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Nome" name="nome_ref_add" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Cognome" name="cognome_ref_add" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Email" name="email_ref_add" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Telefono" name="telefono_ref_add" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <button type="submit" class="btn btn-success submit-btn btn-block">Inserisci</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div> <!-- CLOSE MODAL CONTENTE 1 -->
+
+    </c:if>
 
 
+    <c:if test="${ref eq true}">
 
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Visualizza Referente</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        </div>
+        <div class="modal-body">
+          <div class="auto-form-wrapper">
+            <form action="GestioneReferenteEdit" method="POST">
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Nome" name="nome_ref_edit" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Cognome" name="cognome_ref_edit" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Email" name="email_ref_edit" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Telefono" name="telefono_ref_edit" required>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-4">
+                  <button id="edit-ref" type="button" class="btn btn-warning submit-btn btn-block">Modifica</button>
+                </div>
+                <div class="col-4">
+                  <button id="save-ref" type="submit" class="btn btn-success submit-btn btn-block">Salva</button>
+                </div>
+                <div class="col-4">
+                  <button id="delete-ref" type="submit" class="btn btn-danger submit-btn btn-block">Elimina</button>
+                </div>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div> <!-- MODAL CONTENT CLOSE 2 -->
+
+
+    </c:if>
+
+
+  </div>
+</div>
+	
+	
+	
 
