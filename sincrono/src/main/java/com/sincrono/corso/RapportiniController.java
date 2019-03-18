@@ -82,7 +82,7 @@ public class RapportiniController {
 		
 		/* Se non esiste aggiunge il Ril */
 		
-		rils.save(ril);
+		rils.save(ril);  
 		
 		/* Crea la lista di tutti i ril aggiornata */
 		

@@ -27,10 +27,19 @@
 				<div class="card-body">
 					<div class="clearfix">
 						<div class="float-left">
+											<c:choose>
+												<c:when test="${x.statusDip eq 1}">
+													<button type="button" class="btn btn-icons btn-rounded btn-success"></button>
+												</c:when>
+												<c:otherwise>
+													<button type="button" class="btn btn-icons btn-rounded btn-danger"></button>
+												</c:otherwise>
+											</c:choose>
 							<i class="mdi mdi-cube text-danger icon-lg"></i>
 						</div>
 						<div class="float-right">
-							<p class="mb-0 text-right"></p>
+							<p class="mb-0 text-right">
+											
 							<div class="fluid-container">
 								<h3 class="font-weight-medium text-right mb-0 fieldName" >${x.persona.nomePersona}</h3>
 							</div>
