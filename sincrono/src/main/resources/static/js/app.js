@@ -146,8 +146,31 @@ $(document).ready(function(){
 		});
 	});
 
-
 	
+	// RERCUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM EDIT COMMESSE
+	$(".edit-commesse").on("click", function() {
+		var id = $(this).data("id");
+		var nome = $(this).data("nome");
+		var dipendente = $(this).data("dipendente");
+		var aziendac = $(this).data("aziendac");
+		var tariffa = $(this).data("tariffa");
+	
+		
+
+		$("#modal-edit-commesse input[name=idCommessa]").val(id);
+		$("#modal-edit-commesse input[name=nomeCommessa]").val(nome);
+		$("#modal-edit-commesse input[name=idDipendente]").val(dipendente);
+		$("#modal-edit-commesse input[name=nomeAziendaCommessa]").val(aziendac);
+		$("#modal-edit-commesse input[name=tariffaCliente]").val(tariffa);
+	});
+	
+	// FUNZIONE PER RICERCA NELLA PAGINA GESTIONE COMMESSE
+	$("#searchGestioneCommesse").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#table-gestione-commesse tr").not('thead tr').filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	});
 	
 	function notify_danger() {
 		$.notify({
