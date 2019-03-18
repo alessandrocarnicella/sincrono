@@ -56,12 +56,12 @@ public class LoginController {
 
 		/* Crea la sessione */
 
-		HttpSession session = request.getSession();
+	//	HttpSession session = request.getSession();
 		boolean isLogged = false;
 
 		/* Aggiunge i parametri necessari in sessione */
 
-		session.setAttribute("isLogged", isLogged);
+		request.getSession().setAttribute("isLogged", isLogged);
 		m.addAttribute("error_login", false);
 
 		return "Login";
@@ -173,10 +173,8 @@ public class LoginController {
 	@RequestMapping(value = "/Logout")
 	public String getLogout(Model m, HttpServletRequest request) {
 
-		request.getSession().invalidate();
-		request.getSession().removeAttribute("isLogged");
-		request.getSession().removeAttribute("dipendente");
-
+		request.getSession().setAttribute("isLogged", false);	
+		
 		m.addAttribute("error_login", false);
 		return "Login";
 	}

@@ -14,9 +14,14 @@
               		Ciao ${sessionScope.username} !
               </span>   
               <span class="ml-3">
-              	 <button href="Logout" class="btn btn-danger">
-              		<i class="fas fa-sign-out-alt"></i>Logout
-          		 </button>
+              
+              
+              <form class="d-inline" action="Logout" method="post">
+					<button type="submit" class="btn btn-danger">
+						<i class="fas fa-sign-out-alt"></i>Logout
+					</button>
+			 </form>
+  		 
               </span>           
 			</li>
         </ul>
