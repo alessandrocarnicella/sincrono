@@ -127,15 +127,6 @@ public class RapportiniController {
 		return "Rapportini";
 	}
 
-	@RequestMapping(value = "/GestioneCommesseDipendenti")
-	public String getGestioneCommesseDipendenti(Model m, HttpServletRequest request) {
-
-		/*Blocco accesso alla pagina se non loggato*/		
-		if(!isLog(request))
-			return "Login";
-		
-		return "GestioneCommesseDipendenti";
-	}
 
 	/*Blocco accesso alla pagina se non loggato*/	
 	
