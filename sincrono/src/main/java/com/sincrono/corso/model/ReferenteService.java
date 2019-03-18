@@ -9,5 +9,4 @@ public interface ReferenteService extends JpaRepository<Referente, Integer> {
 	@Query("SELECT r.idRef FROM Referente r WHERE r.azienda = :nomeAzienda")
 	int findIdRefByAziendaName(@Param("nomeAzienda") Azienda nomeAzienda);
 
-
 }

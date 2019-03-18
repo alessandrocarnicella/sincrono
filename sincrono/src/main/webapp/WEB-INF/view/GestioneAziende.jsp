@@ -7,7 +7,6 @@
 <html lang="en">
 
 <head>
-
 	<!-- IMPORT FILE CSS  -->	
   	<%@ include file="import/css_import.html"%>
 	<meta charset="ISO-8859-1">
