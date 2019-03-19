@@ -52,9 +52,9 @@
 										<td>${x.dipendente.persona.cognomePersona}</td>
 										<td>
 									
-											<button type="button" class="btn btn-secondary btn-fw edit-cespiti" 
+											<button type="button" class="btn btn-secondary btn-fw " id="edit-cespiti" 
 												data-idces="${x.idcespiti}"
-												data-annofunzione="${x.annoFunzione}"
+												data-annoFunzione="${x.annoFunzione}"
 												data-categoria="${x.categoria}"
 												data-descrizione = "${x.descrizione}"
 												data-dipendente="${x.dipendente}"
@@ -162,29 +162,29 @@
 				
 					<form action="CespitiUpdate" method="post">
 						
-					<input type="hidden" name=idcespiti-edit value="${x.idcespiti}">
+					<input type="hidden" name=idcespiti value="${x.idcespiti}">
 
 						
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="annofunzione-edit" placeholder="Anno" required>
+								<input type="text" class="form-control" name="annoFunzione" placeholder="Anno" required>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="categoria-edit" placeholder="Categoria" required>
+								<input type="text" class="form-control" name="categoria" placeholder="Categoria" required>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="descrizione-edit" placeholder="Descrizione" required>
+								<input type="text" class="form-control" name="descrizione" placeholder="Descrizione" required>
 							</div>
 						</div>
 						
 						<div class="form-group">
-		                    <select class="form-control form-control-sm" name="dipendente-edit">
+		                    <select class="form-control form-control-sm" name="dipendente">
 	                    	  <option selected disabled="disabled">Dipendente Responsabile</option>    
 		                     	<c:forEach items="${list_dip}" var="y">
 		                     		<option value="${y.idPersonadip}">${y.persona.nomePersona}&nbsp${y.persona.cognomePersona}</option> 		                     		 
@@ -203,4 +203,17 @@
 </div>
 
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<script>
+$("#edit-cespiti").on("click", function() {
+	var annoFunzione = $(this).data("annoFunzione");
+	var categoria = $(this).data("categoria");
+	var descrizione = $(this).data("descrizione");
+	var dipendente= $(this).data("dipendente");
+	$("#modal-edit-cespiti input[name=annoFunzione]").val(annoFunzione);
+	$("#modal-edit-cespiti input[name=categoria]").val(categoria);
+	$("#modal-edit-cespiti input[name=descrizione]").val(descrizione);
+	$("#modal-edit-cespiti input[name=dipendente] select").val(dipendente);
+
+});</script>

@@ -32,7 +32,7 @@
 								<th class="text-center">Status</th>
 								<th></th>
 								<th></th>
-								<th></th>
+								
 							</tr>
 						</thead>
 						
