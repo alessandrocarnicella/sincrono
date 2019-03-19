@@ -52,6 +52,13 @@ $(document).ready(function(){
 	});
 	
 	
+	// FUNZIONE PER RICERCA NELLA PAGINA GESTIONE COMMESSE
+	$("#searchGestioneCommesse").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#table-gestione-commesse tr").not('thead tr').filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	});	
 	/*===================================================================== MODIFICHES =====================================================================*/
 	// RERCUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM EDIT AZIENDA
 	$(".edit-aziende").on("click", function() {
@@ -73,6 +80,13 @@ $(document).ready(function(){
 		$("#modal-edit-aziende input[name=societa]").val(societa);
 		$("#modal-edit-aziende input[name=statusAzienda]").val(status);
 		$("#modal-edit-aziende input[name=telefonoAzienda]").val(telefono);
+		
+		
+		if(status == 1){
+			$("#status_azienda_true").prop('checked',true);
+		}else{
+			$("#status_azienda_false").prop('checked',true);
+		}
 	});
 	  
 	// RECUPERA I DATI DAI DATANAME E RIEMPIE LA FORM EDIT UTENTI
@@ -96,7 +110,7 @@ $(document).ready(function(){
 		$("#modal-edit-utenti input[name=ruolo_cat] select").val(ruolocat);	
 		$("#modal-edit-utenti input[name=idpersona]").val(idpersona);
 		
-		console.log(status_dip);
+
 		if(status_dip == 1){
 			$("#status_dip_true").prop('checked',true);
 			console.log("if");
@@ -122,15 +136,23 @@ $(document).ready(function(){
 	});
 		
 
-	//FUNZIONE PER RICERCA IN RAPPORTINI  
-	$("#searchRapportini").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#table-gestione-ril tr").not('thead tr').filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
-	});
 
-		
+	// RERCUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM EDIT COMMESSE
+	$(".edit-commesse").on("click", function() {
+		var id = $(this).data("id");
+		var nome = $(this).data("nome");
+		var dipendente = $(this).data("dipendente");
+		var aziendac = $(this).data("aziendac");
+		var tariffa = $(this).data("tariffa");
+	
+		$("#modal-edit-commesse input[name=idCommessa]").val(id);
+		$("#modal-edit-commesse input[name=nomeCommessa]").val(nome);
+		$("#modal-edit-commesse input[name=idDipendente]").val(dipendente);
+		$("#modal-edit-commesse input[name=nomeAziendaCommessa]").val(aziendac);
+		$("#modal-edit-commesse input[name=tariffaCliente]").val(tariffa);
+	});
+	
+
 
 	
 	function notify_danger() {
