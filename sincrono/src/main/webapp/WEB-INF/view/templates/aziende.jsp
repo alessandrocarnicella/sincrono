@@ -62,13 +62,24 @@
 				<div class="modal fade" id="modalA${count.count}" role="dialog" >
 				    <div class="modal-dialog">
 				    
-				      <div class="modal-content">
+				      <div class="modal-content" >
+				      	
 				        <div class="modal-header">
 		          			<h4 class="modal-title">Dettagli Azienza</h4>
 				        	<button type="button" class="close" data-dismiss="modal">&times;</button>	       
 				        </div>
 				        <div class="modal-body">
-				          <div class="auto-form-wrapper">              
+				        	<div class="row d-none" id="spinner">
+				          			<div class="col-2"></div>
+				          			<div class="col-8 text-center">
+				          				<i  class="fas fa-sync-alt fa-5x"></i>
+				          			</div>		
+				          			<div class="col-2"></div>		          				
+				          		</div>
+				          <div class="auto-form-wrapper"> 
+				          		
+				          		
+				                       
 				                <div class="form-group">
 				                  <div class="input-group">
 				                    <input type="text" class="form-control" placeholder="Nome Azienda" name="nomeAzienda">
@@ -107,11 +118,11 @@
 				               	<!-- TODO: controllare sto cazzzo di campo -->
 				               	<input type="hidden" name="statusAzienda" value="${x.statusAzienda}">			               
 				            </div>
-				            <div class="row">
+				            <div class="row" id="loading_chart">
 				            	<div class="col-12">
 		      				        <form action="Andamento" method="POST">
 										<input type="hidden" name="nomeAziendaAndamento" value="${x.nomeAzienda}">
-											<button type="submit" class="w-100 btn btn-success btn-fw">
+											<button type="submit"  class="w-100 btn btn-success btn-fw">
 												<h4 class="d-inline">Visualizza grafico andamento</h4> 
 												<i class="fas fa-chart-area fa-2x"></i>
 											</button>
@@ -124,6 +135,8 @@
 				      
 				    </div>
 			 	</div>
+			 	
+			 	
 		  		
 		    </div>
 	</c:forEach>
@@ -131,6 +144,23 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<style>
+.glyphicon-refresh-animate {
+   -webkit-animation-name: rotateThis;
+   -webkit-animation-duration: 2s;
+   -webkit-animation-iteration-count: infinite;
+   -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes "rotateThis" {
+ from { 
+        -webkit-transform: rotate( 0deg );  
+    }
+ to  { 
+        -webkit-transform: rotate( 360deg ); 
+    }
+}
+</style>
 
 <script>
 function launch_modal_aziende(id){
@@ -158,5 +188,28 @@ function launch_modal_aziende(id){
 	
 }
 
+$(document).ready( function(){
+	
+	
+    $("#loading_chart").on( "click", function( e ) {
+    	$("#spinner").removeClass('d-none');
+    	
+		$(".auto-form-wrapper").hide();
+		$(".modal-header").hide();
+		$("#loading_chart").hide();
+		
+		
+		//var $icon = $( this ).find( "#spinner" ),
+        animateClass = "glyphicon-refresh-animate";
+		
+        $("#spinner").addClass( animateClass );
+        
+        // setTimeout is to indicate some async operation
+        window.setTimeout( function() {
+            $("#spinner").removeClass( animateClass );
+        }, 6000 );
+
+    });    
+});
 
 </script>
