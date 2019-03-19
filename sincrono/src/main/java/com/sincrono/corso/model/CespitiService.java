@@ -11,14 +11,16 @@ public interface CespitiService extends JpaRepository<Cespiti, Integer> {
 	
 	@Transactional
 	@Modifying
-	@Query("UPDATE Cespiti SET annoFunzione=:annoFunzione, categoria=:categoria, descrizione=:descrizione , dipendente=:dipendente where idcespiti=:idcespiti")
-	void updateCespite(@Param("idcespiti") Integer  idcespiti,
-			@Param("annoFunzione") Integer annoFunzione, 
+	@Query("UPDATE Cespiti SET annoFunzione=:annoFunzione, categoria=:categoria, descrizione=:descrizione, dipendente=:dipendente where idcespiti=:idcespiti")
+	void updateCespite(
+			@Param("idcespiti") Integer  idcespiti,
+			@Param("annoFunzione") Integer annoFunzione,
 			@Param("categoria") String categoria,
 			@Param("descrizione") String descrizione, 
-			@Nullable@Param("dipendente") Dipendente dipendente);
+			@Nullable@Param(value="dipendente") Dipendente dipendente);
 
-
+	
+	
 	}
 	
 	

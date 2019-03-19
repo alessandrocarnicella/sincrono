@@ -51,10 +51,9 @@
 										<td>${x.dipendente.persona.nomePersona}</td>
 										<td>${x.dipendente.persona.cognomePersona}</td>
 										<td>
-									
-											<button type="button" class="btn btn-secondary btn-fw " id="edit-cespiti" 
+											
+											<button type="button" class="btn btn-secondary btn-fw edit-cespiti" 
 												data-idces="${x.idcespiti}"
-												data-annoFunzione="${x.annoFunzione}"
 												data-categoria="${x.categoria}"
 												data-descrizione = "${x.descrizione}"
 												data-dipendente="${x.dipendente}"
@@ -161,16 +160,12 @@
 				<div class="auto-form-wrapper">
 				
 					<form action="CespitiUpdate" method="post">
-						
-					<input type="hidden" name=idcespiti value="${x.idcespiti}">
-
-						
+							
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="annoFunzione" placeholder="Anno" required>
+								<input type="hidden" class="form-control" name="idces" value="">
 							</div>
 						</div>
-						
 						<div class="form-group">
 							<div class="input-group">
 								<input type="text" class="form-control" name="categoria" placeholder="Categoria" required>
@@ -203,17 +198,3 @@
 </div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<script>
-$("#edit-cespiti").on("click", function() {
-	var annoFunzione = $(this).data("annoFunzione");
-	var categoria = $(this).data("categoria");
-	var descrizione = $(this).data("descrizione");
-	var dipendente= $(this).data("dipendente");
-	$("#modal-edit-cespiti input[name=annoFunzione]").val(annoFunzione);
-	$("#modal-edit-cespiti input[name=categoria]").val(categoria);
-	$("#modal-edit-cespiti input[name=descrizione]").val(descrizione);
-	$("#modal-edit-cespiti input[name=dipendente] select").val(dipendente);
-
-});</script>
