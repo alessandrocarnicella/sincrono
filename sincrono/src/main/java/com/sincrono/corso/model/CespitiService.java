@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface CespitiService extends JpaRepository<Cespiti, Integer> {
@@ -15,5 +16,11 @@ public interface CespitiService extends JpaRepository<Cespiti, Integer> {
 			@Param("annoFunzione") Integer annoFunzione, 
 			@Param("categoria") String categoria,
 			@Param("descrizione") String descrizione, 
-			@Param("dipendente") Dipendente dipendente);
-}
+			@Nullable@Param("dipendente") Dipendente dipendente);
+
+
+	}
+	
+	
+
+
