@@ -8,9 +8,14 @@
 	vertical-align: middle;
 }
 
-.card.card-statistics:hover {
-	-webkit-box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.45);
-	box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.45);
+.card.card-statistics.success:hover {
+	-webkit-box-shadow: 0px 0px 10px 5px rgba(0, 206, 104, 0.50);
+	box-shadow: 0px 0px 10px 5px rgba(0, 206, 104, 0.50);
+}
+
+.card.card-statistics.danger:hover {
+	-webkit-box-shadow: 0px 0px 10px 5px rgba(230, 82, 82, 0.50);
+	box-shadow: 0px 0px 10px 5px rgba(230, 82, 82, 0.50);
 }
 
 .btn-center {

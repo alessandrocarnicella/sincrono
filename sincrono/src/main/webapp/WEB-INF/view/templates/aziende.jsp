@@ -22,19 +22,42 @@
 				data-telefono="${x.telefonoAzienda}"
 				data-status="${x.statusAzienda}">
 		        
-		        <div class="card card-statistics">
+				
+				
+				<c:set var="status_int" scope="page" value="${x.statusAzienda}"/> 
+				<c:choose>
+				    <c:when test="${status_int eq 1}">
+						<c:set var="status_string" scope="page" value="success"/> 
+				    </c:when>    
+				    <c:otherwise>
+						<c:set var="status_string" scope="page" value="danger"/>
+				    </c:otherwise>
+				</c:choose>
+				
+				
+		        <div class="card card-statistics ${status_string}">
 		          <div class="card-body">
 		            <div class="clearfix">
-		              <div class="float-left">
-		              	
+		              <div class="float-left">              
 		              	<h3 class="px18 font-weight-medium mb-0 fieldNameAzienda">${x.nomeAzienda}</h3>
-		            
 		                <p class="mb-0">${x.pivaAzienda}</p>
-		               	 <p class="text-muted mt-3 mb-0">Telefono N:  ${x.telefonoAzienda}</p>
+		               	<p class="text-muted mt-3 mb-0">Telefono N:  ${x.telefonoAzienda}</p>
+		              </div>
+		              <div class="float-right">
+              			<c:choose>
+							<c:when test="${x.statusAzienda eq 1}">
+								<i class="fas fa-circle text-success"></i>
+							</c:when>
+							<c:otherwise>
+								<i class="fas fa-circle text-danger"></i>
+							</c:otherwise>
+						</c:choose>
 		              </div>
 		            </div>
 		          </div>
 		        </div>
+		  		
+
 		  		
 				<div class="modal fade" id="modalA${count.count}" role="dialog" >
 				    <div class="modal-dialog">
@@ -123,4 +146,6 @@ function launch_modal_aziende(id){
 	$("#modalA"+id).modal('show');
 	
 }
+
+
 </script>
