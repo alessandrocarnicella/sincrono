@@ -11,7 +11,7 @@
 		</div> 
 		
 		<c:forEach items="${list_az}" var="x" varStatus="count">
-			<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" id="${count.count}" 
+			<div class="col-xl-3 col-lg-4 col-sm-6 grid-margin stretch-card" id="${count.count}" 
 				onclick="launch_modal_aziende(id=${count.count})"
 				data-namen="${x.nomeAzienda}" 
 				data-email="${x.emailAzienda}"
@@ -26,7 +26,7 @@
 				
 				<c:set var="status_int" scope="page" value="${x.statusAzienda}"/> 
 				<c:choose>
-				    <c:when test="${status_int eq 1}">
+				    <c:when test="${status_int==1}">
 						<c:set var="status_string" scope="page" value="success"/> 
 				    </c:when>    
 				    <c:otherwise>

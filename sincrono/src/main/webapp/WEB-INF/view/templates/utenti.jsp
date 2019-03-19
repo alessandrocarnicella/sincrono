@@ -12,7 +12,7 @@
 
 	<c:forEach items="${list_dip}" var="x" varStatus="count">
 		<div
-			class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" id="U${count.count}"
+			class="col-xl-3 col-lg-4 col-sm-6 grid-margin stretch-card" id="U${count.count}"
 			onclick="launch_modal_utenti(id=${count.count})"
 			data-nomep="${x.persona.nomePersona}"  
 			data-cognomep="${x.persona.cognomePersona}"
@@ -21,8 +21,18 @@
 			data-nomecat ="${x.categoria.id.nomeCat}"
 			data-ruolocat ="${x.categoria.id.ruoloCat}"
 			data-passworddip ="${x.passwordDip}">
-			
-			<div class="card card-statistics">
+
+			<c:set var="status_int_dip" scope="page" value="${x.statusDip}"/> 
+				<c:choose>
+				    <c:when test="${status_int_dip==1}">
+						<c:set var="status_string_dip" scope="page" value="success"/> 
+				    </c:when>    
+				    <c:otherwise>
+						<c:set var="status_string_dip" scope="page" value="danger"/>
+				    </c:otherwise>
+				</c:choose>
+				
+			<div class="card card-statistics ${status_string_dip}">
 				<div class="card-body">
 					<div class="clearfix">
 			            <div class="float-left">
@@ -30,10 +40,17 @@
 				            <p class="mb-0">${x.persona.emailPersona}</p>
 			               	<p class="text-muted mt-3 mb-0">${x.categoria.id.nomeCat} &nbsp ${x.categoria.id.ruoloCat}</p>	
 	              		</div>
+	              		<div class="float-right">
+              			<c:choose>
+							<c:when test="${x.statusDip eq 1}">
+								<i class="fas fa-circle text-success"></i>
+							</c:when>
+							<c:otherwise>
+								<i class="fas fa-circle text-danger"></i>
+							</c:otherwise>
+						</c:choose>
+		              </div>
 					</div>
-					<p class="text-muted mt-3 mb-0">
-						
-					</p>
 				</div>
 			</div>
 		</div>
