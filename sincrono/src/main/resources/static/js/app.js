@@ -141,4 +141,4 @@ $(document).ready(function(){
 		$("#modal-edit-commesse input[name=nomeAziendaCommessa]").val(aziendac);
 		$("#modal-edit-commesse input[name=tariffaCliente]").val(tariffa);
 	});
-	
+});

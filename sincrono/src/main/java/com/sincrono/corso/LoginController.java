@@ -51,9 +51,31 @@ public class LoginController {
 	@Autowired
 	RilService rils;
 
-	@RequestMapping(value = "/Andamento")
-	public String getGrafici(Model m, HttpServletRequest request, @RequestParam("nomeAzienda") String nomeAzienda) {
+	
+	@RequestMapping(value = "/")
+	public String getHome(Model m, HttpServletRequest request) {
 
+		/* Crea la sessione */
+
+	//	HttpSession session = request.getSession();
+		boolean isLogged = false;
+
+		/* Aggiunge i parametri necessari in sessione */
+
+		request.getSession().setAttribute("isLogged", isLogged);
+		m.addAttribute("error_login", false);
+
+		return "Login";
+	}
+	
+	@RequestMapping(value = "/Andamento")
+	public String getGrafici(Model m, HttpServletRequest request, 
+			@RequestParam("nomeAziendaAndamento") String nomeAzienda){
+
+		/* Blocca accesso alla pagina se non loggato */	
+
+		if(!isLog(request)) 
+			return "Login";
 		
 		Optional<Azienda> azienda = as.findById(nomeAzienda);
 		List<Dipendente> listDipendenti = dip.findAll();
@@ -72,27 +94,11 @@ public class LoginController {
 		/* Aggiunge i parametri necessari in sessione */
 
 		m.addAttribute("error_login", false);
+		m.addAttribute("nomeAzienda", nomeAzienda);
 		request.getSession().setAttribute("list_guadagno_totale_azienda", guadagnoTotaleAzienda);	 
 
-		return "Andamento";
+		return "Grafici";
 	}
-	
-	@RequestMapping(value = "/")
-	public String getHome(Model m, HttpServletRequest request) {
-
-		/* Crea la sessione */
-
-	//	HttpSession session = request.getSession();
-		boolean isLogged = false;
-
-		/* Aggiunge i parametri necessari in sessione */
-
-		request.getSession().setAttribute("isLogged", isLogged);
-		m.addAttribute("error_login", false);
-
-		return "Login";
-	}
-	
 
 	@RequestMapping(value = "/DashboardHome")
 	public String getDashboardHome(Model m, HttpServletRequest request) {
@@ -110,19 +116,10 @@ public class LoginController {
 
 		/* x ogni azienda prendo ogni anno e sommo i guadagni di tutti i mesi */
 
-		
-		for (int k=0; k<listAziende.size(); k++ ) {
-			List<Double> guadagnoTotalePerAnno = new ArrayList<Double>();
-			for(int i=2015; i<=2019; i++) {
-				guadagnoTotalePerAnno.add(guadagnoAnnuoAzienda(listAziende.get(k),i,listDipendenti));	
-			}
-			guadagnoTotaleAziende.add(guadagnoTotalePerAnno);
-		}
-				 
+						 
 		/* Aggiunge i parametri necessari in sessione */
 
 		m.addAttribute("error_login", false);
-		request.getSession().setAttribute("list_guadagno_totale_aziende", guadagnoTotaleAziende);	
 		request.getSession().setAttribute("list_andamenti", andamenti);   
 		
 		return "Dashboard";
@@ -169,19 +166,6 @@ public class LoginController {
 		
 		List<List<Double>> guadagnoTotaleAziende = new ArrayList<List<Double>>();
 
-		/* x ogni azienda prendo ogni anno e sommo i guadagni di tutti i mesi */
-
-		
-		for (int k=0; k<listAziende.size(); k++ ) {
-			List<Double> guadagnoTotalePerAnno = new ArrayList<Double>();
-			for(int i=2015; i<=2019; i++) {
-				guadagnoTotalePerAnno.add(guadagnoAnnuoAzienda(listAziende.get(k),i,listDipendenti));	
-			}
-			guadagnoTotaleAziende.add(guadagnoTotalePerAnno);
-		}
-		
-		
-
 
 		/* Aggiunge i parametri necessari in sessione */
 
@@ -190,7 +174,6 @@ public class LoginController {
 		
 		request.getSession().setAttribute("list_dipendenti",  listDipendenti);   
 		request.getSession().setAttribute("list_aziende", listAziende);	 
-		request.getSession().setAttribute("list_guadagno_totale_aziende", guadagnoTotaleAziende);	
 		request.getSession().setAttribute("list_andamenti", andamenti);   
 		request.getSession().setAttribute("isLogged", isLogged);	
 		request.getSession().setAttribute("dipendente", dipendente);		
