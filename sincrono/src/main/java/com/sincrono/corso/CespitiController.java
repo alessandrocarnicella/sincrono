@@ -1,5 +1,7 @@
 package com.sincrono.corso;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,11 +102,11 @@ public class CespitiController {
 	@Transactional
 	@RequestMapping(value = "/CespitiUpdate")
 	public String getCespitiUpdate(Model m, HttpServletRequest request,
-			@RequestParam("idcespiti-edit") Integer  idcespiti,
-			@RequestParam("annofunzione-edit") Integer annoFunzione, 
-			@RequestParam("categoria-edit") String categoria,
-			@RequestParam("descrizione-edit") String descrizione, 
-			@RequestParam (value="dipendente-edit", required = false) Dipendente dipendente){
+			@RequestParam("idces") Integer  idcespiti,
+			@RequestParam("annoFunzione") Integer annoFunzione,
+			@RequestParam("categoria") String categoria,
+			@RequestParam("descrizione") String descrizione, 
+			@RequestParam (value="dipendente", required = false) Dipendente dipendente){
 
 		/* Blocca l'accesso alla pagina se non loggato */	
 		
@@ -113,7 +115,7 @@ public class CespitiController {
 		}
 		
 		ces.updateCespite(idcespiti, annoFunzione, categoria, descrizione, dipendente);
-
+		
 		/* Aggiunge i parametri necessari in sessione */
 		m.addAttribute("list_dip", des.findAll());
 		m.addAttribute("list_cespiti", ces.findAll());

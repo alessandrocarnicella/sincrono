@@ -11,7 +11,7 @@
 		</div> 
 		
 		<c:forEach items="${list_az}" var="x" varStatus="count">
-			<div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card" id="${count.count}" 
+			<div class="col-xl-3 col-lg-4 col-sm-6 grid-margin stretch-card" id="${count.count}" 
 				onclick="launch_modal_aziende(id=${count.count})"
 				data-namen="${x.nomeAzienda}" 
 				data-email="${x.emailAzienda}"
@@ -26,7 +26,7 @@
 				
 				<c:set var="status_int" scope="page" value="${x.statusAzienda}"/> 
 				<c:choose>
-				    <c:when test="${status_int eq 1}">
+				    <c:when test="${status_int==1}">
 						<c:set var="status_string" scope="page" value="success"/> 
 				    </c:when>    
 				    <c:otherwise>
@@ -64,8 +64,8 @@
 				    
 				      <div class="modal-content">
 				        <div class="modal-header">
-				          <h4 class="modal-title">Dettagli Azienza</h4>
-		                    <button type="button" class="close" data-dismiss="modal">&times;</button>		          
+		          			<h4 class="modal-title">Dettagli Azienza</h4>
+				        	<button type="button" class="close" data-dismiss="modal">&times;</button>	       
 				        </div>
 				        <div class="modal-body">
 				          <div class="auto-form-wrapper">              
@@ -107,6 +107,17 @@
 				               	<!-- TODO: controllare sto cazzzo di campo -->
 				               	<input type="hidden" name="statusAzienda" value="${x.statusAzienda}">			               
 				            </div>
+				            <div class="row">
+				            	<div class="col-12">
+		      				        <form action="Andamento" method="POST">
+										<input type="hidden" name="nomeAziendaAndamento" value="${x.nomeAzienda}">
+											<button type="submit" class="w-100 btn btn-success btn-fw">
+												<h4 class="d-inline">Visualizza grafico andamento</h4> 
+												<i class="fas fa-chart-area fa-2x"></i>
+											</button>
+									</form>
+								</div>
+							</div>
 				        </div>
 				       
 				      </div>

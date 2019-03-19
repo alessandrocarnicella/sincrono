@@ -51,10 +51,9 @@
 										<td>${x.dipendente.persona.nomePersona}</td>
 										<td>${x.dipendente.persona.cognomePersona}</td>
 										<td>
-									
+											
 											<button type="button" class="btn btn-secondary btn-fw edit-cespiti" 
 												data-idces="${x.idcespiti}"
-												data-annofunzione="${x.annoFunzione}"
 												data-categoria="${x.categoria}"
 												data-descrizione = "${x.descrizione}"
 												data-dipendente="${x.dipendente}"
@@ -161,30 +160,26 @@
 				<div class="auto-form-wrapper">
 				
 					<form action="CespitiUpdate" method="post">
-						
-					<input type="hidden" name=idcespiti-edit value="${x.idcespiti}">
-
-						
+							
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="annofunzione-edit" placeholder="Anno" required>
+								<input type="hidden" class="form-control" name="idces" value="">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" class="form-control" name="categoria" placeholder="Categoria" required>
 							</div>
 						</div>
 						
 						<div class="form-group">
 							<div class="input-group">
-								<input type="text" class="form-control" name="categoria-edit" placeholder="Categoria" required>
+								<input type="text" class="form-control" name="descrizione" placeholder="Descrizione" required>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<div class="input-group">
-								<input type="text" class="form-control" name="descrizione-edit" placeholder="Descrizione" required>
-							</div>
-						</div>
-						
-						<div class="form-group">
-		                    <select class="form-control form-control-sm" name="dipendente-edit">
+		                    <select class="form-control form-control-sm" name="dipendente">
 	                    	  <option selected disabled="disabled">Dipendente Responsabile</option>    
 		                     	<c:forEach items="${list_dip}" var="y">
 		                     		<option value="${y.idPersonadip}">${y.persona.nomePersona}&nbsp${y.persona.cognomePersona}</option> 		                     		 
@@ -201,6 +196,5 @@
 		</div>
 	</div>
 </div>
-
 
 

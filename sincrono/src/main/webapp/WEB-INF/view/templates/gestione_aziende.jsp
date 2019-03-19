@@ -71,15 +71,15 @@
 															data-emailref="${y.persona.emailPersona}"
 															data-telefonoref="${y.telefonoRef}"
 															data-aziendaref="${y.azienda.nomeAzienda}"> 
-															<i class="fas fa-user-astronaut"></i>
+															<i class="fas fa-user-astronaut text-success" ></i>
 														</a>
 													</c:forEach>
 												</c:when>
 												<c:otherwise>
-													<a class="btn btn-warning btn-fw" id="${c}"
+													<a class="btn btn-secondary btn-fw" id="${c}"
 														onclick="launch_modal(id=${c})"
 														data-ref="${has_ref}"> 
-														<i class="fas fa-arrow-alt-circle-up"></i>
+														<i class="fas fa-user-astronaut text-danger"></i>
 													</a>
 												</c:otherwise>
 											</c:choose> 
