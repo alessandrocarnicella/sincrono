@@ -35,48 +35,13 @@ public class ReferenteController {
 	@Autowired
 	PersonaService per;
 	
-	@RequestMapping(value = "/Referente")
-	public String getQualcosa(Model m, HttpServletRequest request,
-			@RequestParam("nomeAzienda") String nomeAzienda) {
-		
-		/*Blocco accesso alla pagina se non loggato*/		
-		if(!isLog(request))
-			return "Login";
-		
-		Optional<Azienda> a_opt = as.findById(nomeAzienda);
-		Azienda a = (Azienda)a_opt.get();
-
-		int id_ref = 0;
-		
-		try {
-			id_ref = ref.findIdRefByAziendaName(a);	
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		if(id_ref>0) {
-			System.out.println(id_ref);
-			request.getSession().setAttribute("has_ref", true);
-			request.getSession().setAttribute("id_ref", id_ref);
-			
-		}else {
-			request.getSession().setAttribute("has_ref", false);
-			
-		}
-		
-		m.addAttribute("list_az", as.findAll());
-		m.addAttribute("count", 1);
-		return "GestioneAziende";
-	}
-	
-	
-	@RequestMapping(value = "/AddReferente")
+	@RequestMapping(value = "/GestioneReferenteAdd")
 	public String getAddReferente(Model m, HttpServletRequest request,
-			@RequestParam("cognome_ref_add") String cognome_ref_add,
-			@RequestParam("nome_ref_add") String nome_ref_add, 
-			@RequestParam("email_ref_add") String email_ref_add,
-			@RequestParam("azienda_ref_add") String azienda_string_ref_add,
-			@RequestParam("telefono_ref_add") String telefono_ref_add) {
+			@RequestParam("cognome-ref-add") String cognome_ref_add,
+			@RequestParam("nome-ref-add") String nome_ref_add, 
+			@RequestParam("email-ref-add") String email_ref_add,
+			@RequestParam("azienda-ref-add") String azienda_string_ref_add,
+			@RequestParam("telefono-ref-add") String telefono_ref_add) {
 		
 		/* AGGIUNGERE PRIMA LA PERSONA E POI ASSOCIARLA AL REFERENTE CON L'ID */ 
 		/*Blocco accesso alla pagina se non loggato*/		
@@ -84,71 +49,85 @@ public class ReferenteController {
 			return "Login";
 		boolean error = false;
 		
+
 		if(per.findByEmailPersona(email_ref_add).isEmpty()) {
+			
 		
 			/* RECUPERO L'OGGETTO AZIENDA DAL NOME AZIENDA */
 			Azienda azienda_ref_add = as.findById(azienda_string_ref_add).get();
-			
+						
 			Persona persona = new Persona();
 			persona.setNomePersona(nome_ref_add);
 			persona.setCognomePersona(cognome_ref_add);
 			persona.setEmailPersona(email_ref_add);
-			per.save(persona);
+	
+			per.save(persona);			
 			
 			Referente referente = new Referente();
 			referente.setAzienda(azienda_ref_add);
-			referente.setPersona(persona);
+			referente.setIdRef(persona.getIdPersona());
 			referente.setTelefonoRef(telefono_ref_add);
 			
 			ref.save(referente);
-
+			
 		}else {
-
 			error = true;
-			m.addAttribute("error_insert_persona", error);
-			
-			return "Referente";
-		}
+		}	
 		
+		System.out.println("ciao add");
 		
-		error = false;
-		m.addAttribute("error_insert_persona", error);
+		m.addAttribute("error_insert_ref", error);
 		m.addAttribute("list_az", as.findAll());
-		return "Referente";
+		return "GestioneAziende";
 	}
 	
 	
-	@RequestMapping(value = "/EditReferente")
+	@RequestMapping(value = "/GestioneReferenteEdit")
 	public String getEditReferente(Model m, HttpServletRequest request,
-			@RequestParam("cognome_ref_edit") String cognome_ref_edit,
-			@RequestParam("nome_ref_edit") String nome_ref_edit, 
-			@RequestParam("email_ref_edit") String email_ref_edit,
-			@RequestParam("azienda_ref_edit") String azienda_ref_edit,
-			@RequestParam("telefono_ref_edit") String telefono_ref_edit,
-			@RequestParam("id_ref_edit") int id_ref_edit) {
+			@RequestParam("cognome-ref-edit") String cognome_ref_edit,
+			@RequestParam("nome-ref-edit") String nome_ref_edit, 
+			@RequestParam("email-ref-edit") String email_ref_edit,
+			@RequestParam("azienda-ref-edit") String azienda_ref_edit,
+			@RequestParam("telefono-ref-edit") String telefono_ref_edit,
+			@RequestParam("id-ref-edit") int id_ref_edit) {
 			
+		/*Blocca l'accesso alla pagina se non loggato*/		
+		if(!isLog(request)) 
+			return "Login";
 		
-		return "Referente";
+		/* Aggiorno la persona */
+		per.updatePersona(id_ref_edit, cognome_ref_edit, nome_ref_edit, email_ref_edit);
+
+		/* Aggiorno il referente */
+		ref.updateReferente(id_ref_edit, telefono_ref_edit);
+		
+		System.out.println("ciao edit");
+		
+		m.addAttribute("list_az", as.findAll());
+		return "GestioneAziende";
 	}
 	
 	
-	@RequestMapping(value = "/DeleteReferente")
-	public String getDeleteReferente(			
-			@RequestParam("aziendaref") String aziendaref,
-			@RequestParam("idref") int idref) {
+	@RequestMapping(value = "/GestioneReferenteDelete")
+	public String getDeleteReferente(Model m, HttpServletRequest request,
+			@RequestParam("id-ref-delete") int id_ref_delete) {
 		
-		/* RIMUVO LA COPPIA IDREF AZIENDA */
+	
+		/*Blocca l'accesso alla pagina se non loggato*/		
+		if(!isLog(request)) 
+			return "Login";
 		
-		return "Referente";
+		/* Elimino pure il referente */
+		ref.deleteById(id_ref_delete);
+
+		/* Elimina la persona  */
+		per.deleteById(id_ref_delete);
+
+		System.out.println("ciao delete");
+		
+		m.addAttribute("list_az", as.findAll());
+		return "GestioneAziende";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	/*Blocco accesso alla pagina se non loggato*/		
