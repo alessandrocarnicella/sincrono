@@ -51,6 +51,32 @@ public class LoginController {
 	@Autowired
 	RilService rils;
 
+	@RequestMapping(value = "/Andamento")
+	public String getGrafici(Model m, HttpServletRequest request, @RequestParam("nomeAzienda") String nomeAzienda) {
+
+		
+		Optional<Azienda> azienda = as.findById(nomeAzienda);
+		List<Dipendente> listDipendenti = dip.findAll();
+		
+		List<List<Double>> guadagnoTotaleAzienda = new ArrayList<List<Double>>();
+
+		/* x ogni azienda prendo ogni anno e sommo i guadagni di tutti i mesi */
+		
+			List<Double> guadagnoTotalePerAnno = new ArrayList<Double>();
+			for(int i=2015; i<=2019; i++) {
+				guadagnoTotalePerAnno.add(guadagnoAnnuoAzienda(azienda.get(),i,listDipendenti));	
+			}
+			guadagnoTotaleAzienda.add(guadagnoTotalePerAnno);
+		
+				 
+		/* Aggiunge i parametri necessari in sessione */
+
+		m.addAttribute("error_login", false);
+		request.getSession().setAttribute("list_guadagno_totale_azienda", guadagnoTotaleAzienda);	 
+
+		return "Andamento";
+	}
+	
 	@RequestMapping(value = "/")
 	public String getHome(Model m, HttpServletRequest request) {
 
@@ -66,6 +92,7 @@ public class LoginController {
 
 		return "Login";
 	}
+	
 
 	@RequestMapping(value = "/DashboardHome")
 	public String getDashboardHome(Model m, HttpServletRequest request) {
