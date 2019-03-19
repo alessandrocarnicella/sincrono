@@ -123,17 +123,7 @@ $(document).ready(function(){
 	});
 
 	// RECUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM EDIT CESPITI
-	$(".edit-cespiti").on("click", function() {
-		var annofunzione = $(this).data("annofunzione");
-		var categoria = $(this).data("categoria");
-		var descrizione = $(this).data("descrizione");
-		var dipendente=$(this).data("dipendente");
-		$("#modal-edit-cespiti input[name=annofunzione]").val(annofunzione);
-		$("#modal-edit-cespiti input[name=categoria]").val(categoria);
-		$("#modal-edit-cespiti input[name=descrizione]").val(descrizione);
-		$("#modal-edit-cespiti input[name=dipendente] select").val(dipendente);
-
-	});
+	
 		
 
 
@@ -152,57 +142,3 @@ $(document).ready(function(){
 		$("#modal-edit-commesse input[name=tariffaCliente]").val(tariffa);
 	});
 	
-
-
-	
-	function notify_danger() {
-		$.notify({
-			// options
-			message: 'STUPIDAAAAAAAAAA' 
-		},{
-			// settings
-			type: 'danger',
-			z_index: 2000,
-			delay: 5000
-
-		}
-
-		);
-	};
-	
-	function notify_warning() {
-		$.notify({
-			// options
-			message: 'Yeah' 
-		},{
-			// settings
-			type: 'warning'
-		});
-
-	};
-
-	function notify_success() {
-		$.notify({
-			// options
-			message: 'Yeah' 
-		},{
-			// settings
-			type: 'success'
-		});
-
-	};
-
-	
-	function sample() {
-		alert("This is sample function");
-	}
-	
-	$(function() {
-		$("#button").click(function() {
-			setTimeout(sample, 2000);
-		});
-	
-	});
-
-
-});

@@ -263,7 +263,7 @@ public class LoginController {
 		for(int k=0; k<listDipendenti.size(); k++) {
 			List<Ril> listRil =  trovaTuttiRil(listDipendenti.get(k));
 			for (int j=0; j<listRil.size(); j++) {
-
+				try {
 				int idCommessa  = coms.findIdRefByPersona(listRil.get(j).getPersona());
 				Optional<Commessa> commessa = coms.findById(idCommessa);
 				double guadagno;
@@ -275,6 +275,8 @@ public class LoginController {
 				andamenti.add(new Andamento(commessa.get().getNomeCommessa(),commessa.get().getTariffaCliente(),
 						commessa.get().getAzienda(),dipendente1.get(),guadagno,dipendente1.get().getTariffaOraria(),
 						listRil.get(j).getOreCliente(),listRil.get(j).getId()));
+				}catch(Exception e) {
+				}
 			}
 		}
 
