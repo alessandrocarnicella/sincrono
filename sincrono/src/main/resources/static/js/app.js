@@ -120,9 +120,19 @@ $(document).ready(function(){
 		$("#modal-edit-cespiti input[name=dipendente] select").val(dipendente);
 
 	});
-	
-	/*===================================================================== NOTIFY =====================================================================*/
+		
 
+	//FUNZIONE PER RICERCA IN RAPPORTINI  
+	$("#searchRapportini").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#table-gestione-ril tr").not('thead tr').filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	});
+
+		
+
+	
 	function notify_danger() {
 		$.notify({
 			// options

@@ -142,10 +142,11 @@ $(function() {
       'Opera Mini'
     ]
   };
+  
   var areaData = {
-    labels: ["2013", "2014", "2015", "2016", "2017"],
+    labels: ["2015", "2016", "2017", "2018", "2019"],
     datasets: [{
-      label: '# of Votes',
+      label: 'Guadagno totale azienda',
       data: [12, 19, 3, 5, 2, 3],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -171,7 +172,42 @@ $(function() {
       fill: '-2' // 4: fill to dataset 2
     }]
   };
+  
+  var areaData1 = {
+		    labels: ["2015", "2016", "2017", "2018", "2019"],
+		    datasets: [{
+		      label: 'Guadagno totale azienda',
+		      data:  $("#idDati").data("dati"),
+		      backgroundColor: [
+		        'rgba(255, 99, 132, 0.2)',
+		        'rgba(54, 162, 235, 0.2)',
+		        'rgba(255, 206, 86, 0.2)',
+		        'rgba(75, 192, 192, 0.2)',
+		        'rgba(153, 102, 255, 0.2)',
+		        'rgba(255, 159, 64, 0.2)'
+		      ],
+		      borderColor: [
+		        'rgba(255,99,132,1)',
+		        'rgba(54, 162, 235, 1)',
+		        'rgba(255, 206, 86, 1)',
+		        'rgba(75, 192, 192, 1)',
+		        'rgba(153, 102, 255, 1)',
+		        'rgba(255, 159, 64, 1)'
+		      ],
+		      borderWidth: 1,
+		      fill: 'origin', // 0: fill to 'origin'
+		      fill: '+2', // 1: fill to dataset 3
+		      fill: 1, // 2: fill to dataset 1
+		      fill: false, // 3: no fill
+		      fill: '-2' // 4: fill to dataset 2
+		    }]
+		  };
 
+  
+  
+  
+  
+  
   var areaOptions = {
     plugins: {
       filler: {
@@ -360,7 +396,7 @@ $(function() {
     var areaChartCanvas = $("#areaChart").get(0).getContext("2d");
     var areaChart = new Chart(areaChartCanvas, {
       type: 'line',
-      data: areaData,
+      data: areaData1,
       options: areaOptions
     });
   }
@@ -382,4 +418,63 @@ $(function() {
       options: doughnutPieOptions
     });
   }
+
+
+
+
 });
+
+
+function prova1(id, dati){
+		
+		console.log(id);
+		console.log(dati);
+		
+	  
+		  var areaOptions = {
+				    plugins: {
+				      filler: {
+				        propagate: true
+				      }
+				    }
+				  }
+		  
+		  if ($("#areaChart"+id).length) {
+			    var areaChartCanvas = $("#areaChart"+id).get(0).getContext("2d");
+			    var areaChart = new Chart(areaChartCanvas, {
+			      type: 'line',
+			      data: {
+					    labels: ["2015", "2016", "2017", "2018", "2019"],
+					    datasets: [{
+					      label: 'Guadagno totale azienda',
+					      data: dati,
+					      backgroundColor: [
+					        'rgba(255, 99, 132, 0.2)',
+					        'rgba(54, 162, 235, 0.2)',
+					        'rgba(255, 206, 86, 0.2)',
+					        'rgba(75, 192, 192, 0.2)',
+					        'rgba(153, 102, 255, 0.2)',
+					        'rgba(255, 159, 64, 0.2)'
+					      ],
+					      borderColor: [
+					        'rgba(255,99,132,1)',
+					        'rgba(54, 162, 235, 1)',
+					        'rgba(255, 206, 86, 1)',
+					        'rgba(75, 192, 192, 1)',
+					        'rgba(153, 102, 255, 1)',
+					        'rgba(255, 159, 64, 1)'
+					      ],
+					      borderWidth: 1,
+					      fill: 'origin', // 0: fill to 'origin'
+					      fill: '+2', // 1: fill to dataset 3
+					      fill: 1, // 2: fill to dataset 1
+					      fill: false, // 3: no fill
+					      fill: '-2' // 4: fill to dataset 2
+					    }]
+					  },
+			      options: areaOptions
+			    });
+			  }
+	}
+
+

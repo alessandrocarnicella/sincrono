@@ -82,7 +82,7 @@ public class RapportiniController {
 		
 		/* Se non esiste aggiunge il Ril */
 		
-		rils.save(ril);
+		rils.save(ril);  
 		
 		/* Crea la lista di tutti i ril aggiornata */
 		
@@ -127,15 +127,6 @@ public class RapportiniController {
 		return "Rapportini";
 	}
 
-	@RequestMapping(value = "/GestioneCommesseDipendenti")
-	public String getGestioneCommesseDipendenti(Model m, HttpServletRequest request) {
-
-		/*Blocco accesso alla pagina se non loggato*/		
-		if(!isLog(request))
-			return "Login";
-		
-		return "GestioneCommesseDipendenti";
-	}
 
 	/*Blocco accesso alla pagina se non loggato*/	
 	
