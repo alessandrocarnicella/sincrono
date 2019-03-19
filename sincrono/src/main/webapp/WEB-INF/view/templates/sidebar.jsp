@@ -43,8 +43,15 @@
 		        <span class="menu-title">Gestione Utenti</span>
 		      </a>
 		    </li>
+				
+		 <li class="nav-item">
+		      <a class="nav-link" href="Cespiti"> 
+		        <i class=""></i> 
+		        <span class="menu-title">Cespiti </span>
+		      </a>
+		    </li>
+		    
 		</c:if>
-		
 		
 		<c:set var="categoriaFlag" scope="session"  value="${sessionScope.categoria}" />
 		<c:if test="${categoriaFlag eq 'Amministrativo' }">
@@ -54,7 +61,14 @@
 		        <span class="menu-title">Gestione Commesse Dipendenti </span>
 		      </a>
 		    </li>
+		     <li class="nav-item">
+		      <a class="nav-link" href="Cespiti"> 
+		        <i class=""></i> 
+		        <span class="menu-title">Cespiti </span>
+		      </a>
+		    </li>
 		</c:if>
+		
 		
 		
 		<c:set var="categoriaFlag" scope="session"  value="${sessionScope.categoria}" />

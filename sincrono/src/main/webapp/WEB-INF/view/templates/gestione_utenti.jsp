@@ -27,7 +27,6 @@
 							<!-- ROW INTESTAZIONE TABLE -->
 							<tr>
 								<th>User</th>
-								<th>Identificativo</th>
 								<th>Tariffa oraria</th>
 								<th>Persona associata</th>
 								<th class="text-center">Status</th>
@@ -43,7 +42,6 @@
 								<c:forEach items="${list_dip}" var="x">
 									<tr>
 										<td class="py-1"><img src="../../images/faces-clipart/pic-1.png" alt="image"></td>
-										<td>${x.idPersonadip}</td>
 										<td>${x.tariffaOraria}</td>
 										<td>${x.persona.nomePersona}</td>
 										<td class="text-center">
@@ -83,13 +81,6 @@
 												</button>
 											</form>
 											<!-- FINE Elimina utente -->
-										</td>
-										<td>
-											<!-- START STAMPA UTENTE -->
-											<a href="" class="btn btn-secondary btn-fw">
-												<i class="fas fa-print"></i>
-											</a>
-											<!-- END STAMPA UTENTE -->
 										</td>
 									</tr>
 								</c:forEach>

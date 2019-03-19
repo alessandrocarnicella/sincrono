@@ -1,6 +1,8 @@
 $(document).ready(function(){
-	console.log("simona the white");
-	// FUNZIONE PER RICERCA NELLA PAGINA AZIENDA
+
+	/*===================================================================== RICERCHE =====================================================================*/
+	
+	// FUNZIONE PER RICERCA PAGINA AZIENDA
 	$("#searchAziende").on("keyup", function() {
 		var value = $(this).val().toLowerCase();
 		$(".fieldNameAzienda").filter(function() {
@@ -8,7 +10,7 @@ $(document).ready(function(){
 		});
 	});
 
-	// FUNZIONE PER RICERCA NELLA PAGINA GESTIONE AZIENDE
+	// FUNZIONE PER RICERCA PAGINA GESTIONE AZIENDE
 	$("#searchGestioneAziende").on("keyup", function() {
 		var value = $(this).val().toLowerCase();
 		$("#table-gestione-aziende tr").not('thead tr').filter(function() {
@@ -16,30 +18,48 @@ $(document).ready(function(){
 		});
 	});
 		  
-	
-	// RECUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM SHOW AZIENDA
-	$("#stretch-card-aziende").on("click", function() {
-		var namen = $(this).data("namen");
-		var email = $(this).data("email");
-		var address = $(this).data("address");
-		var numdip = $(this).data("numdip");
-		var piva = $(this).data("piva");
-		var societa = $(this).data("societa");
-		var telefono = $(this).data("telefono");
-		var status = $(this).data("status");
 
-		$("#modal-detail-aziende input[name=nomeAzienda]").val(namen).prop("disabled",true);
-		$("#modal-detail-aziende input[name=emailAzienda]").val(email).prop("disabled",true);
-		$("#modal-detail-aziende input[name=indirizzoAzienda]").val(address).prop("disabled",true);
-		$("#modal-detail-aziende input[name=numdipAzienda]").val(numdip).prop("disabled",true);
-		$("#modal-detail-aziende input[name=pivaAzienda]").val(piva).prop("disabled",true);
-		$("#modal-detail-aziende input[name=societa]").val(societa).prop("disabled",true);
-		$("#modal-detail-aziende input[name=status]").val(status).prop("disabled",true);
-		$("#modal-detail-aziende input[name=telefonoAzienda]").val(telefono).prop("disabled",true);
+	//FUNZIONE PER RICERCA PAGINA CESPITI
+	$("#searchCespiti").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#table-gestione-cespiti tr").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
 	});
-		
-
-
+	
+	//FUNZIONE PER RICERCA PAGINA RAPPORTINI  
+	$("#searchRapportini").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#table-gestione-ril tr").not('thead tr').filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	});
+	
+	// FUNZIONE PER RICERCA IN GESTIONE UTENTI
+	$("#searchGestioneUtenti").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#table-gestione-utenti tr").filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	});
+	
+	// FUNZIONE PER RICERCA IN PAGINA UTENTI
+	$("#searchDipendenti").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$(".fieldName").filter(function() {
+			$(this).closest(".stretch-card").toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	});
+	
+	
+	// FUNZIONE PER RICERCA NELLA PAGINA GESTIONE COMMESSE
+	$("#searchGestioneCommesse").on("keyup", function() {
+		var value = $(this).val().toLowerCase();
+		$("#table-gestione-commesse tr").not('thead tr').filter(function() {
+			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+		});
+	});	
+	/*===================================================================== MODIFICHES =====================================================================*/
 	// RERCUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM EDIT AZIENDA
 	$(".edit-aziende").on("click", function() {
 		var namen = $(this).data("namen");
@@ -60,52 +80,15 @@ $(document).ready(function(){
 		$("#modal-edit-aziende input[name=societa]").val(societa);
 		$("#modal-edit-aziende input[name=statusAzienda]").val(status);
 		$("#modal-edit-aziende input[name=telefonoAzienda]").val(telefono);
-	});
-	  
-	
-	
-	// RERCUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM EDIT REFERENTE
-	$("#ref-aziende").on("click", function() {
-		var idref = $(this).data("idref");
-		var nomeref = $(this).data("nomeref");
-		var cognomeref = $(this).data("cognomeref");
-		var emailref = $(this).data("emailref");
-		var telefonoref = $(this).data("telefonoref");
-		var aziendaref = $(this).data("aziendaref");
 		
-		console.log(cognomeref);
-		$("#modal-ref-aziende input[name=nome_ref_edit]").val(nomeref).prop("disabled",true);
-		$("#modal-ref-aziende input[name=cognome_ref_edit]").val(cognomeref).prop("disabled",true);
-		$("#modal-ref-aziende input[name=email_ref_edit]").val(emailref).prop("disabled",true);
-		$("#modal-ref-aziende input[name=telefono_ref_edit]").val(telefonoref).prop("disabled",true);
-		$("#modal-ref-aziende input[name=azienda_ref_edit]").val(aziendaref).prop("disabled",true);
-
+		
+		if(status == 1){
+			$("#status_azienda_true").prop('checked',true);
+		}else{
+			$("#status_azienda_false").prop('checked',true);
+		}
 	});
-	
 	  
-	
-	
-	
-	
-	
-
-	// FUNZIONE PER RICERCA IN GESTIONE UTENTI
-	$("#searchGestioneUtenti").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#table-gestione-utenti tr").filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
-	});
-	
-	// FUNZIONE PER RICERCA IN UTENTI
-	$("#searchDipendenti").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$(".fieldName").filter(function() {
-			$(this).closest(".stretch-card").toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
-	});
-	
-
 	// RECUPERA I DATI DAI DATANAME E RIEMPIE LA FORM EDIT UTENTI
 	$(".edit-utente").on("click", function() {
 		var nomep = $(this).data("nomep");
@@ -127,7 +110,7 @@ $(document).ready(function(){
 		$("#modal-edit-utenti input[name=ruolo_cat] select").val(ruolocat);	
 		$("#modal-edit-utenti input[name=idpersona]").val(idpersona);
 		
-		console.log(status_dip);
+
 		if(status_dip == 1){
 			$("#status_dip_true").prop('checked',true);
 			console.log("if");
@@ -138,41 +121,22 @@ $(document).ready(function(){
 
 		
 	});
-	
-	
-	// RECUPERA I DATI DA DATA E RIEMPIE LA FORM SHOW UTENTI
-	$("#stretch-card-utenti").on("click", function() {
-		var nomep = $(this).data("nomep");
-		var cognomep = $(this).data("cognomep");
-		var emailp = $(this).data("emailp");
-		var passwordDip = "**************";
-		var tariffaOraria = $(this).data("tariffaOraria");
-		var nomecat = $(this).data("nomecat");
-		var ruolocat = $(this).data("ruolocat");
-		var tariffaoraria = $(this).data("tariffaoraria");
 
-		$("#modal-detail-utenti input[name=cognomePersona]").val(cognomep).prop( "disabled", true ).css('textTransform', 'capitalize');
-		$("#modal-detail-utenti input[name=nomePersona]").val(nomep).prop( "disabled", true ).css('textTransform', 'capitalize');
-		$("#modal-detail-utenti input[name=emailPersona]").val(emailp).prop( "disabled", true );
-		$("#modal-detail-utenti input[name=passwordDip]").val(passwordDip).prop( "disabled", true );
-		$("#modal-detail-utenti input[name=tariffaOraria]").val(tariffaOraria).prop( "disabled", true );
-		$("#modal-detail-utenti input[name=nome_cat]").val(nomecat).prop("disabled", true ).css('textTransform', 'capitalize');
-		$("#modal-detail-utenti input[name=ruolo_cat]").val(ruolocat).prop( "disabled", true ).css('textTransform', 'capitalize');
-		$("#modal-detail-utenti input[name=tariffaOraria]").val(tariffaoraria + "Euro").prop( "disabled", true );
-
+	// RECUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM EDIT CESPITI
+	$(".edit-cespiti").on("click", function() {
+		var annofunzione = $(this).data("annofunzione");
+		var categoria = $(this).data("categoria");
+		var descrizione = $(this).data("descrizione");
+		var dipendente=$(this).data("dipendente");
+		$("#modal-edit-cespiti input[name=annofunzione]").val(annofunzione);
+		$("#modal-edit-cespiti input[name=categoria]").val(categoria);
+		$("#modal-edit-cespiti input[name=descrizione]").val(descrizione);
+		$("#modal-edit-cespiti input[name=dipendente] select").val(dipendente);
 
 	});
 		
 
-	//FUNZIONE PER RICERCA IN RAPPORTINI  
-	$("#searchRapportini").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#table-gestione-ril tr").not('thead tr').filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
-	});
 
-	
 	// RERCUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM EDIT COMMESSE
 	$(".edit-commesse").on("click", function() {
 		var id = $(this).data("id");
@@ -181,8 +145,6 @@ $(document).ready(function(){
 		var aziendac = $(this).data("aziendac");
 		var tariffa = $(this).data("tariffa");
 	
-		
-
 		$("#modal-edit-commesse input[name=idCommessa]").val(id);
 		$("#modal-edit-commesse input[name=nomeCommessa]").val(nome);
 		$("#modal-edit-commesse input[name=idDipendente]").val(dipendente);
@@ -190,13 +152,8 @@ $(document).ready(function(){
 		$("#modal-edit-commesse input[name=tariffaCliente]").val(tariffa);
 	});
 	
-	// FUNZIONE PER RICERCA NELLA PAGINA GESTIONE COMMESSE
-	$("#searchGestioneCommesse").on("keyup", function() {
-		var value = $(this).val().toLowerCase();
-		$("#table-gestione-commesse tr").not('thead tr').filter(function() {
-			$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-		});
-	});
+
+
 	
 	function notify_danger() {
 		$.notify({
