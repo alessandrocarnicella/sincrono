@@ -209,6 +209,7 @@
 		</div>
 	</div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <c:choose>
 	<c:when test="${errore_commesse eq 2}">
@@ -218,7 +219,7 @@
 			});
 		</script>
 	</c:when>
-	<c:when test="${errore_commessa eq 1}">
+	<c:when test="${errore_commesse eq 1}">
 		<script>
 			$(window).bind("load",function(){
 			setTimeout(notify_success,500);
@@ -234,12 +235,12 @@
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script>
 function notify_danger() {
 	$.notify({
 		// options
-		message: 'Error: Commessa gia esistente' 
+		message: 'Error: Commessa errata' 
 	},{
 		// settings
 		type: 'danger',
