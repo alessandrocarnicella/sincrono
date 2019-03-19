@@ -1,7 +1,6 @@
 package com.sincrono.corso;
 
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,17 +38,14 @@ public class CommessaController {
 		if(!isLog(request)) 
 			return "Login";
 
-		m.addAttribute("error_insert_commessa", false);
-
-		m.addAttribute("list_com", com.findAll());
-
+		/* Aggiunge i parametri necessari in sessione */
 		
-
+		request.getSession().setAttribute("errore_commesse", 0);
+		m.addAttribute("list_com", com.findAll());
+		
 		return "GestioneCommesseDipendenti";
 	}
 
-	//@RequestParam("idCommessa") int idCommessa,
-	
 	@RequestMapping(value = "/GestioneCommesseAdd")
 	public String getGestioneCommesseAdd(Model m, HttpServletRequest request, 
 			@RequestParam("nomeCommessa") String nomeCommessa,
@@ -61,8 +57,6 @@ public class CommessaController {
 		if(!isLog(request))
 			return "Login";
 
-		boolean error = false;
-
 		Azienda aziendaCom = new Azienda();
 		aziendaCom.setNomeAzienda(nomeAziendaCommessa);
 
@@ -70,7 +64,6 @@ public class CommessaController {
 		
 		if(com.findByNomeCommessaAndNomeAzienda(nomeCommessa, aziendaCom).isEmpty()) {
 
-			error = false;
 
 			try {
 				Commessa commessa = new Commessa();
@@ -78,46 +71,45 @@ public class CommessaController {
 				commessa.setTariffaCliente(tariffaCliente);
 				commessa.setAzienda(aziendaCom);
 				commessa.setPersona(pers.get());
+				
+				/* Aggiunge la commessa */
+				
 				com.save(commessa);
+				request.getSession().setAttribute("errore_commesse", 1);
 				
 			} catch (Exception e) {
-				
-				System.out.println("l'azienda o l'utente inserito non esistono!!!");
-				
+				request.getSession().setAttribute("errore_commesse", 2);
 			}
 			
 
-		}else {
-
-			error = true;
-			System.out.println("la commessa esiste già!!!");
-			m.addAttribute("error_insert_azienda", error);
+		}else {		
+			/* Aggiunge i parametri necessari in sessione */
+			
+			request.getSession().setAttribute("errore_commesse", 2);
 			m.addAttribute("list_com", com.findAll());
 
 		}
 
-
-		/*Blocco accesso alla pagina se non loggato*/		
-		if(!isLog(request)) {
-			return "Login";
-		}
-
+		/* Aggiunge i parametri necessari in sessione */
+		
 		m.addAttribute("list_com", com.findAll());
-
 		return "GestioneCommesseDipendenti";
 	}
 
-	
 	@RequestMapping(value = "/GestioneCommesseElimina")
 	public String getGestioneCommesseDelete(Model m, HttpServletRequest request, 
 			@RequestParam("idCommessa") Integer idCommessa) {
 
+		/* Elimina la commessa */
+		
 		com.deleteById(idCommessa);
-
+		
+		/* Aggiunge i parametri necessari in sessione */
+		
+		request.getSession().setAttribute("errore_commesse", 1);
 		m.addAttribute("list_com", com.findAll());
-
+		
 		return "GestioneCommesseDipendenti";
-
 	}
 
 	@RequestMapping(value = "/GestioneCommesseUpdate")
@@ -131,21 +123,28 @@ public class CommessaController {
 		
 		Azienda aziendaCom = new Azienda();
 		aziendaCom.setNomeAzienda(nomeAziendaCommessa);
-
+	
 		Optional<Persona> pers = ps.findById(idDipendente);
 
-		com.updateCommessa(idCommessa, tariffaCliente, nomeCommessa, pers.get(), aziendaCom);
-
-		//System.out.println(com.updateCommessa(idCommessa, tariffaCliente, nomeCommessa, pers.get(), aziendaCom));
+		try {
+			
+			/* Aggiorna la commessa */
+			com.updateCommessa(idCommessa, tariffaCliente, nomeCommessa, pers.get(), aziendaCom);
+			
+		}catch(Exception e) {
+			request.getSession().setAttribute("errore_commesse", 2);
+		}
 		
+		/* Aggiunge i parametri necessari in sessione */
+		
+		request.getSession().setAttribute("errore_commesse", 1);
 		m.addAttribute("list_com", com.findAll());
 
 		return "GestioneCommesseDipendenti";
-
 	}
 
-
-	/*Blocco accesso alla pagina se non loggato*/		
+	/*Blocco accesso alla pagina se non loggato*/	
+	
 	private boolean isLog(HttpServletRequest request) {
 		if(!(boolean) request.getSession().getAttribute("isLogged")) {
 			return false;

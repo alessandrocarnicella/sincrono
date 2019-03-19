@@ -40,6 +40,7 @@ public class RapportiniController {
 		
 		/* Aggiunge i parametri necessari in sessione */
 		
+		request.getSession().setAttribute("errore_rapportini", 0);
 		m.addAttribute("list_ril", listRil);
 		return "Rapportini";
 	}
@@ -69,7 +70,10 @@ public class RapportiniController {
 		/* Controlla se un ril esiste gia  */
 		
 		if(rils.findById(rilPK).isPresent()) {
-			m.addAttribute("error_insert_ril", true);
+			
+			request.getSession().setAttribute("errore_rapportini", 2);
+			List<Ril> listRil = trovaTuttiRil(dip.get());
+			m.addAttribute("list_ril", listRil);
 			return "Rapportini";
 		}
 		
@@ -83,7 +87,7 @@ public class RapportiniController {
 		/* Se non esiste aggiunge il Ril */
 		
 		rils.save(ril);  
-		
+		request.getSession().setAttribute("errore_rapportini", 1);
 		/* Crea la lista di tutti i ril aggiornata */
 		
 		List<Ril> listRil = trovaTuttiRil(dip.get());
@@ -115,7 +119,7 @@ public class RapportiniController {
 		/* Elima un ril utilizzando il rilPK */
 		
 		rils.deleteById(rilPK);
-		
+		request.getSession().setAttribute("errore_rapportini", 1);
 		/* Crea la lista di tutti i ril */
 		
 		List<Ril> listRil = trovaTuttiRil(dip.get());
@@ -127,8 +131,7 @@ public class RapportiniController {
 		return "Rapportini";
 	}
 
-
-	/*Blocco accesso alla pagina se non loggato*/	
+	/* Blocco accesso alla pagina se non loggato */	
 	
 	private boolean isLog(HttpServletRequest request) {
 
