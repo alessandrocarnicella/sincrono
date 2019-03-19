@@ -16,14 +16,20 @@
               <span class="ml-3">
               
               
-              <form class="d-inline" action="Logout" method="post">
+              	<form class="d-inline" action="Logout" method="post">
 					<button type="submit" class="btn btn-danger">
 						<i class="fas fa-sign-out-alt"></i>Logout
 					</button>
-			 </form>
+				</form>
   		 
-              </span>           
+              </span> 
+              
+              
+                        
 			</li>
         </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          		<i class="fas fa-bars"></i>
+    	</button>
   </div>
 </nav>
