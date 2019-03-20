@@ -57,7 +57,7 @@ public class DipendenteController {
 			return "Login";
 
 		/* Aggiunge i parametri necessari in sessione */
-		
+		request.getSession().setAttribute("errore_dipendenti", 0);
 		m.addAttribute("list_dip", dip.findAll());
 		return "GestioneUtenti";
 	}
@@ -125,7 +125,7 @@ public class DipendenteController {
 			error = true;
 			
 			/* Aggiunge i parametri necessari in sessione */
-			
+			request.getSession().setAttribute("errore_dipendenti", 2);
 			m.addAttribute("error_insert_persona", error);
 			m.addAttribute("list_dip", dip.findAll());
 			return "GestioneUtenti";
@@ -133,7 +133,7 @@ public class DipendenteController {
 		error = false;
 		
 		/* Aggiunge i parametri necessari in sessione */
-		
+		request.getSession().setAttribute("errore_dipendenti", 1);
 		m.addAttribute("error_insert_persona", error);
 		m.addAttribute("list_dip", dip.findAll());
 		return "GestioneUtenti";
@@ -166,7 +166,7 @@ public class DipendenteController {
 		per.deleteById(idPersonadip);
 
 		/* Aggiunge i parametri necessari in sessione */
-		
+		request.getSession().setAttribute("errore_dipendenti", 1);
 		m.addAttribute("list_dip", dip.findAll());
 		return "GestioneUtenti";
 	}
@@ -210,7 +210,7 @@ public class DipendenteController {
 		dip.updateDipendente(idPersonadip, passwordDip, nome_cat, ruolo_cat, tariffaOraria, statusDip);
 
 		/* Aggiunge i parametri necessari in sessione */
-		
+		request.getSession().setAttribute("errore_dipendenti", 1);
 		m.addAttribute("list_dip", dip.findAll());
 		return "GestioneUtenti";
 	}

@@ -61,7 +61,7 @@ public class AziendeController {
 		if(!isLog(request)) 
 			return "Login";
 		
-		m.addAttribute("error_insert_azienda", false);
+		request.getSession().setAttribute("errore_aziende", 0);
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
 	
@@ -105,12 +105,12 @@ public class AziendeController {
 			
 			error = true;
 			
-			m.addAttribute("error_insert_azienda", error);
+			request.getSession().setAttribute("errore_aziende", 2);
 			m.addAttribute("list_az", as.findAll());
 			return "GestioneAziende";
 		}
 		
-		m.addAttribute("error_insert_azienda", error);
+		request.getSession().setAttribute("errore_aziende", 1);
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
 	}
@@ -119,7 +119,7 @@ public class AziendeController {
 	
 	@RequestMapping(value = "/GestioneAziendeElimina")
 	public String getGestioneAziendeElimina(Model m, HttpServletRequest request, 
-			@RequestParam("nomeAzienda") String nomeAzienda){
+			@RequestParam("nomeAziendaElimina") String nomeAzienda){
 		
 		/*Blocco accesso alla pagina se non loggato*/		
 		if(!isLog(request))
@@ -127,6 +127,7 @@ public class AziendeController {
 			
 		as.deleteById(nomeAzienda);
 		
+		request.getSession().setAttribute("errore_aziende", 1);
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
 	}
@@ -148,6 +149,7 @@ public class AziendeController {
 		
 		as.updateAzienda(nomeAzienda, emailAzienda, indirizzoAzienda, numdipAzienda, pivaAzienda, societa, statusAzienda, telefonoAzienda);
 		
+		request.getSession().setAttribute("errore_aziende", 1);
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
 	}
@@ -337,7 +339,7 @@ public class AziendeController {
 
 
 		document.close();
-
+		request.getSession().setAttribute("errore_aziende", 1);
 		m.addAttribute("list_az", as.findAll());
 
 		return "GestioneAziende";

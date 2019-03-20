@@ -71,12 +71,10 @@ public class ReferenteController {
 			ref.save(referente);
 			
 		}else {
-			error = true;
+			request.getSession().setAttribute("errore_referenti", 2);
 		}	
 		
-		System.out.println("ciao add");
-		
-		m.addAttribute("error_insert_ref", error);
+		request.getSession().setAttribute("errore_rapportini", 1);
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
 	}
@@ -101,7 +99,7 @@ public class ReferenteController {
 		/* Aggiorno il referente */
 		ref.updateReferente(id_ref_edit, telefono_ref_edit);
 		
-		System.out.println("ciao edit");
+		request.getSession().setAttribute("errore_rapportini", 1);
 		
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
@@ -123,8 +121,7 @@ public class ReferenteController {
 		/* Elimina la persona  */
 		per.deleteById(id_ref_delete);
 
-		System.out.println("ciao delete");
-		
+		request.getSession().setAttribute("errore_rapportini", 1);
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
 	}

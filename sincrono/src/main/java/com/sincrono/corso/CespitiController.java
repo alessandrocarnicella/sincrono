@@ -36,6 +36,7 @@ public class CespitiController {
 
 		/* Aggiunge i parametri necessari in sessione */
 
+		request.getSession().setAttribute("errore_cespiti", 0);
 		m.addAttribute("list_cespiti",ces.findAll());
 		m.addAttribute("list_dip", des.findAll());
 
@@ -54,7 +55,8 @@ public class CespitiController {
 		/* Elimina la commessa associata alla persona */
 
 		ces.deleteById(idcespiti);
-	
+		
+		request.getSession().setAttribute("errore_cespiti", 1);
 		m.addAttribute("list_dip", des.findAll());
 		m.addAttribute("list_cespiti",ces.findAll());
 		return "Cespiti";
@@ -92,7 +94,7 @@ public class CespitiController {
 		
 			
 			/* Aggiunge i parametri necessari in sessione */
-			
+			request.getSession().setAttribute("errore_cespiti", 1);
 			m.addAttribute("error_insert_cespiti", error);
 			m.addAttribute("list_cespiti", ces.findAll());
 			m.addAttribute("list_dip", des.findAll());
@@ -116,6 +118,7 @@ public class CespitiController {
 		ces.updateCespite(idcespiti, annoFunzione, categoria, descrizione, dipendente);
 		
 		/* Aggiunge i parametri necessari in sessione */
+		request.getSession().setAttribute("errore_cespiti", 1);
 		m.addAttribute("list_dip", des.findAll());
 		m.addAttribute("list_cespiti", ces.findAll());
 		return "Cespiti";

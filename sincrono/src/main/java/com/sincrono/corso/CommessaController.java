@@ -16,6 +16,7 @@ import com.sincrono.corso.model.Azienda;
 import com.sincrono.corso.model.AziendaService;
 import com.sincrono.corso.model.Commessa;
 import com.sincrono.corso.model.CommessaService;
+import com.sincrono.corso.model.DipendenteService;
 import com.sincrono.corso.model.Persona;
 import com.sincrono.corso.model.PersonaService;
 
@@ -30,6 +31,9 @@ public class CommessaController {
 
 	@Autowired
 	PersonaService ps;
+	
+	@Autowired
+	DipendenteService ds;
 
 	@RequestMapping(value = "/GestioneCommesseDipendenti")
 	public String getGestioneCommessa(Model m, HttpServletRequest request) {
@@ -42,6 +46,8 @@ public class CommessaController {
 		
 		request.getSession().setAttribute("errore_commesse", 0);
 		m.addAttribute("list_com", com.findAll());
+		m.addAttribute("list_az", as.findAll());
+		m.addAttribute("list_dip", ds.findAll());
 		
 		return "GestioneCommesseDipendenti";
 	}
@@ -87,12 +93,16 @@ public class CommessaController {
 			
 			request.getSession().setAttribute("errore_commesse", 2);
 			m.addAttribute("list_com", com.findAll());
+			m.addAttribute("list_az", as.findAll());
+			m.addAttribute("list_dip", ds.findAll());
 
 		}
 
 		/* Aggiunge i parametri necessari in sessione */
 		
 		m.addAttribute("list_com", com.findAll());
+		m.addAttribute("list_az", as.findAll());
+		m.addAttribute("list_dip", ds.findAll());
 		return "GestioneCommesseDipendenti";
 	}
 
@@ -116,17 +126,19 @@ public class CommessaController {
 	public String getGestioneCommesseUpdate(Model m, HttpServletRequest request, 
 			@RequestParam("idCommessa") int idCommessa,
 			@RequestParam("nomeCommessa") String nomeCommessa,
-			@RequestParam("nomeAziendaCommessa") String nomeAziendaCommessa, 
+			@RequestParam(value="nomeAziendaCommessa", required = false) String nomeAziendaCommessa, 
 			@RequestParam("tariffaCliente") double tariffaCliente,
-			@RequestParam("idDipendente") int idDipendente) {
+			@RequestParam(value="idDipendente", required = false) Integer idDipendente) {
 		
 		
 		Azienda aziendaCom = new Azienda();
 		aziendaCom.setNomeAzienda(nomeAziendaCommessa);
 	
-		Optional<Persona> pers = ps.findById(idDipendente);
+		
 
 		try {
+			
+			Optional<Persona> pers = ps.findById(idDipendente);
 			
 			/* Aggiorna la commessa */
 			com.updateCommessa(idCommessa, tariffaCliente, nomeCommessa, pers.get(), aziendaCom);
@@ -139,6 +151,8 @@ public class CommessaController {
 		
 		request.getSession().setAttribute("errore_commesse", 1);
 		m.addAttribute("list_com", com.findAll());
+		m.addAttribute("list_az", as.findAll());
+		m.addAttribute("list_dip", ds.findAll());
 
 		return "GestioneCommesseDipendenti";
 	}
