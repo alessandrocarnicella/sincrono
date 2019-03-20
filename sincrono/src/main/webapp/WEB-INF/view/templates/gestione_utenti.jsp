@@ -3,7 +3,7 @@
 function notify_danger() {
 	$.notify({
 		// options
-		message: 'Error: Rapportino gia esistente' 
+		message: 'Error: Utente gia esistente' 
 	},{
 		// settings
 		type: 'danger',

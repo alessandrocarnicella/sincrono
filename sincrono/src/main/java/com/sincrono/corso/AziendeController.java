@@ -119,7 +119,7 @@ public class AziendeController {
 	
 	@RequestMapping(value = "/GestioneAziendeElimina")
 	public String getGestioneAziendeElimina(Model m, HttpServletRequest request, 
-			@RequestParam("nomeAzienda") String nomeAzienda){
+			@RequestParam("nomeAziendaElimina") String nomeAzienda){
 		
 		/*Blocco accesso alla pagina se non loggato*/		
 		if(!isLog(request))
