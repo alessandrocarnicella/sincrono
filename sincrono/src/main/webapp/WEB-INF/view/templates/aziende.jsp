@@ -160,6 +160,8 @@
         -webkit-transform: rotate( 360deg ); 
     }
 }
+
+
 </style>
 
 <script>
@@ -192,9 +194,11 @@ $(document).ready( function(){
 	
 	
     $("#loading_chart").on( "click", function( e ) {
-    	$("#spinner").removeClass('d-none');
     	
-		$(".auto-form-wrapper").hide();
+		$(".modal-dialog").addClass('modal-dialog-centered');
+    	
+    	$("#spinner").removeClass('d-none');
+    	$(".auto-form-wrapper").hide();
 		$(".modal-header").hide();
 		$("#loading_chart").hide();
 		
@@ -204,10 +208,13 @@ $(document).ready( function(){
 		
         $("#spinner").addClass( animateClass );
         
+
+        
+        
         // setTimeout is to indicate some async operation
         window.setTimeout( function() {
             $("#spinner").removeClass( animateClass );
-        }, 6000 );
+        }, 7000 );
 
     });    
 });
