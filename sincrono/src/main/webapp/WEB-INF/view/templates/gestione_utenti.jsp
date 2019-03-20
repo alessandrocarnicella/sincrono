@@ -74,8 +74,8 @@ function notify_success() {
 							<!-- ROW INTESTAZIONE TABLE -->
 							<tr>
 								<th>User</th>
-								<th>Tariffa oraria</th>
-								<th>Persona associata</th>
+								<th>Dipendente</th>
+								<th>Tariffa Oraria</th>
 								<th class="text-center">Status</th>
 								<th></th>
 								<th></th>
@@ -89,8 +89,8 @@ function notify_success() {
 								<c:forEach items="${list_dip}" var="x">
 									<tr>
 										<td class="py-1"><img src="../../images/faces-clipart/pic-1.png" alt="image"></td>
+										<td>${x.persona.nomePersona}&nbsp${x.persona.cognomePersona}</td>
 										<td>${x.tariffaOraria}</td>
-										<td>${x.persona.nomePersona}</td>
 										<td class="text-center">
 											<c:choose>
 												<c:when test="${x.statusDip eq 1}">
@@ -188,7 +188,7 @@ function notify_success() {
 						</div>
 						<div class="form-group">
 		                    <select class="form-control form-control-sm"  name="ruolo_cat"  required>
-	                    	  <option selected disabled="disabled">Ruolo Categoria</option>    
+		                    <option selected disabled="disabled" value="">Ruolo Categoria</option> 
 		                      <option value="amministratore">Amministratore</option>
 		                      <option value="commerciale">Commerciale</option>
 		                      <option value="amministrativo">Amministrativo</option>

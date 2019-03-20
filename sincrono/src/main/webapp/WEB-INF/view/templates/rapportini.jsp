@@ -141,8 +141,8 @@ function notify_success() {
                 
                 
                 <div class="form-group">
-		                    <select class="form-control form-control-sm" name="meseRil">
-	                    	  <option selected="true" disabled="disabled">Mese</option>    
+		                    <select class="form-control form-control-sm" name="meseRil" required>
+	                    	  <option selected="true" disabled="disabled" value="">Mese</option>    
 		                      <option value="gennaio">Gennaio</option>
 		                      <option value="febbraio">Febbraio</option>
 		                      <option value="marzo">Marzo</option>
@@ -160,8 +160,8 @@ function notify_success() {
 		                  
 		                  
 		                  <div class="form-group">
-		                    <select class="form-control form-control-sm" name="annoRil">
-	                    	  <option selected="true" disabled="disabled">Anno</option>    
+		                    <select class="form-control form-control-sm" name="annoRil" required>
+	                    	  <option selected="true" disabled="disabled" value="">Anno</option>    
 		                      <option value="2015">2015</option>
 		                      <option value="2016">2016</option>
 		                      <option value="2017">2017</option>
