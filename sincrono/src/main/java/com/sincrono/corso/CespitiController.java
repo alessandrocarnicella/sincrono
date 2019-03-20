@@ -104,14 +104,13 @@ public class CespitiController {
 	@Transactional
 	@RequestMapping(value = "/CespitiUpdate")
 	public String getCespitiUpdate(Model m, HttpServletRequest request,
-			@RequestParam("idces") Integer  idcespiti,
-			@RequestParam("annoFunzione") Integer annoFunzione,
+			@RequestParam("idcespiti") Integer idcespiti,
+			@RequestParam("anno_funzione") Integer annoFunzione,
 			@RequestParam("categoria") String categoria,
 			@RequestParam("descrizione") String descrizione, 
 			@RequestParam (value="dipendente", required = false) Dipendente dipendente){
 
 		/* Blocca l'accesso alla pagina se non loggato */	
-		
 		if(!isLog(request)) {
 			return "Login";
 		}
