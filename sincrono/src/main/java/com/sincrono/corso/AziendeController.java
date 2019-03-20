@@ -78,7 +78,7 @@ public class AziendeController {
             @RequestParam("pivaAzienda") String pivaAzienda,
             @RequestParam("societa") String societa,
             @RequestParam("telefonoAzienda") String telefonoAzienda,
-            @RequestParam("statusAzienda") byte statusAzienda) {
+            @RequestParam("statusAziendaAdd") byte statusAzienda) {
 		
 		/*Blocco accesso alla pagina se non loggato*/		
 		if(!isLog(request))
@@ -141,7 +141,7 @@ public class AziendeController {
             @RequestParam("pivaAzienda") String pivaAzienda,
             @RequestParam("societa") String societa,
             @RequestParam("telefonoAzienda") String telefonoAzienda,
-            @RequestParam("statusAzienda") byte statusAzienda){
+            @RequestParam("status_azienda_edit") byte statusAzienda){
 		
 		/*Blocco accesso alla pagina se non loggato*/
 		if(!isLog(request))
