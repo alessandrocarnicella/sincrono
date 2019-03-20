@@ -71,21 +71,21 @@ $(document).ready(function(){
 		var telefono = $(this).data("telefono");
 		var status = $(this).data("status");
 		
-
+		console.log(status);
 		$("#modal-edit-aziende input[name=nomeAzienda]").val(namen);
 		$("#modal-edit-aziende input[name=emailAzienda]").val(email);
 		$("#modal-edit-aziende input[name=indirizzoAzienda]").val(address);
 		$("#modal-edit-aziende input[name=numdipAzienda]").val(numdip);
 		$("#modal-edit-aziende input[name=pivaAzienda]").val(piva);
 		$("#modal-edit-aziende input[name=societa]").val(societa);
-		$("#modal-edit-aziende input[name=statusAzienda]").val(status);
+		$("#modal-edit-aziende input[name=statusAziendaEdit]").val(status);
 		$("#modal-edit-aziende input[name=telefonoAzienda]").val(telefono);
 		
 		
 		if(status == 1){
-			$("#status_azienda_true").prop('checked',true);
+			$("#status_azienda_true_edit").prop('checked',true);
 		}else{
-			$("#status_azienda_false").prop('checked',true);
+			$("#status_azienda_false_edit").prop('checked',true);
 		}
 	});
 	  
@@ -98,7 +98,7 @@ $(document).ready(function(){
 		var tariffaoraria = $(this).data("tariffaoraria");
 		var nomecat = $(this).data("nomecat");
 		var ruolocat = $(this).data("ruolocat");
-		var status_dip = $(this).data("status_dip_edit");
+		var status_dip = $(this).data("status");
 		var idpersona = $(this).data("idpersona");
 
 		$("#modal-edit-utenti input[name=cognomePersona]").val(cognomep);
@@ -118,9 +118,9 @@ $(document).ready(function(){
 		});
 
 		if(status_dip == 1){
-			$("#status_dip_true").prop('checked',true);
+			$("#status_dip_true_edit").prop('checked',true);
 		}else{
-			$("#status_dip_false").prop('checked',true);
+			$("#status_dip_false_edit").prop('checked',true);
 		}
 
 		

@@ -255,16 +255,12 @@ function notify_success() {
 
 										<!-- START DANGER OR SUCCESS ICON -->
 										<td class="text-center">
-										
-										
-
-										
 											<c:choose>
 												<c:when test="${x.statusAzienda eq 1}">
-													<i class="fas fa-circle text-success fa-3x"></i>
+													<i class="fas fa-circle text-success fa-2x"></i>
 												</c:when>
 												<c:otherwise>
-													<i class="fas fa-circle text-danger fa-3x"></i>
+													<i class="fas fa-circle text-danger fa-2x"></i>
 												</c:otherwise>
 											</c:choose>
 										</td>
@@ -377,13 +373,13 @@ function notify_success() {
 								<div class="form-group">
 									<div class="form-radio form-radio-flat">
 										<label class="form-check-label"> 
-											<input type="radio" class="form-check-input" name="statusAzienda" id="status_azienda_true" value="1" required> Attivo 
+											<input type="radio" class="form-check-input" name="statusAziendaAdd" id="status_azienda_true_add" value="1" required> Attivo 
 											<i class="input-helper"></i>
 										</label>
 									</div>
 									<div class="form-radio form-radio-flat danger">
 										<label class="form-check-label"> 
-											<input type="radio" class="form-check-input" name="statusAzienda" id="status_azienda_false" value="0" required> Disattivo 
+											<input type="radio" class="form-check-input" name="statusAziendaAdd" id="status_azienda_false_add" value="0" required> Disattivo 
 											<i class="input-helper"></i>
 										</label>
 									</div>
@@ -457,13 +453,13 @@ function notify_success() {
 								<div class="form-group">
 									<div class="form-radio form-radio-flat">
 										<label class="form-check-label"> 
-											<input type="radio" class="form-check-input" name="statusAzienda" id="status_azienda_true" value="1" required> Attivo 
+											<input type="radio" class="form-check-input" name="status_azienda_edit" id="status_azienda_true_edit" value="1" required> Attivo 
 											<i class="input-helper"></i>
 										</label>
 									</div>
 									<div class="form-radio form-radio-flat danger">
 										<label class="form-check-label"> 
-											<input type="radio" class="form-check-input" name="statusAzienda" id="status_azienda_false" value="0" required> Disattivo 
+											<input type="radio" class="form-check-input" name="status_azienda_edit" id="status_azienda_false_edit" value="0" required> Disattivo 
 											<i class="input-helper"></i>
 										</label>
 									</div>
@@ -496,7 +492,6 @@ function launch_modal(id){
 		var telefonoref = $("#"+id).data("telefonoref");
 		var aziendaref = $("#"+id).data("aziendaref");
 		
-		console.log(cognomeref);
 		
 		$("#modal"+id+" input[name=nome-ref-edit]").val(nomeref).prop("disabled",true);
 		$("#modal"+id+" input[name=cognome-ref-edit]").val(cognomeref).prop("disabled",true);

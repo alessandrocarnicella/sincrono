@@ -94,10 +94,10 @@ function notify_success() {
 										<td class="text-center">
 											<c:choose>
 												<c:when test="${x.statusDip eq 1}">
-													<i class="fas fa-circle text-success fa-3x"></i>
+													<i class="fas fa-circle text-success fa-2x"></i>
 												</c:when>
 												<c:otherwise>
-													<i class="fas fa-circle text-danger fa-3x"></i>
+													<i class="fas fa-circle text-danger fa-2x"></i>
 												</c:otherwise>
 											</c:choose>
 										</td>
@@ -205,12 +205,12 @@ function notify_success() {
 						<div class="form-group">
                           <div class="form-radio form-radio-flat">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="status_dip_add" id="status_dip_true" value="1" required> Attivo
+                              <input type="radio" class="form-check-input" name="status_dip_add" id="status_dip_true_add" value="1" required> Attivo
                             <i class="input-helper"></i></label>
                           </div>
                           <div class="form-radio form-radio-flat danger">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="status_dip_add" id="status_dip_false" value="0" required> Disattivo
+                              <input type="radio" class="form-check-input" name="status_dip_add" id="status_dip_false_add" value="0" required> Disattivo
                             <i class="input-helper "></i></label>
                           </div>
                         </div>					
@@ -289,12 +289,12 @@ function notify_success() {
 						<div class="form-group">
                           <div class="form-radio form-radio-flat">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="status_dip_edit" id="status_dip_true" value="1" required> Attivo
+                              <input type="radio" class="form-check-input" name="status_dip_edit" id="status_dip_true_edit" value="1" required> Attivo
                             <i class="input-helper"></i></label>
                           </div>
                           <div class="form-radio form-radio-flat danger">
                             <label class="form-check-label">
-                              <input type="radio" class="form-check-input" name="status_dip_edit" id="status_dip_false" value="0" required> Disattivo
+                              <input type="radio" class="form-check-input" name="status_dip_edit" id="status_dip_false_edit" value="0" required> Disattivo
                             <i class="input-helper "></i></label>
                           </div>
                         </div>		
