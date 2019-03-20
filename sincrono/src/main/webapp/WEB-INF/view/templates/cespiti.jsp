@@ -1,3 +1,51 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+function notify_danger() {
+	$.notify({
+		// options
+		message: 'Error: Rapportino gia esistente' 
+	},{
+		// settings
+		type: 'danger',
+		z_index: 2000,
+		delay: 5000
+
+	}
+
+	);
+};
+
+function notify_success() {
+	$.notify({
+		// options
+		message: 'Success: Evento andato a buon fine' 
+	},{
+		// settings
+		type: 'success'
+	});
+
+};
+</script>
+<c:choose>
+	<c:when test="${errore_cespiti eq 2}">
+		<script>
+			$(window).bind("load",function(){
+			setTimeout(notify_danger,500);
+			});
+		</script>
+	</c:when>
+	<c:when test="${errore_cespiti eq 1}">
+		<script>
+			$(window).bind("load",function(){
+			setTimeout(notify_success,500);
+			});
+		</script>
+	</c:when>
+	<c:otherwise>
+	</script>
+	</c:otherwise>
+</c:choose>
+
 <div class="row">
 	<div class="col-lg-12 grid-margin stretch-card">
 	
