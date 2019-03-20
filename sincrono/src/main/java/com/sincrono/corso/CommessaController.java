@@ -55,9 +55,9 @@ public class CommessaController {
 	@RequestMapping(value = "/GestioneCommesseAdd")
 	public String getGestioneCommesseAdd(Model m, HttpServletRequest request, 
 			@RequestParam("nomeCommessa") String nomeCommessa,
-			@RequestParam("nomeAziendaCommessa") String nomeAziendaCommessa, 
+			@RequestParam(value="nomeAziendaCommessa", required = false) String nomeAziendaCommessa, 
 			@RequestParam("tariffaCliente") double tariffaCliente,
-			@RequestParam("idDipendente") int idDipendente) {
+			@RequestParam(value="idDipendente", required = false) Integer idDipendente) {
 
 		/*Blocco accesso alla pagina se non loggato*/		
 		if(!isLog(request))
@@ -66,12 +66,12 @@ public class CommessaController {
 		Azienda aziendaCom = new Azienda();
 		aziendaCom.setNomeAzienda(nomeAziendaCommessa);
 
-		Optional<Persona> pers = ps.findById(idDipendente);
 		
 		if(com.findByNomeCommessaAndNomeAzienda(nomeCommessa, aziendaCom).isEmpty()) {
 
-
-			try {
+			try {	
+				Optional<Persona> pers = ps.findById(idDipendente);
+				
 				Commessa commessa = new Commessa();
 				commessa.setNomeCommessa(nomeCommessa);
 				commessa.setTariffaCliente(tariffaCliente);
@@ -117,6 +117,8 @@ public class CommessaController {
 		/* Aggiunge i parametri necessari in sessione */
 		
 		request.getSession().setAttribute("errore_commesse", 1);
+		m.addAttribute("list_az", as.findAll());
+		m.addAttribute("list_dip", ds.findAll());
 		m.addAttribute("list_com", com.findAll());
 		
 		return "GestioneCommesseDipendenti";
@@ -142,6 +144,7 @@ public class CommessaController {
 			
 			/* Aggiorna la commessa */
 			com.updateCommessa(idCommessa, tariffaCliente, nomeCommessa, pers.get(), aziendaCom);
+			request.getSession().setAttribute("errore_commesse", 1);
 			
 		}catch(Exception e) {
 			request.getSession().setAttribute("errore_commesse", 2);
@@ -149,7 +152,7 @@ public class CommessaController {
 		
 		/* Aggiunge i parametri necessari in sessione */
 		
-		request.getSession().setAttribute("errore_commesse", 1);
+		
 		m.addAttribute("list_com", com.findAll());
 		m.addAttribute("list_az", as.findAll());
 		m.addAttribute("list_dip", ds.findAll());
