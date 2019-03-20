@@ -108,9 +108,9 @@
 							
 							<div class="form-group">
 		                    <select class="form-control form-control-sm" name="idDipendente" required>
-	                    	  <option selected disabled="disabled">Identificativo Dipendente</option>    
+	                    	  <option selected disabled="disabled" value="">Dipendente Associato</option>    
 		                     	<c:forEach items="${list_dip}" var="x">
-		                     		<option value="${x.persona.idPersona}">${x.persona.idPersona}</option> 
+		                     		<option value="${x.persona.idPersona}">${x.persona.nomePersona}&nbsp${x.persona.cognomePersona}</option> 
 		                     	</c:forEach>
 		                    </select>
 		                  </div>
@@ -119,7 +119,7 @@
 						
 						<div class="form-group">
 		                    <select class="form-control form-control-sm" name="nomeAziendaCommessa" required>
-	                    	  <option selected disabled="disabled">Identificativo Azienda</option>    
+	                    	  <option selected disabled="disabled" value="">Identificativo Azienda</option>    
 		                     	<c:forEach items="${list_az}" var="x">
 		                     		<option value="${x.nomeAzienda}">${x.nomeAzienda}</option> 
 		                     	</c:forEach>
@@ -188,26 +188,11 @@
 							<select class="form-control form-control-sm" name="idDipendente" required>
 								<option selected disabled="disabled">Identificativo Dipendente</option>
 								<c:forEach items="${list_dip}" var="x">
-									<option value="${x.persona.idPersona}" required>${x.persona.idPersona}</option>
+									<option value="${x.persona.idPersona}" required>${x.persona.nomePersona}&nbsp${x.persona.cognomePersona}</option>
 								</c:forEach>
 							</select>
 						</div>
-						
-						
-<!-- 						<div class="form-group"> -->
-<!-- 								<div class="input-group"> -->
-<!-- 									<input type="text" class="form-control" -->
-<!-- 										placeholder="Id Dipendente" name="idDipendente" required> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
 
-<!-- 							<div class="form-group"> -->
-<!-- 								<div class="input-group"> -->
-<!-- 									<input type="text" class="form-control" -->
-<!-- 										placeholder="Nome Azienda" name="nomeAziendaCommessa" required> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-							
 							<div class="form-group">
 		                    <select class="form-control form-control-sm" name="nomeAziendaCommessa" required>
 	                    	  <option selected disabled="disabled">Nome Azienda</option>    
