@@ -50,17 +50,18 @@
 										<td>${x.descrizione}</td>
 										<td>${x.dipendente.persona.nomePersona}</td>
 										<td>${x.dipendente.persona.cognomePersona}</td>
-										<td>
-											
-											<button type="button" class="btn btn-secondary btn-fw edit-cespiti" 
-												data-idces="${x.idcespiti}"
-												data-categoria="${x.categoria}"
-												data-descrizione = "${x.descrizione}"
-												data-dipendente="${x.dipendente}"
-												data-toggle="modal" 
-												data-target="#modal-edit-cespiti">
-												<i class="fas fa-edit"></i>
-											</button>
+										<td>								
+													<button type="button" class="btn btn-secondary btn-fw edit-cespiti" 
+													data-idcespiti="${x.idcespiti}"
+													data-anno_funzione="${x.annoFunzione}"
+													data-categoria="${x.categoria}"
+													data-descrizione = "${x.descrizione}"
+													data-dipendente="${x.dipendente}"
+													data-iddipendente="${x.dipendente.idPersonadip}"
+													data-toggle="modal" 
+													data-target="#modal-edit-cespiti">
+													<i class="fas fa-edit"></i>
+													</button>
 										</td>
 										
 										<td>
@@ -125,7 +126,7 @@
 						</div>
 						
 						<div class="form-group">
-		                    <select class="form-control form-control-sm" name="dipendente-add">
+		                    <select class="form-control form-control-sm"  name="dipendente-add">
 	                    	  <option selected disabled="disabled">Dipendente Responsabile</option>    
 		                     	<c:forEach items="${list_dip}" var="y">
 		                     		<option value="${y.idPersonadip}">${y.persona.nomePersona}&nbsp${y.persona.cognomePersona}</option> 
@@ -161,11 +162,13 @@
 				
 					<form action="CespitiUpdate" method="post">
 							
+						
 						<div class="form-group">
 							<div class="input-group">
-								<input type="hidden" class="form-control" name="idces" value="">
+								<input type="text" class="form-control" name="anno_funzione" placeholder="Anno" required>
 							</div>
 						</div>
+						
 						<div class="form-group">
 							<div class="input-group">
 								<input type="text" class="form-control" name="categoria" placeholder="Categoria" required>
@@ -179,13 +182,16 @@
 						</div>
 						
 						<div class="form-group">
-		                    <select class="form-control form-control-sm" name="dipendente">
+		                    <select class="form-control form-control-sm" id="select-option" name="dipendente" >
 	                    	  <option selected disabled="disabled">Dipendente Responsabile</option>    
 		                     	<c:forEach items="${list_dip}" var="y">
 		                     		<option value="${y.idPersonadip}">${y.persona.nomePersona}&nbsp${y.persona.cognomePersona}</option> 		                     		 
 		                     	</c:forEach>
 		                    </select>
 		                  </div>
+						
+						<input type="hidden" class="form-control" name="idcespiti">
+						
 						
 						<div class="form-group">
 							<button type="submit" class="btn btn-success submit-btn btn-block">Modifica Cespite</button>

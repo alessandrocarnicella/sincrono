@@ -207,12 +207,16 @@
 
 										<!-- START DANGER OR SUCCESS ICON -->
 										<td class="text-center">
+										
+										
+
+										
 											<c:choose>
 												<c:when test="${x.statusAzienda eq 1}">
-													<button type="button" class="btn btn-icons btn-rounded btn-success"></button>
+													<i class="fas fa-circle text-success fa-3x"></i>
 												</c:when>
 												<c:otherwise>
-													<button type="button" class="btn btn-icons btn-rounded btn-danger"></button>
+													<i class="fas fa-circle text-danger fa-3x"></i>
 												</c:otherwise>
 											</c:choose>
 										</td>
@@ -319,8 +323,28 @@
 								<input type="text" class="form-control" placeholder="Telefono" name="telefonoAzienda" required>
 							</div>
 						</div>
-						<!-- Di default setto Status Azienda ad 1 quando lo registro -->
-						<input type="hidden" name="statusAzienda" value="1">
+						
+						<div class="form-group">
+							<div class="input-group">
+								<div class="form-group">
+									<div class="form-radio form-radio-flat">
+										<label class="form-check-label"> 
+											<input type="radio" class="form-check-input" name="statusAzienda" id="status_azienda_true" value="1" required> Attivo 
+											<i class="input-helper"></i>
+										</label>
+									</div>
+									<div class="form-radio form-radio-flat danger">
+										<label class="form-check-label"> 
+											<input type="radio" class="form-check-input" name="statusAzienda" id="status_azienda_false" value="0" required> Disattivo 
+											<i class="input-helper"></i>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+						
 						<div class="form-group">
 							<button type="submit" class="btn btn-success submit-btn btn-block">Inserisci</button>
 						</div>

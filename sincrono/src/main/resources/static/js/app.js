@@ -98,7 +98,7 @@ $(document).ready(function(){
 		var tariffaoraria = $(this).data("tariffaoraria");
 		var nomecat = $(this).data("nomecat");
 		var ruolocat = $(this).data("ruolocat");
-		var status_dip = $(this).data("status_dip");
+		var status_dip = $(this).data("status_dip_edit");
 		var idpersona = $(this).data("idpersona");
 
 		$("#modal-edit-utenti input[name=cognomePersona]").val(cognomep);
@@ -107,23 +107,47 @@ $(document).ready(function(){
 		$("#modal-edit-utenti input[name=password_dip]").val(password_dip);
 		$("#modal-edit-utenti input[name=tariffaoraria]").val(tariffaoraria);
 		$("#modal-edit-utenti input[name=nome_cat]").val(nomecat);
-		$("#modal-edit-utenti input[name=ruolo_cat] select").val(ruolocat);	
 		$("#modal-edit-utenti input[name=idpersona]").val(idpersona);
 		
+		
+		$('#select-option-utente option').each(function(){ 
+			if (this.value == ruolocat) { 
+				val_f = this.value;
+				$('#select-option-utente option[value='+val_f+']').prop("selected", true);
+			} 
+		});
 
 		if(status_dip == 1){
 			$("#status_dip_true").prop('checked',true);
-			console.log("if");
 		}else{
-			console.log("else");
 			$("#status_dip_false").prop('checked',true);
 		}
 
 		
 	});
 
-	// RECUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM EDIT CESPITI
-	
+	// RERCUPERA I CAMPI DAI DATANAME E RIEMPIE LA FORM EDIT CESPITI
+	$(".edit-cespiti").on("click", function() {
+		var anno_funzione = $(this).data("anno_funzione");
+		var categoria = $(this).data("categoria");
+		var descrizione = $(this).data("descrizione");
+		var dipendente=$(this).data("dipendente");
+		var idcespiti = $(this).data("idcespiti");
+		var iddipendente = $(this).data("iddipendente");
+		
+		$("#modal-edit-cespiti input[name=idcespiti]").val(idcespiti);
+		$("#modal-edit-cespiti input[name=anno_funzione]").val(anno_funzione);
+		$("#modal-edit-cespiti input[name=categoria]").val(categoria);
+		$("#modal-edit-cespiti input[name=descrizione]").val(descrizione);
+		
+		$('#select-option option').each(function(){ 
+			if (this.value == iddipendente) { 
+				val_f = this.value;
+				$('#select-option option[value='+val_f+']').prop("selected", true);
+			} 
+		});
+
+	});	
 		
 
 

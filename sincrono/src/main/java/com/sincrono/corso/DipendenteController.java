@@ -181,7 +181,7 @@ public class DipendenteController {
 			@RequestParam("nome_cat") String nome_cat,
 			@RequestParam("ruolo_cat") String ruolo_cat ,
 			@RequestParam("tariffaoraria") double tariffaOraria,
-			@RequestParam("status_dip") byte statusDip){
+			@RequestParam("status_dip_edit") byte statusDip){
 
 		/*Blocca l'accesso alla pagina se non loggato*/	
 		
