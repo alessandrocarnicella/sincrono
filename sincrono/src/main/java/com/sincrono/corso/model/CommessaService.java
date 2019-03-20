@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.lang.Nullable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -37,7 +38,7 @@ public interface CommessaService extends JpaRepository<Commessa, Integer> {
 	int updateCommessa(@Param("idCommessa") int idCommessa,
 			@RequestParam("tariffaCliente") double tariffaCliente,
 			@RequestParam("nomeCommessa") String nomeCommessa,
-			@RequestParam("idDipendente") Persona idDipendente,
-			@RequestParam("nomeAziendaCommessa") Azienda nomeAziendaCommessa);
+			@Nullable@RequestParam("idDipendente") Persona idDipendente,
+			@Nullable@RequestParam("nomeAziendaCommessa") Azienda nomeAziendaCommessa);
 
 }
