@@ -185,17 +185,17 @@
 
 
 						<div class="form-group">
-							<select class="form-control form-control-sm" name="idDipendente" required>
-								<option selected disabled="disabled">Identificativo Dipendente</option>
+							<select class="form-control form-control-sm" name="idDipendente" id="select-option-commessadip" required>
+								<option selected disabled="disabled" value="">Identificativo Dipendente</option>
 								<c:forEach items="${list_dip}" var="x">
-									<option value="${x.persona.idPersona}" required>${x.persona.nomePersona}&nbsp${x.persona.cognomePersona}</option>
+									<option value="${x.persona.idPersona}">${x.persona.nomePersona}&nbsp${x.persona.cognomePersona}</option>
 								</c:forEach>
 							</select>
 						</div>
 
 							<div class="form-group">
-		                    <select class="form-control form-control-sm" name="nomeAziendaCommessa" required>
-	                    	  <option selected disabled="disabled">Nome Azienda</option>    
+		                    <select class="form-control form-control-sm" name="nomeAziendaCommessa" id ="select-option-commessaaz"required>
+	                    	  <option selected disabled="disabled" value="">Nome Azienda</option>    
 		                     	<c:forEach items="${list_az}" var="x">
 		                     		<option value="${x.nomeAzienda}">${x.nomeAzienda}</option> 
 		                     	</c:forEach>

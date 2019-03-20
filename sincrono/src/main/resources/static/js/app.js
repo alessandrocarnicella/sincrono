@@ -161,8 +161,22 @@ $(document).ready(function(){
 	
 		$("#modal-edit-commesse input[name=idCommessa]").val(id);
 		$("#modal-edit-commesse input[name=nomeCommessa]").val(nome);
-		$("#modal-edit-commesse input[name=idDipendente]").val(dipendente);
-		$("#modal-edit-commesse input[name=nomeAziendaCommessa]").val(aziendac);
+//		$("#modal-edit-commesse input[name=idDipendente]").val(dipendente);
+//		$("#modal-edit-commesse input[name=nomeAziendaCommessa]").val(aziendac);
 		$("#modal-edit-commesse input[name=tariffaCliente]").val(tariffa);
+		
+		$('#select-option-commessadip option').each(function(){ 
+			if (this.value == dipendente) { 
+				val_f = this.value;
+				$('#select-option-commessadip option[value='+val_f+']').prop("selected", true);
+			} 
+		});
+		
+		$('#select-option-commessaaz option').each(function(){ 
+			if (this.value == aziendac) { 
+				val_f = this.value;
+				$('#select-option-commessaaz option[value='+val_f+']').prop("selected", true);
+			} 
+		});
 	});
 });
