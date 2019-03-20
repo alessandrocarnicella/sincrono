@@ -98,7 +98,7 @@ $(document).ready(function(){
 		var tariffaoraria = $(this).data("tariffaoraria");
 		var nomecat = $(this).data("nomecat");
 		var ruolocat = $(this).data("ruolocat");
-		var status_dip = $(this).data("status");
+		var status_dip_edit = $(this).data("status_dip");
 		var idpersona = $(this).data("idpersona");
 
 		$("#modal-edit-utenti input[name=cognomePersona]").val(cognomep);
@@ -117,7 +117,7 @@ $(document).ready(function(){
 			} 
 		});
 
-		if(status_dip == 1){
+		if(status_dip_edit == 1){
 			$("#status_dip_true_edit").prop('checked',true);
 		}else{
 			$("#status_dip_false_edit").prop('checked',true);
