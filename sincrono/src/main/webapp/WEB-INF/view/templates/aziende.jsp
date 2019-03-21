@@ -2,6 +2,7 @@
 <div class="row">
 	<div class="col-8">
 			<h3>Elenco Aziende</h3>
+			<p class="text-muted">Clicca sulle card per visualizzare il dettaglio dell'azienda!</p>
 		</div>
 		<div class="col-4">
 			<div class="form-group">

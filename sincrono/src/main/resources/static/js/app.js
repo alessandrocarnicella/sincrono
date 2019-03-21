@@ -1,5 +1,7 @@
 $(document).ready(function(){
-
+	
+	$('[data-toggle="tooltip"]').tooltip();
+	
 	/*===================================================================== RICERCHE =====================================================================*/
 	
 	// FUNZIONE PER RICERCA PAGINA AZIENDA
@@ -178,3 +180,4 @@ $(document).ready(function(){
 		});
 	});
 });
+
