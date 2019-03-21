@@ -27,24 +27,47 @@ function notify_success() {
 };
 </script>
 <c:choose>
-	<c:when test="${errore_aziende eq 2}">
+	<c:when test="${errore_aziende eq 1}">
 		<script>
 			$(window).bind("load",function(){
 			setTimeout(notify_danger,500);
 			});
 		</script>
 	</c:when>
-	<c:when test="${errore_aziende eq 1}">
+	<c:when test="${errore_aziende eq 2}">
+		<script>
+
+			$(window).bind("load",function(){
+				setTimeout(notify_success,200);
+			});
+			
+
+		</script>
+	</c:when>
+	
+	<c:when test="${errore_referenti eq 2}">
 		<script>
 			$(window).bind("load",function(){
-			setTimeout(notify_success,500);
+			setTimeout(notify_danger,500);
 			});
 		</script>
 	</c:when>
+	<c:when test="${errore_referenti eq 1}">
+		<script>
+
+			$(window).bind("load",function(){
+				setTimeout(notify_success,200);
+			});
+			
+
+		</script>
+	</c:when>
+	
 	<c:otherwise>
-	</script>
+	
 	</c:otherwise>
 </c:choose>
+
 
 <div class="row">
 	<div class="col-lg-12 grid-margin stretch-card">
@@ -520,5 +543,8 @@ function edit(id){
 	$("#save-ref"+id).prop("disabled",false);
 	
 }
+
+
+
 
 </script>
