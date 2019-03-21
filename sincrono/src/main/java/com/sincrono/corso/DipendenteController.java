@@ -37,28 +37,27 @@ public class DipendenteController {
 	@RequestMapping(value = "/Utenti")
 	public String getUtenti(Model m, HttpServletRequest request) {
 
-		/*Blocca l'accesso alla pagina se non loggato */		
-		
+		/** Blocca l'accesso alla pagina */
 		if(!isLog(request)) 
 			return "Login";
 
 		/* Aggiunge i parametri necessari in sessione */
-		
 		m.addAttribute("list_dip", dip.findAll());
+		
 		return "Utenti";
 	}
 
 	@RequestMapping(value = "/GestioneUtenti")
 	public String getGestioneUtent(Model m,HttpServletRequest request) {
 
-		/* Blocca l'accesso alla pagina se non loggato */	
-		
+		/** Blocca l'accesso alla pagina */
 		if(!isLog(request))
 			return "Login";
 
 		/* Aggiunge i parametri necessari in sessione */
 		request.getSession().setAttribute("errore_dipendenti", 0);
 		m.addAttribute("list_dip", dip.findAll());
+		
 		return "GestioneUtenti";
 	}
 
@@ -73,7 +72,7 @@ public class DipendenteController {
 			@RequestParam("tariffaoraria") double tariffaOraria,
 			@RequestParam("status_dip_add") byte statusDip) {
 
-		/*Blocca l'accesso alla pagina se non loggato */		
+		/** Blocca l'accesso alla pagina */	
 		if(!isLog(request)) 
 			return "Login";
 
@@ -83,32 +82,21 @@ public class DipendenteController {
 		
 		if(per.findByEmailPersona(emailPersona).isEmpty()) {
 
-			CategoriaPK categoriaPk = new  CategoriaPK();
-			categoriaPk.setNomeCat(nome_cat);
-			categoriaPk.setRuoloCat(ruolo_cat);
-
-			/* Se non esiste crea la perosna */
+			/** Crea la categoriaPK */
+			CategoriaPK categoriaPk = creaCategoriaPK(nome_cat,ruolo_cat);
 			
-			Persona persona = new Persona();
-			persona.setNomePersona(nomePersona);
-			persona.setCognomePersona(cognomePersona);
-			persona.setEmailPersona(emailPersona);
+			/** Crea la perosna */
+			Persona persona = creaPersona(nomePersona,cognomePersona,emailPersona);
 			
-			/* Aggiungo la persona */
+			/** Aggiunge la persona */
 			per.save(persona);
 
-			/* Crea il dipendente associato alla persona */
-			
-			Dipendente dipendente =  new Dipendente();
-			dipendente.setStatusDip(statusDip);
-			dipendente.setPasswordDip(passwordDip);
-			dipendente.setTariffaOraria(tariffaOraria);
-			dipendente.setIdPersonadip(persona.getIdPersona());
+			/** Crea il dipendente associato alla persona */
+			Dipendente dipendente =  creaDipendente(statusDip,passwordDip,tariffaOraria,persona.getIdPersona());		
 
 			Categoria categoria = new Categoria();
 			
 			/* Controlla se esiste la categoria e se non esiste la crea */
-			
 			try {
 				Optional<Categoria> opCat = cat.findById(categoriaPk);
 				categoria = opCat.get();
@@ -119,7 +107,7 @@ public class DipendenteController {
 
 			dipendente.setCategoria(categoria);
 			
-			/* Aggiungo la persona */
+			/** Aggiunge la persona */
 			dip.save(dipendente);
 		}else {
 			error = true;
@@ -143,15 +131,14 @@ public class DipendenteController {
 	public String getGestioneUtentiElimina(Model m, HttpServletRequest request,
 			@RequestParam("idPersonadip") Integer idPersonadip){
 
-		/*Blocca l'accesso alla pagina se non loggato*/	
-		
+		/** Blocca l'accesso alla pagina */
 		if(!isLog(request)) 
 			return "Login";
 
 		
 		Optional<Persona> pers = (Optional<Persona>)per.findById(idPersonadip);
 		
-		/* Elimina la commessa associata alla persona */
+		/** Elimina la commessa associata alla persona */
 		try {
 			int idCommessa = coms.findIdRefByPersona(pers.get());
 			coms.deleteById(idCommessa);
@@ -159,10 +146,10 @@ public class DipendenteController {
 
 		}
 
-		/* Elimina il dipendente associato alla persona */
+		/** Elimina il dipendente associato alla persona */
 		dip.deleteById(idPersonadip);
 		
-		/* Elimina la persona  */
+		/** Elimina la persona  */
 		per.deleteById(idPersonadip);
 
 		/* Aggiunge i parametri necessari in sessione */
@@ -183,14 +170,12 @@ public class DipendenteController {
 			@RequestParam("tariffaoraria") double tariffaOraria,
 			@RequestParam("status_dip_edit") byte statusDip){
 
-		/*Blocca l'accesso alla pagina se non loggato*/	
-		
+		/** Blocca l'accesso alla pagina */
 		if(!isLog(request)) 
 			return "Login";
 
-		CategoriaPK categoriaPk = new  CategoriaPK();
-		categoriaPk.setNomeCat(nome_cat);
-		categoriaPk.setRuoloCat(ruolo_cat);
+		/** Crea la categoriaPK */
+		CategoriaPK categoriaPk = creaCategoriaPK(nome_cat,ruolo_cat);
 
 		Categoria categoria = new Categoria();
 
@@ -203,10 +188,10 @@ public class DipendenteController {
 			cat.save(categoria);
 		}
 		
-		/* Aggiorno la persona */
+		/** Aggiorna la persona */
 		per.updatePersona(idPersonadip, cognomePersona, nomePersona, emailPersona);
 
-		/* Aggiorno il dipendente */
+		/** Aggiorna il dipendente */
 		dip.updateDipendente(idPersonadip, passwordDip, nome_cat, ruolo_cat, tariffaOraria, statusDip);
 
 		/* Aggiunge i parametri necessari in sessione */
@@ -214,9 +199,36 @@ public class DipendenteController {
 		m.addAttribute("list_dip", dip.findAll());
 		return "GestioneUtenti";
 	}
-
-	/*Blocco accesso alla pagina se non loggato*/
 	
+	
+	/** Questo metodo crea un dipendente, ritorna il dipendente creato **/
+	private Dipendente creaDipendente(byte statusDip, String passwordDip, double tariffaOraria, int idPersona) {
+		Dipendente dipendente =  new Dipendente();
+		dipendente.setStatusDip(statusDip);
+		dipendente.setPasswordDip(passwordDip);
+		dipendente.setTariffaOraria(tariffaOraria);
+		dipendente.setIdPersonadip(idPersona);
+		return dipendente;
+	}
+
+	/** Questo metodo crea una persona, ritorna la persona creata **/
+	private Persona creaPersona(String nomePersona, String cognomePersona, String emailPersona) {
+		Persona persona = new Persona();
+		persona.setNomePersona(nomePersona);
+		persona.setCognomePersona(cognomePersona);
+		persona.setEmailPersona(emailPersona);
+		return persona;
+	}
+
+	/** Questo metodo crea una categoriaPK, ritorna la categoriaPK creata **/
+	private CategoriaPK creaCategoriaPK(String nome_cat, String ruolo_cat) {
+		CategoriaPK categoriaPk = new  CategoriaPK();
+		categoriaPk.setNomeCat(nome_cat);
+		categoriaPk.setRuoloCat(ruolo_cat);
+		return categoriaPk;
+	}
+	
+	/** Ritorna true se l'utente in sessione è loggato **/
 	private boolean isLog(HttpServletRequest request) {
 		if(!(boolean) request.getSession().getAttribute("isLogged")) {
 			return false;

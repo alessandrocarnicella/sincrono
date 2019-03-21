@@ -38,7 +38,7 @@ public class CommessaController {
 	@RequestMapping(value = "/GestioneCommesseDipendenti")
 	public String getGestioneCommessa(Model m, HttpServletRequest request) {
 	
-		/*Blocco accesso alla pagina se non loggato*/		
+		/** Blocca l'accesso alla pagina */		
 		if(!isLog(request)) 
 			return "Login";
 
@@ -59,28 +59,25 @@ public class CommessaController {
 			@RequestParam("tariffaCliente") double tariffaCliente,
 			@RequestParam(value="idDipendente", required = false) Integer idDipendente) {
 
-		/*Blocco accesso alla pagina se non loggato*/		
+		/** Blocca l'accesso alla pagina */		
 		if(!isLog(request))
 			return "Login";
 
 		Azienda aziendaCom = new Azienda();
 		aziendaCom.setNomeAzienda(nomeAziendaCommessa);
 
-		
 		if(com.findByNomeCommessaAndNomeAzienda(nomeCommessa, aziendaCom).isEmpty()) {
 
 			try {	
+				
 				Optional<Persona> pers = ps.findById(idDipendente);
 				
-				Commessa commessa = new Commessa();
-				commessa.setNomeCommessa(nomeCommessa);
-				commessa.setTariffaCliente(tariffaCliente);
-				commessa.setAzienda(aziendaCom);
-				commessa.setPersona(pers.get());
-				
-				/* Aggiunge la commessa */
-				
+				/** Crea la commessa */
+				Commessa commessa = creaCommessa(nomeCommessa,tariffaCliente,aziendaCom,pers.get());
+			
+				/** Aggiunge la commessa */
 				com.save(commessa);
+				
 				request.getSession().setAttribute("errore_commesse", 1);
 				
 			} catch (Exception e) {
@@ -110,8 +107,7 @@ public class CommessaController {
 	public String getGestioneCommesseDelete(Model m, HttpServletRequest request, 
 			@RequestParam("idCommessa") Integer idCommessa) {
 
-		/* Elimina la commessa */
-		
+		/** Elimina la commessa */
 		com.deleteById(idCommessa);
 		
 		/* Aggiunge i parametri necessari in sessione */
@@ -132,26 +128,22 @@ public class CommessaController {
 			@RequestParam("tariffaCliente") double tariffaCliente,
 			@RequestParam(value="idDipendente", required = false) Integer idDipendente) {
 		
-		
 		Azienda aziendaCom = new Azienda();
 		aziendaCom.setNomeAzienda(nomeAziendaCommessa);
-	
-		
 
 		try {
 			
 			Optional<Persona> pers = ps.findById(idDipendente);
 			
-			/* Aggiorna la commessa */
+			/** Aggiorna la commessa */
 			com.updateCommessa(idCommessa, tariffaCliente, nomeCommessa, pers.get(), aziendaCom);
-			request.getSession().setAttribute("errore_commesse", 1);
 			
+			request.getSession().setAttribute("errore_commesse", 1);
 		}catch(Exception e) {
 			request.getSession().setAttribute("errore_commesse", 2);
 		}
 		
 		/* Aggiunge i parametri necessari in sessione */
-		
 		
 		m.addAttribute("list_com", com.findAll());
 		m.addAttribute("list_az", as.findAll());
@@ -160,8 +152,17 @@ public class CommessaController {
 		return "GestioneCommesseDipendenti";
 	}
 
-	/*Blocco accesso alla pagina se non loggato*/	
+	/** Questo metodo crea una commessa, ritorna la commessa creata**/	
+	private Commessa creaCommessa(String nomeCommessa, double tariffaCliente, Azienda aziendaCom, Persona persona) {
+		Commessa commessa = new Commessa();
+		commessa.setNomeCommessa(nomeCommessa);
+		commessa.setTariffaCliente(tariffaCliente);
+		commessa.setAzienda(aziendaCom);
+		commessa.setPersona(persona);
+		return commessa;
+	}
 	
+	/** Ritorna true se l'utente in sessione è loggato **/	
 	private boolean isLog(HttpServletRequest request) {
 		if(!(boolean) request.getSession().getAttribute("isLogged")) {
 			return false;

@@ -46,27 +46,26 @@ public class AziendeController {
 	@RequestMapping(value = "/Aziende")
 	public String getAziende(Model m, HttpServletRequest request) {
 		
-		/*Blocco accesso alla pagina se non loggato*/		
+		/** Blocca l'accesso alla pagina */		
 		if(!isLog(request))
 			return "Login";
 		
 		m.addAttribute("list_az", as.findAll());
+		
 		return "Aziende";
 	}
 	
 	@RequestMapping(value = "/GestioneAziende")
 	public String getGestioneAziende(Model m, HttpServletRequest request) {
 		
-		/*Blocco accesso alla pagina se non loggato*/		
+		/** Blocca l'accesso alla pagina */		
 		if(!isLog(request)) 
 			return "Login";
 		
 		request.getSession().setAttribute("errore_aziende", 0);
 		m.addAttribute("list_az", as.findAll());
-		return "GestioneAziende";
-	
 		
-
+		return "GestioneAziende";
 	}
 	
 	@RequestMapping(value = "/GestioneAziendeAdd")
@@ -80,7 +79,7 @@ public class AziendeController {
             @RequestParam("telefonoAzienda") String telefonoAzienda,
             @RequestParam("statusAziendaAdd") byte statusAzienda) {
 		
-		/*Blocco accesso alla pagina se non loggato*/		
+		/** Blocca l'accesso alla pagina */	
 		if(!isLog(request))
 			return "Login";
 		
@@ -121,10 +120,11 @@ public class AziendeController {
 	public String getGestioneAziendeElimina(Model m, HttpServletRequest request, 
 			@RequestParam("nomeAziendaElimina") String nomeAzienda){
 		
-		/*Blocco accesso alla pagina se non loggato*/		
+		/** Blocca l'accesso alla pagina */		
 		if(!isLog(request))
 			return "Login";
-			
+
+		/** Elimina l'azienda, richiede l'identificativo */
 		as.deleteById(nomeAzienda);
 		
 		request.getSession().setAttribute("errore_aziende", 1);
@@ -143,7 +143,7 @@ public class AziendeController {
             @RequestParam("telefonoAzienda") String telefonoAzienda,
             @RequestParam("status_azienda_edit") byte statusAzienda){
 		
-		/*Blocco accesso alla pagina se non loggato*/
+		/** Blocca l'accesso alla pagina */
 		if(!isLog(request))
 			return "Login";
 		
@@ -168,6 +168,22 @@ public class AziendeController {
 		if(!isLog(request))
 			return "Login";
 
+		createPDF(nomeAzienda, emailAzienda, indirizzoAzienda,
+				numdipAzienda, pivaAzienda, societa ,
+				telefonoAzienda );
+		
+		request.getSession().setAttribute("errore_aziende", 1);
+		m.addAttribute("list_az", as.findAll());
+
+		return "GestioneAziende";
+
+	}
+
+	/** Questo metodo crea il PDF con i dettagli dell'azienda, del referente e delle commesse */
+	
+	private void createPDF(String nomeAzienda,String emailAzienda, String indirizzoAzienda,
+			Integer numdipAzienda, String pivaAzienda, String societa ,
+			String telefonoAzienda ) {
 		Document document = new Document();
 		try {
 			String home = System.getProperty("user.home");
@@ -199,7 +215,6 @@ public class AziendeController {
 		Font font_val = new Font(FontFamily.HELVETICA, 11, Font.NORMAL, BaseColor.BLACK);
 		table.setPaddingTop(0f);
 
-
 		table.addCell(new Phrase("Nome",font_label));
 		table.addCell(new Phrase(nomeAzienda,font_val));
 		table.addCell(new Phrase("Società",font_label));
@@ -214,7 +229,7 @@ public class AziendeController {
 		table.addCell(new Phrase(indirizzoAzienda,font_val));
 		table.addCell(new Phrase("Numero Dipendenti",font_label));
 		table.addCell(new Phrase(Integer.toString(numdipAzienda),font_val));
-
+		
 		try {
 			document.add(table);
 		} catch (DocumentException e1) {
@@ -235,7 +250,6 @@ public class AziendeController {
 		azienda.setPivaAzienda(pivaAzienda);
 		azienda.setSocieta(societa);
 		azienda.setTelefonoAzienda(telefonoAzienda);
-
 
 		try {
 			
@@ -268,31 +282,15 @@ public class AziendeController {
 			table2.addCell(new Phrase(referente.get().getTelefonoRef(),font_val));
 
 			table2.setSpacingAfter(30);
-			table2.setSpacingBefore(30);
-
-			
+			table2.setSpacingBefore(30);	
 			try {
-
 				document.add(table2);
-			} catch (DocumentException e) {
-				
-				e.printStackTrace();
-			}
-			
-			
-			
+			} catch (DocumentException e) {		
+			}	
 		}catch(Exception e) {
-
-
 		}
 
-
-
-
-
 		//-------------------TABELLA COMMESSA--------------
-
-
 
 		List<Integer> idCommessaList = com.findIdCommessaByAziendaName(azienda);
 
@@ -301,7 +299,6 @@ public class AziendeController {
 			PdfPTable table3 = new PdfPTable(2);
 
 			Optional<Commessa> commessa = com.findById(id);
-			System.out.println(commessa.get().getNomeCommessa());
 			//---------------- add header -------
 
 			PdfPCell header3 = new PdfPCell(new Phrase("Dettaglio Commessa n° " + Integer.toString(id),font_header));
@@ -325,29 +322,18 @@ public class AziendeController {
 			table3.addCell(new Phrase(Double.toString(commessa.get().getTariffaCliente()),font_val));
 			table3.addCell(new Phrase("Azienda",font_label));
 			table3.addCell(new Phrase(commessa.get().getAzienda().getNomeAzienda(),font_val));
-
 			table3.setSpacingAfter(10);
 			table3.setSpacingBefore(10);
-
 			try {
 				document.add(table3);
 			} catch (DocumentException e) {
 				e.printStackTrace();
 			}
-
 		}
-
-
 		document.close();
-		request.getSession().setAttribute("errore_aziende", 1);
-		m.addAttribute("list_az", as.findAll());
-
-		return "GestioneAziende";
-
 	}
 
-
-	/*Blocco accesso alla pagina se non loggato*/		
+	/** Ritorna true se l'utente in sessione è loggato **/		
 	private boolean isLog(HttpServletRequest request) {
 		if(!(boolean) request.getSession().getAttribute("isLogged")) {
 			return false;

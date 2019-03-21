@@ -1,8 +1,5 @@
 package com.sincrono.corso;
 
-import java.util.List;
-import java.util.Optional;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,30 +41,25 @@ public class ReferenteController {
 			@RequestParam("telefono-ref-add") String telefono_ref_add) {
 		
 		/* AGGIUNGERE PRIMA LA PERSONA E POI ASSOCIARLA AL REFERENTE CON L'ID */ 
-		/*Blocco accesso alla pagina se non loggato*/		
+		/** Blocca l'accesso alla pagina */		
 		if(!isLog(request)) 
-			return "Login";
-		boolean error = false;
-		
+			return "Login";	
 
 		if(per.findByEmailPersona(email_ref_add).isEmpty()) {
 			
-		
 			/* RECUPERO L'OGGETTO AZIENDA DAL NOME AZIENDA */
 			Azienda azienda_ref_add = as.findById(azienda_string_ref_add).get();
-						
-			Persona persona = new Persona();
-			persona.setNomePersona(nome_ref_add);
-			persona.setCognomePersona(cognome_ref_add);
-			persona.setEmailPersona(email_ref_add);
-	
+			
+			/** Crea la perosna */	
+			Persona persona = creaPersona(nome_ref_add,cognome_ref_add,email_ref_add);
+
+			/** Salva la persona */
 			per.save(persona);			
 			
-			Referente referente = new Referente();
-			referente.setAzienda(azienda_ref_add);
-			referente.setIdRef(persona.getIdPersona());
-			referente.setTelefonoRef(telefono_ref_add);
+			/** Crea il referente */	
+			Referente referente = creaReferente(azienda_ref_add,persona.getIdPersona(),telefono_ref_add);
 			
+			/** Salva il referente */
 			ref.save(referente);
 			
 		}else {
@@ -78,8 +70,7 @@ public class ReferenteController {
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
 	}
-	
-	
+
 	@RequestMapping(value = "/GestioneReferenteEdit")
 	public String getEditReferente(Model m, HttpServletRequest request,
 			@RequestParam("cognome-ref-edit") String cognome_ref_edit,
@@ -89,19 +80,20 @@ public class ReferenteController {
 			@RequestParam("telefono-ref-edit") String telefono_ref_edit,
 			@RequestParam("id-ref-edit") int id_ref_edit) {
 			
-		/*Blocca l'accesso alla pagina se non loggato*/		
+		/** Blocca l'accesso alla pagina */		
 		if(!isLog(request)) 
 			return "Login";
 		
-		/* Aggiorno la persona */
+		/** Aggiorna la persona */
 		per.updatePersona(id_ref_edit, cognome_ref_edit, nome_ref_edit, email_ref_edit);
 
-		/* Aggiorno il referente */
+		/** Aggiorna il referente */
 		ref.updateReferente(id_ref_edit, telefono_ref_edit);
 		
+		/* Aggiunge i parametri necessari in sessione */
 		request.getSession().setAttribute("errore_referenti", 1);
-		
 		m.addAttribute("list_az", as.findAll());
+		
 		return "GestioneAziende";
 	}
 	
@@ -110,24 +102,42 @@ public class ReferenteController {
 	public String getDeleteReferente(Model m, HttpServletRequest request,
 			@RequestParam("id-ref-delete") int id_ref_delete) {
 		
-	
-		/*Blocca l'accesso alla pagina se non loggato*/		
+		/** Blocca l'accesso alla pagina */		
 		if(!isLog(request)) 
 			return "Login";
 		
-		/* Elimino pure il referente */
+		/** Elimina il referente */
 		ref.deleteById(id_ref_delete);
 
-		/* Elimina la persona  */
+		/** Elimina la persona  */
 		per.deleteById(id_ref_delete);
-
+		
+		/* Aggiunge i parametri necessari in sessione */
 		request.getSession().setAttribute("errore_referenti", 1);
 		m.addAttribute("list_az", as.findAll());
+		
 		return "GestioneAziende";
 	}
 	
+	/** Questo metodo crea referente, ritorna il referente creato **/
+	private Referente creaReferente(Azienda azienda_ref_add, int idPersona, String telefono_ref_add) {
+		Referente referente = new Referente();
+		referente.setAzienda(azienda_ref_add);
+		referente.setIdRef(idPersona);
+		referente.setTelefonoRef(telefono_ref_add);
+		return referente;
+	}
 	
-	/*Blocco accesso alla pagina se non loggato*/		
+	/** Questo metodo crea una persona, ritorna la persona creata **/
+	private Persona creaPersona(String nomePersona, String cognomePersona, String emailPersona) {
+		Persona persona = new Persona();
+		persona.setNomePersona(nomePersona);
+		persona.setCognomePersona(cognomePersona);
+		persona.setEmailPersona(emailPersona);
+		return persona;
+	}
+	
+	/** Ritorna true se l'utente in sessione è loggato **/		
 	private boolean isLog(HttpServletRequest request) {
 		if(!(boolean) request.getSession().getAttribute("isLogged")) {
 			return false;

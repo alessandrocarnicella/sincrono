@@ -27,19 +27,16 @@ public class RapportiniController {
 	@RequestMapping(value = "/Rapportini")
 	public String getRapportini(Model m, HttpServletRequest request) {
 
-		/*Blocco accesso alla pagina se non loggato*/		
-		
+		/** Blocca l'accesso alla pagina */
 		if(!isLog(request))
 			return "Login";
 
 		Optional<Dipendente> dip = (Optional<Dipendente>) request.getSession().getAttribute("dipendente");
 		
-		/* Crea la lista di tutti i ril aggiornata */
-		
+		/** Crea la lista di tutti i ril aggiornata */
 		List<Ril> listRil = trovaTuttiRil(dip.get());
 		
 		/* Aggiunge i parametri necessari in sessione */
-		
 		request.getSession().setAttribute("errore_rapportini", 0);
 		m.addAttribute("list_ril", listRil);
 		return "Rapportini";
@@ -54,85 +51,92 @@ public class RapportiniController {
 			@RequestParam("orePermessi") double orePermessi,
 			@RequestParam("oreSede") double oreSede) {
 		 
-		/*Blocco accesso alla pagina se non loggato*/		
-		
+		/** Blocca l'accesso alla pagina */
 		if(!isLog(request))
 			return "Login";
-
-		
+	
 		Optional<Dipendente> dip = (Optional<Dipendente>) request.getSession().getAttribute("dipendente");
 	
-		RilPK rilPK = new RilPK();
-		rilPK.setIdPersonaril(dip.get().getIdPersonadip());
-		rilPK.setMeseRil(meseRil);
-		rilPK.setAnnoRil(annoRil);
-		
+		/** Crea un RilPK */
+		RilPK rilPK = creaRilPK(dip.get().getIdPersonadip(),meseRil,annoRil);
+	
 		/* Controlla se un ril esiste gia  */
-		
 		if(rils.findById(rilPK).isPresent()) {
-			
-			request.getSession().setAttribute("errore_rapportini", 2);
 			List<Ril> listRil = trovaTuttiRil(dip.get());
+			
 			m.addAttribute("list_ril", listRil);
+			request.getSession().setAttribute("errore_rapportini", 2);
+			
 			return "Rapportini";
 		}
 		
-		Ril ril = new Ril();
-		ril.setId(rilPK);
-		ril.setOreCliente(oreCliente);
-		ril.setOreFerie(oreFerie);
-		ril.setOrePermessi(orePermessi);
-		ril.setOreSede(oreSede);
+		Ril ril = creaRil(rilPK,oreCliente,oreFerie,orePermessi,oreSede);
 		
-		/* Se non esiste aggiunge il Ril */
-		
+		/** Aggiunge il Ril */
 		rils.save(ril);  
-		request.getSession().setAttribute("errore_rapportini", 1);
-		/* Crea la lista di tutti i ril aggiornata */
 		
+		/** Crea la lista di tutti i ril aggiornata */
 		List<Ril> listRil = trovaTuttiRil(dip.get());
 		
 		/* Aggiunge i parametri necessari in sessione */
-		
+		request.getSession().setAttribute("errore_rapportini", 1);
 		m.addAttribute("list_ril", listRil);
 		m.addAttribute("error_insert_ril", true);
+		
 		return "Rapportini";
 	}
+
 
 	@RequestMapping(value = "/RapportiniElimina")
 	public String getRapportiniElimina(Model m, HttpServletRequest request,
 			@RequestParam("meseRilElimina") String meseRil,
 			@RequestParam("annoRilElimina") Integer annoRil) {
 
-		/*Blocco accesso alla pagina se non loggato*/		
+		/** Blocca l'accesso alla pagina */
 		if(!isLog(request))
 			return "Login";
 		
 		Optional<Dipendente> dip = (Optional<Dipendente>) request.getSession().getAttribute("dipendente");
 		
-		RilPK rilPK = new RilPK();
-		rilPK.setIdPersonaril(dip.get().getIdPersonadip());
-		rilPK.setMeseRil(meseRil);
-		rilPK.setAnnoRil(annoRil);
+		/** Crea un RilPK */
+		RilPK rilPK = creaRilPK(dip.get().getIdPersonadip(),meseRil,annoRil);
 		
-		
-		/* Elima un ril utilizzando il rilPK */
-		
+		/** Elima un ril utilizzando il rilPK */
 		rils.deleteById(rilPK);
-		request.getSession().setAttribute("errore_rapportini", 1);
-		/* Crea la lista di tutti i ril */
 		
+		/** Crea la lista di tutti i ril */
 		List<Ril> listRil = trovaTuttiRil(dip.get());
 		
 		/* Aggiunge i parametri necessari in sessione */
-		
+		request.getSession().setAttribute("errore_rapportini", 1);
 		m.addAttribute("list_ril", listRil);
 		m.addAttribute("error_insert_ril", true);
+		
 		return "Rapportini";
 	}
-
-	/* Blocco accesso alla pagina se non loggato */	
 	
+
+	/** Questo metodo crea un Ril, ritorna il ril creato **/
+	private Ril creaRil(RilPK rilPK, double oreCliente, double oreFerie, double orePermessi, double oreSede) {
+		Ril ril = new Ril();
+		ril.setId(rilPK);
+		ril.setOreCliente(oreCliente);
+		ril.setOreFerie(oreFerie);
+		ril.setOrePermessi(orePermessi);
+		ril.setOreSede(oreSede);
+		return ril;
+	}
+
+	/** Questo metodo crea un RilPK, ritorna il rilPK creato **/
+	private RilPK creaRilPK(int idPersonadip, String meseRil, Integer annoRil) {
+		RilPK rilPK = new RilPK();
+		rilPK.setIdPersonaril(idPersonadip);
+		rilPK.setMeseRil(meseRil);
+		rilPK.setAnnoRil(annoRil);
+		return rilPK;
+	}
+	
+	/** Ritorna true se l'utente in sessione è loggato **/
 	private boolean isLog(HttpServletRequest request) {
 
 		if(!(boolean) request.getSession().getAttribute("isLogged")) {
@@ -141,8 +145,7 @@ public class RapportiniController {
 		return true;
 	}
 
-	/* Crea una lista di Ril */
-	
+	/** Questo metodo crea una lista di tutti i RIL per il dipendente*/
 	private List<Ril> trovaTuttiRil(Dipendente dip) {
 
 		List<Ril> listRil = new ArrayList<>();
