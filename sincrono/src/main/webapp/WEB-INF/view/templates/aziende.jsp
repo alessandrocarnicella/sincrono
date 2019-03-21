@@ -118,7 +118,7 @@
 				               	<!-- TODO: controllare sto cazzzo di campo -->
 				               	<input type="hidden" name="statusAzienda" value="${x.statusAzienda}">			               
 				            </div>
-				            <div class="row" id="loading_chart">
+				            <div class="row loading_chart">
 				            	<div class="col-12">
 		      				        <form action="Andamento" method="POST">
 										<input type="hidden" name="nomeAziendaAndamento" value="${x.nomeAzienda}">
@@ -193,14 +193,14 @@ function launch_modal_aziende(id){
 $(document).ready( function(){
 	
 	
-    $("#loading_chart").on( "click", function( e ) {
+    $(".loading_chart").on( "click", function( e ) {
     	
 		$(".modal-dialog").addClass('modal-dialog-centered');
     	
     	$("#spinner").removeClass('d-none');
     	$(".auto-form-wrapper").hide();
 		$(".modal-header").hide();
-		$("#loading_chart").hide();
+		$(".loading_chart").hide();
 		
 		
 		//var $icon = $( this ).find( "#spinner" ),
