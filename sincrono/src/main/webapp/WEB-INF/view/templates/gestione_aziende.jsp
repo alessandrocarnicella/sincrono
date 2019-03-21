@@ -70,7 +70,7 @@ function notify_success() {
 
 
 <c:choose>
-	<c:when test="${categoria == 'Amministratore'}">
+	<c:when test="${categoria != 'Amministrativo'}">
 		<div class="row">
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
@@ -343,13 +343,7 @@ function notify_success() {
 		</div>
 	</div>
 	</c:when>
-	<c:when test="${categoria == 'Amministrativo'}">
-		
-	</c:when>
 	
-	<c:when test="${categoria == 'Commerciale'}">
-		
-	</c:when>
 	
 	<c:otherwise>
 	
@@ -451,7 +445,7 @@ function notify_success() {
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Edit Azienza</h4>
+				<h4 class="modal-title">Edit Azienda</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
