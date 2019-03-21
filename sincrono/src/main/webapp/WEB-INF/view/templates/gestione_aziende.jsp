@@ -69,7 +69,9 @@ function notify_success() {
 </c:choose>
 
 
-<div class="row">
+<c:choose>
+	<c:when test="${categoria == 'Amministratore'}">
+		<div class="row">
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
@@ -340,7 +342,26 @@ function notify_success() {
 			</div>
 		</div>
 	</div>
-</div>
+	</c:when>
+	<c:when test="${categoria == 'Amministrativo'}">
+		
+	</c:when>
+	
+	<c:when test="${categoria == 'Commerciale'}">
+		
+	</c:when>
+	
+	<c:otherwise>
+	
+	</c:otherwise>
+</c:choose>
+
+
+
+
+
+
+
 
 
 

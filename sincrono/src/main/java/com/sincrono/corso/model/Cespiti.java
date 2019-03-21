@@ -3,6 +3,9 @@ package com.sincrono.corso.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 
 /**
  * The persistent class for the cespiti database table.
@@ -26,6 +29,7 @@ public class Cespiti implements Serializable {
 
 	//bi-directional many-to-one association to Dipendente
 	@ManyToOne
+	@NotFound(action = NotFoundAction.IGNORE)
 	@JoinColumn(name="id_dipendente_cespiti")
 	private Dipendente dipendente;
 
