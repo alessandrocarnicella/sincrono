@@ -7,7 +7,17 @@
   <div class="navbar-menu-wrapper d-flex align-items-center">
   	 
   		<button class="btn btn-primary">
-           <i class="fas fa-check-circle"></i>${sessionScope.categoria}
+           <i class="fas fa-check-circle"></i>       
+	       <c:choose>
+			    <c:when test="${categoria == 'Nessuno'}">
+			       	Dipendente
+			    </c:when>    
+			    <c:otherwise>
+			        ${sessionScope.categoria}
+			        <br />
+			    </c:otherwise>
+			</c:choose>
+	       
         </button>
 		
 		<ul class="navbar-nav navbar-nav-right">        

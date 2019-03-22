@@ -1,5 +1,5 @@
 <c:choose>
-	<c:when test="${categoria != 'Amministrativo'}">
+	<c:when test="${categoria == 'Amministratore' or categoria =='Commerciale'}">
 	
 		<!-- ######################################## START ROW CONTAINER GESTIONE AZIENDE ############################################################## -->	
 		<div class="row">
@@ -443,6 +443,23 @@
 		
 	</c:when>
 	<c:otherwise>
+		<div class="row">
+				<div class="col-3"></div>
+				<div class="col-6 grid-margin stretch-card">
+	              <div class="card">
+	                <div class="card-body">
+                  	  <img src="images/sirena.gif" class="w-50px" >
+	                  <h4 class="card-title d-inline">Non fare il furbo!</h4>
+	                  <div class="media">
+	                    <div class="media-body">
+	                      <p class="card-text">Non hai le autorizzazioni per entrare in questa pagina.</p>
+	                    </div>
+	                  </div>
+	                  
+	                </div>
+	              </div>
+            	</div>
+			</div>
 	</c:otherwise>
 </c:choose>
 
@@ -520,7 +537,7 @@ function notify_download() {
 	</c:when>	
 	
 	<c:otherwise>
-	
+
 	</c:otherwise>
 </c:choose>
 
@@ -565,4 +582,5 @@ function edit(id){
 	$("#save-ref"+id).prop("disabled",false);
 	
 }
+
 </script>

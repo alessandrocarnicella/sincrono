@@ -70,10 +70,6 @@
 									</c:forEach>
 								</div>
 
-
-
-
-
 							</tbody>
 						</table>
 					</div>

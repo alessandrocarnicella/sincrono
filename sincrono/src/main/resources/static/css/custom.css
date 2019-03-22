@@ -53,3 +53,7 @@
 .navbar-nav .nav-item.dropdown .dropdown-toggle:after{
   content: none;
 }
+
+.w-50px{
+	width: 50px;
+}
