@@ -475,43 +475,49 @@ function notify_success() {
 	});
 
 };
+
+function notify_download() {
+	$.notify({
+		// options
+		message: 'Download Success: /Users/userName/Downloads' 
+	},{
+		// settings
+		type: 'success',
+		z_index: 2000,
+		delay: 5000
+
+	}
+
+	);
+};
 </script>
 <c:choose>
-	<c:when test="${errore_aziende eq 11}">
+	<c:when test="${errore_aziende eq 2}">
 		<script>
 			$(window).bind("load",function(){
 			setTimeout(notify_danger,500);
 			});
 		</script>
+		<% session.setAttribute("errore_aziende", 0); %>
 	</c:when>
-	<c:when test="${errore_aziende eq 21}">
+	<c:when test="${errore_aziende eq 1}">
 		<script>
 
 			$(window).bind("load",function(){
 				setTimeout(notify_success,200);
 			});
-			
-
 		</script>
+		<% session.setAttribute("errore_aziende", 0); %>
 	</c:when>
 	
-	<c:when test="${errore_referenti eq 21}">
+	<c:when test="${errore_aziende eq 3}">
 		<script>
 			$(window).bind("load",function(){
-			setTimeout(notify_danger,500);
+			setTimeout(notify_download,500);
 			});
 		</script>
-	</c:when>
-	<c:when test="${errore_referenti eq 11}">
-		<script>
-
-			$(window).bind("load",function(){
-				setTimeout(notify_success,200);
-			});
-			
-
-		</script>
-	</c:when>
+	<% session.setAttribute("errore_aziende", 0); %>
+	</c:when>	
 	
 	<c:otherwise>
 	
