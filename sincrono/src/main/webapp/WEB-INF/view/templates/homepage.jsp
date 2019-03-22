@@ -1,5 +1,3 @@
-
-
 <div class="row">
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
@@ -23,7 +21,6 @@
 					<table class="table table-striped" id="table-gestione-ril">
 						<thead>
 							<tr>
-
 								<th>Azienda</th>
 								<th>Nome</th>
 								<th>Cognome</th>
@@ -32,7 +29,6 @@
 								<th>Anno</th>
 								<th>Guadagno</th>
 								<th></th>
-
 							</tr>
 						</thead>
 						<tbody>
@@ -62,7 +58,10 @@
 	</div>
 </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<<script type="text/javascript">
+	
+</script>
 
 
 
