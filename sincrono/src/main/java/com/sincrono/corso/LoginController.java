@@ -51,7 +51,7 @@ public class LoginController {
 	@Autowired
 	RilService rils;
 
-	
+
 	@RequestMapping(value = "/")
 	public String getHome(Model m, HttpServletRequest request) {
 
@@ -66,7 +66,7 @@ public class LoginController {
 
 		return "Login";
 	}
-	
+
 	@RequestMapping(value = "/Andamento")
 	public String getGrafici(Model m, HttpServletRequest request, 
 			@RequestParam("nomeAziendaAndamento") String nomeAzienda){
@@ -75,27 +75,40 @@ public class LoginController {
 
 		if(!isLog(request)) 
 			return "Login";
-		
+
 		Optional<Azienda> azienda = as.findById(nomeAzienda);
 		List<Dipendente> listDipendenti = dip.findAll();
 		List<Andamento> andamenti =  getAllAndamenti(listDipendenti);
-		
+
 		List<List<Double>> guadagnoTotaleAzienda = new ArrayList<List<Double>>();
 
 		/* x ogni azienda prendo ogni anno e sommo i guadagni di tutti i mesi */
+
+		List<Double> guadagnoTotalePerAnno = new ArrayList<Double>();
+		for(int i=2015; i<=2019; i++) {
+			guadagnoTotalePerAnno.add(guadagnoAnnuoAzienda(azienda.get(),i,listDipendenti,andamenti));	
+		}
+		guadagnoTotaleAzienda.add(guadagnoTotalePerAnno);
+
 		
-			List<Double> guadagnoTotalePerAnno = new ArrayList<Double>();
-			for(int i=2015; i<=2019; i++) {
-				guadagnoTotalePerAnno.add(guadagnoAnnuoAzienda(azienda.get(),i,listDipendenti,andamenti));	
+		List<Andamento> andamentiAzienda = new ArrayList<Andamento>();
+		for(int i=0; i<andamenti.size(); i++) {
+			if(andamenti.get(i).getAzienda().equals(azienda.get())) {
+				andamentiAzienda.add(andamenti.get(i));
 			}
-			guadagnoTotaleAzienda.add(guadagnoTotalePerAnno);
-		
-				 
+		}
+
+		for(int i=0; i<andamentiAzienda.size(); i++) {
+			System.out.println("andamento"+andamentiAzienda.get(i).getAzienda().getNomeAzienda());	
+		}
+
+
 		/* Aggiunge i parametri necessari in sessione */
 
 		m.addAttribute("error_login", false);
 		m.addAttribute("nomeAzienda", nomeAzienda);
 		request.getSession().setAttribute("list_andamenti", andamenti);  
+		request.getSession().setAttribute("list_andamenti_azienda", andamentiAzienda);  
 		request.getSession().setAttribute("list_guadagno_totale_azienda", guadagnoTotaleAzienda);	 
 
 		return "Grafici";
@@ -112,17 +125,17 @@ public class LoginController {
 		List<Azienda> listAziende = as.findAll();
 		List<Dipendente> listDipendenti = dip.findAll();
 		List<Andamento> andamenti =  getAllAndamenti(listDipendenti);
-		
+
 		List<List<Double>> guadagnoTotaleAziende = new ArrayList<List<Double>>();
 
 		/* x ogni azienda prendo ogni anno e sommo i guadagni di tutti i mesi */
 
-						 
+
 		/* Aggiunge i parametri necessari in sessione */
 
 		m.addAttribute("error_login", false);
 		request.getSession().setAttribute("list_andamenti", andamenti);   
-		
+
 		return "Dashboard";
 	}
 
@@ -158,13 +171,13 @@ public class LoginController {
 		/* Se l'id non è 0 si ha un utente -> ricava il dipendente dall'id */
 		Optional<Dipendente> dipendente;
 		dipendente = dip.findById(dipId);
-		
-		
-		
+
+
+
 		List<Azienda> listAziende = as.findAll();
 		List<Dipendente> listDipendenti = dip.findAll();
 		List<Andamento> andamenti =  getAllAndamenti(listDipendenti);
-		
+
 		List<List<Double>> guadagnoTotaleAziende = new ArrayList<List<Double>>();
 
 
@@ -172,7 +185,7 @@ public class LoginController {
 
 		m.addAttribute("error_login", false);
 		isLogged = true;
-		
+
 		request.getSession().setAttribute("list_dipendenti",  listDipendenti);   
 		request.getSession().setAttribute("list_aziende", listAziende);	 
 		request.getSession().setAttribute("list_andamenti", andamenti);   
@@ -185,7 +198,7 @@ public class LoginController {
 	public String getLogout(Model m, HttpServletRequest request) {
 
 		/* Aggiunge i parametri necessari in sessione */
-		
+
 		request.getSession().setAttribute("isLogged", false);	
 		request.getSession().removeAttribute("username");
 		request.getSession().removeAttribute("categoria");
@@ -216,22 +229,22 @@ public class LoginController {
 	public String getLoginNewPsw(Model m,@RequestParam("recupero_email") String recupero_email) {
 
 		try {
-		int dip_id = dip.existUserByEmail(recupero_email);
-		String new_password = getRandomPsw();
+			int dip_id = dip.existUserByEmail(recupero_email);
+			String new_password = getRandomPsw();
 
-		/* Aggiorna la nuova password */
+			/* Aggiorna la nuova password */
 
-		dip.updatePswDip(dip_id, new_password);
-		
-		/* Aggiunge i parametri necessari in sessione */
-		
-		m.addAttribute("new_psw", new_password);
+			dip.updatePswDip(dip_id, new_password);
+
+			/* Aggiunge i parametri necessari in sessione */
+
+			m.addAttribute("new_psw", new_password);
 		}catch(Exception e) {
 			return "ForgotPassword";
 		}
 		return "Login";
 	}
-	
+
 	private List<Ril> trovaTuttiRil(Dipendente dip) {
 
 		List<Ril> listRil = new ArrayList<>();
@@ -269,7 +282,7 @@ public class LoginController {
 
 	private List<Andamento> getAllAndamenti(List<Dipendente> listDipendenti){
 		List<Andamento> andamenti =  new ArrayList<>();
-		
+
 		for(int k=0; k<listDipendenti.size(); k++) {
 			List<Ril> listRil =  trovaTuttiRil(listDipendenti.get(k));
 			for (int j=0; j<listRil.size(); j++) {
@@ -277,11 +290,11 @@ public class LoginController {
 					int idCommessa  = coms.findIdRefByPersona(listRil.get(j).getPersona());
 					Optional<Commessa> commessa = coms.findById(idCommessa);
 					double guadagno;
-	
+
 					Optional<Dipendente> dipendente1 = dip.findById(listRil.get(j).getPersona().getIdPersona());
-	
+
 					guadagno = (commessa.get().getTariffaCliente()-dipendente1.get().getTariffaOraria())*listRil.get(j).getOreCliente();
-	
+
 					andamenti.add(new Andamento(
 							commessa.get().getNomeCommessa(),
 							commessa.get().getTariffaCliente(),
@@ -291,12 +304,12 @@ public class LoginController {
 							dipendente1.get().getTariffaOraria(),
 							listRil.get(j).getOreCliente(),
 							listRil.get(j).getId()));
-					
+
 				}catch(Exception e) {
 				}
 			}
 		}
-	
+
 		/* Ordina lista Andamenti */
 
 		Collator collator = Collator.getInstance(Locale.US);
