@@ -98,11 +98,7 @@ public class LoginController {
 			}
 		}
 
-		for(int i=0; i<andamentiAzienda.size(); i++) {
-			System.out.println("andamento"+andamentiAzienda.get(i).getAzienda().getNomeAzienda());	
-		}
-
-
+		
 		/* Aggiunge i parametri necessari in sessione */
 
 		m.addAttribute("error_login", false);

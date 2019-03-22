@@ -1,7 +1,9 @@
 <div class="row">
-	<c:forEach items="${list_guadagno_totale_azienda}" var="y" varStatus="count">
+	<c:forEach items="${list_guadagno_totale_azienda}" var="y"
+		varStatus="count">
 		<div class="col-2"></div>
-		<div class="col-lg-8 grid-margin stretch-card" onclick="prova1(id=${count.count},dati=${y})">
+		<div class="col-lg-8 grid-margin stretch-card"
+			onclick="prova1(id=${count.count},dati=${y})">
 			<div class="card">
 				<div class="card-body">
 					<div class="chartjs-size-monitor"
@@ -24,10 +26,56 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<div class="table-responsive">
+							<table class="table table-striped" id="table-gestione-ril">
+								<thead>
+									<tr>
+
+										<th>Azienda</th>
+										<th>Nome</th>
+										<th>Cognome</th>
+										<th>Commessa</th>
+										<th>Mese</th>
+										<th>Anno</th>
+										<th>Guadagno</th>
+										
+									</tr>
+								</thead>
+								<tbody>
+
+
+									<!--  ROW ELENCO RAPPORTINI -->
+									<div class="row">
+										<c:forEach items="${list_andamenti_azienda}" var="x">
+											<tr>
+
+												<td class="text-center">${x.azienda.nomeAzienda}</td>
+												<td class="text-center">${x.dipendente.persona.cognomePersona}</td>
+												<td class="text-center">${x.dipendente.persona.nomePersona}</td>
+												<td class="text-center">${x.nomeCommessa}</td>
+												<td class="text-center">${x.rilPk.meseRil}</td>
+												<td class="text-center">${x.rilPk.annoRil}</td>
+												<td class="text-center">${x.guadagno}</td>
+
+											</tr>
+										</c:forEach>
+									</div>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</c:forEach>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function() {
 	setTimeout(function(){
