@@ -172,7 +172,7 @@ public class AziendeController {
 				numdipAzienda, pivaAzienda, societa ,
 				telefonoAzienda );
 		
-		request.getSession().setAttribute("errore_aziende", 1);
+		request.getSession().setAttribute("errore_aziende", 3);
 		m.addAttribute("list_az", as.findAll());
 
 		return "GestioneAziende";

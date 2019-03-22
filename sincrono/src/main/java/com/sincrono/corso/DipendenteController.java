@@ -50,9 +50,14 @@ public class DipendenteController {
 	@RequestMapping(value = "/GestioneUtenti")
 	public String getGestioneUtent(Model m,HttpServletRequest request) {
 
+		
+		//Optional<Dipendente> dipendente =(Optional<Dipendente>)request.getSession().getAttribute("dipendente");
+		//|| !dipendente.get().getCategoria().getId().getRuoloCat().equals("amministratore")
+	
 		/** Blocca l'accesso alla pagina */
 		if(!isLog(request))
 			return "Login";
+
 
 		/* Aggiunge i parametri necessari in sessione */
 		request.getSession().setAttribute("errore_dipendenti", 0);

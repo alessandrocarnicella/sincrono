@@ -193,9 +193,7 @@ public class LoginController {
 		return "Login";
 	}
 
-
 	/* Genera una passwor random */
-
 	protected String getRandomPsw() {
 		String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 		StringBuilder salt = new StringBuilder();
@@ -261,8 +259,7 @@ public class LoginController {
 		return listRil;
 	}
 
-	/* Blocca l'accesso alla pagina se non loggato */	
-
+	/** Ritorna true se l'utente in sessione è loggato **/
 	private boolean isLog(HttpServletRequest request) {
 		if(!(boolean) request.getSession().getAttribute("isLogged")) {
 			return false;
@@ -270,7 +267,6 @@ public class LoginController {
 		return true;
 	}
 
-	
 	private List<Andamento> getAllAndamenti(List<Dipendente> listDipendenti){
 		List<Andamento> andamenti =  new ArrayList<>();
 		
@@ -314,7 +310,6 @@ public class LoginController {
 		}
 		return andamenti;
 	}
-
 
 	private Double guadagnoAnnuoAzienda(Azienda azienda, int anno, List<Dipendente> listDipendenti, List<Andamento> andamenti){
 		Double guadagnoAziendaAnno = 0.0;
