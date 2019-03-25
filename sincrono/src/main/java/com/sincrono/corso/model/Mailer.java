@@ -10,6 +10,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+
 public class Mailer{  
 	public void send(String from,String password,String to,String sub,String msg){  
 		//Get properties object    
@@ -35,7 +36,6 @@ public class Mailer{
 			message.setText(msg);    
 			//send message  
 			Transport.send(message);    
-			System.out.println("message sent successfully");    
 		} catch (MessagingException e) {throw new RuntimeException(e);}    
 
 	}  
