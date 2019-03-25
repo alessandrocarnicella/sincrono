@@ -33,6 +33,13 @@
 				</form>
               </span>         
 			</li>
+			<li class="nav-item dropdown d-xl-none d-inline-block">
+              	<form class="d-inline" action="Logout" method="post">
+					<button type="submit" class="btn btn-danger">
+						<i class="fas fa-sign-out-alt m-0"></i>
+					</button>
+				</form>      
+			</li>
         </ul>
 		
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">

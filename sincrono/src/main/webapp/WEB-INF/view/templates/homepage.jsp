@@ -28,7 +28,6 @@
 								<th>Mese</th>
 								<th>Anno</th>
 								<th>Guadagno</th>
-								<th></th>
 							</tr>
 						</thead>
 						<tbody>

@@ -63,10 +63,10 @@ public class ReferenteController {
 			ref.save(referente);
 			
 		}else {
-			request.getSession().setAttribute("errore_referenti", 2);
+			request.getSession().setAttribute("errore_referente", 2);
 		}	
 		
-		request.getSession().setAttribute("errore_referenti", 1);
+		request.getSession().setAttribute("errore_referente", 1);
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
 	}
@@ -91,7 +91,7 @@ public class ReferenteController {
 		ref.updateReferente(id_ref_edit, telefono_ref_edit);
 		
 		/* Aggiunge i parametri necessari in sessione */
-		request.getSession().setAttribute("errore_referenti", 1);
+		request.getSession().setAttribute("errore_referente", 1);
 		m.addAttribute("list_az", as.findAll());
 		
 		return "GestioneAziende";
@@ -113,7 +113,7 @@ public class ReferenteController {
 		per.deleteById(id_ref_delete);
 		
 		/* Aggiunge i parametri necessari in sessione */
-		request.getSession().setAttribute("errore_referenti", 1);
+		request.getSession().setAttribute("errore_referente", 1);
 		m.addAttribute("list_az", as.findAll());
 		
 		return "GestioneAziende";

@@ -31,7 +31,7 @@ import com.sincrono.corso.model.PersonaService;
 import com.sincrono.corso.model.Ril;
 import com.sincrono.corso.model.RilPK;
 import com.sincrono.corso.model.RilService;
-
+import com.sincrono.corso.model.Mailer;
 
 @Controller
 public class LoginController {
@@ -62,7 +62,7 @@ public class LoginController {
 		/* Aggiunge i parametri necessari in sessione */
 
 		request.getSession().setAttribute("isLogged", isLogged);
-		m.addAttribute("error_login", false);
+		m.addAttribute("error_login", 0);
 
 		return "Login";
 	}
@@ -158,10 +158,21 @@ public class LoginController {
 		/* Se l'id è 0 non si ha un utente -> il login non è andato a buon fine */
 
 		if(dipId == 0) {
-			m.addAttribute("error_login", true);
+			m.addAttribute("error_login", 3); // utente non trovato 
 			isLogged =  false;
 			request.getSession().setAttribute("isLogged", isLogged);
 			return "Login";
+		}
+		else {
+			byte zero = 0;
+			if(dip.findById(dipId).get().getStatusDip() == zero) {
+				m.addAttribute("error_login", 1); //disattivato
+				isLogged =  false;
+				request.getSession().setAttribute("isLogged", isLogged);
+				return "Login";
+			}else {
+				m.addAttribute("error_login", 2); //attivo
+			}
 		}
 
 		/* Se l'id non è 0 si ha un utente -> ricava il dipendente dall'id */
@@ -179,7 +190,7 @@ public class LoginController {
 
 		/* Aggiunge i parametri necessari in sessione */
 
-		m.addAttribute("error_login", false);
+		m.addAttribute("error_login", 0);
 		isLogged = true;
 
 		request.getSession().setAttribute("list_dipendenti",  listDipendenti);   
@@ -231,10 +242,17 @@ public class LoginController {
 			/* Aggiorna la nuova password */
 
 			dip.updatePswDip(dip_id, new_password);
-
+			Mailer mail = new Mailer();
+			
+			Dipendente dipendente =  dip.findById(dip_id).get();
+		
+			String msg = "Ciao "+dipendente.getPersona().getNomePersona()+ " "+ dipendente.getPersona().getCognomePersona()+",\n\n la tua nuova password è: "+new_password+ "\n\n";
+			
+			mail.send("nomec443@gmail.com","sincrono",dipendente.getPersona().getEmailPersona(),"Sincronia recupero PSW",msg);
+			
 			/* Aggiunge i parametri necessari in sessione */
 
-			m.addAttribute("new_psw", new_password);
+			m.addAttribute("new_psw", "Password inviata a "+dipendente.getPersona().getEmailPersona());
 		}catch(Exception e) {
 			return "ForgotPassword";
 		}

@@ -35,7 +35,7 @@
         <div class="container-fluid page-body-wrapper full-page-wrapper auth-page">
           <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
             <div class="row w-100">
-              <div class="col-lg-4 mx-auto">
+              <div class="col-lg-5 mx-auto">
                 <div class="auto-form-wrapper">
                   
                   <form action="Dashboard" method="post">
@@ -43,8 +43,15 @@
                   	
                   	<c:set var="loginFlag" scope="session" value="${error_login}" />
 					
-					<c:if test="${loginFlag eq true}">
+					
+					<c:if test="${loginFlag eq 1}">
+		  				<p class="text-danger">Account disattivato</p>
+					</c:if>
+					<c:if test="${loginFlag eq 2}">
 		  				<p class="text-danger">Login Errato</p>
+					</c:if>
+					<c:if test="${loginFlag eq 3}">
+		  				<p class="text-danger">Account non trovato</p>
 					</c:if>
 						               		
                    	</div>
@@ -70,7 +77,9 @@
                     	<div class="col-12 text-center form-group">
                     		<a href="ForgotPassword" class="text-small forgot-password text-black">Forgot Password</a>
                     		<br/>
-                    		${new_psw}
+                    		<p class="text-success" id="new_password">	
+                    			${new_psw}
+                    		</p>	
                     	</div>
                     </div>
 	                   
@@ -94,8 +103,19 @@
     </div>
     
 </body>
+	
 
+	
 	<!-- IMPORT FILE JS -->	
   	<%@ include file="import/js_import.html"%>
+  	
+  	
+	<script>	
+		function hide_psw(){
+			$("#new_password").hide();
+		};
+		
+		setTimeout(hide_psw,5000);
+	</script>
   	
 </html>

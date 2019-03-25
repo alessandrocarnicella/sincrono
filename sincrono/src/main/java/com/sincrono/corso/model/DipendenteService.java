@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public interface DipendenteService extends JpaRepository<Dipendente, Integer> {
 
-	@Query("SELECT p.idPersona FROM Dipendente d, Persona p where (p.idPersona = d.idPersonadip and d.passwordDip = :password and p.emailPersona = :email and d.statusDip = 1)")
+	@Query("SELECT p.idPersona FROM Dipendente d, Persona p where (p.idPersona = d.idPersonadip and d.passwordDip = :password and p.emailPersona = :email)")
 	int existUser(@Param("password") String password, @Param("email") String email);
 
 	@Query("SELECT p.idPersona FROM Dipendente d, Persona p where (p.idPersona = d.idPersonadip and p.emailPersona = :email)")

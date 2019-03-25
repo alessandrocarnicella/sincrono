@@ -1,3 +1,4 @@
+
 <div class="row">
 	<c:forEach items="${list_guadagno_totale_azienda}" var="y"
 		varStatus="count">
@@ -28,7 +29,19 @@
 		</div>
 		<div class="col-lg-12 grid-margin stretch-card">
 			<div class="card">
+
 				<div class="card-body">
+					<div class="row">
+						<div class="col-8"></div>
+						<div class="col-4 m-auto">
+							<div class="form-group">
+								<label for="searchRil">Cerca </label> <input type="text"
+									class="form-control" id="searchRapportini"
+									placeholder="Enter...">
+
+							</div>
+						</div>
+					</div>
 					<div class="row">
 						<div class="table-responsive">
 							<table class="table table-striped" id="table-gestione-ril">
@@ -42,7 +55,7 @@
 										<th>Mese</th>
 										<th>Anno</th>
 										<th>Guadagno</th>
-										
+
 									</tr>
 								</thead>
 								<tbody>
