@@ -37,9 +37,9 @@
 				<div class="card-body">
 					<div class="clearfix">
 			            <div class="float-left">
-				            <h3 class="px18 font-weight-medium mb-0 fieldName">${x.persona.cognomePersona} &nbsp ${x.persona.nomePersona}</h3>
-				            <p class="mb-0">${x.persona.emailPersona}</p>
-			               	<p class="text-muted mt-3 mb-0">${x.categoria.id.nomeCat} &nbsp ${x.categoria.id.ruoloCat}</p>	
+				            <h3 class="px18 font-weight-medium mb-0 fieldName">${x.persona.cognomePersona} ${x.persona.nomePersona}</h3>
+				            <p class="mb-0">${x.persona.emailPersona}</p> 
+			               	<p class="text-muted mt-3 mb-0">${x.categoria.id.nomeCat} ${x.categoria.id.ruoloCat}</p>	
 	              		</div>
 	              		<div class="float-right">
               			<c:choose>

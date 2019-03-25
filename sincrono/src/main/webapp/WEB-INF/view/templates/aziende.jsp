@@ -22,8 +22,7 @@
 				data-societa="${x.societa}"
 				data-telefono="${x.telefonoAzienda}"
 				data-status="${x.statusAzienda}">
-		        
-				
+
 				
 				<c:set var="status_int" scope="page" value="${x.statusAzienda}"/> 
 				<c:choose>
@@ -57,20 +56,16 @@
 		            </div>
 		          </div>
 		        </div>
-		  		
-
-		  		
+		  			  		
 				<div class="modal fade" id="modalA${count.count}" role="dialog" >
 				    <div class="modal-dialog">
-				    
 				      <div class="modal-content" >
-				      	
 				        <div class="modal-header">
 		          			<h4 class="modal-title">Dettagli Azienza</h4>
 				        	<button type="button" class="close" data-dismiss="modal">&times;</button>	       
 				        </div>
 				        <div class="modal-body">
-				        	<div class="row d-none" id="spinner">
+				        	<div class="row d-none spinner" id="">
 				          			<div class="col-2"></div>
 				          			<div class="col-8 text-center">
 				          				<i  class="fas fa-sync-alt fa-5x"></i>
@@ -78,9 +73,6 @@
 				          			<div class="col-2"></div>		          				
 				          		</div>
 				          <div class="auto-form-wrapper"> 
-				          		
-				          		
-				                       
 				                <div class="form-group">
 				                  <div class="input-group">
 				                    <input type="text" class="form-control" placeholder="Nome Azienda" name="nomeAzienda">
@@ -198,7 +190,7 @@ $(document).ready( function(){
     	
 		$(".modal-dialog").addClass('modal-dialog-centered');
     	
-    	$("#spinner").removeClass('d-none');
+    	$(".spinner").removeClass('d-none');
     	$(".auto-form-wrapper").hide();
 		$(".modal-header").hide();
 		$(".loading_chart").hide();
@@ -207,7 +199,7 @@ $(document).ready( function(){
 		//var $icon = $( this ).find( "#spinner" ),
         animateClass = "glyphicon-refresh-animate";
 		
-        $("#spinner").addClass( animateClass );
+        $(".spinner").addClass( animateClass );
         
 
         
