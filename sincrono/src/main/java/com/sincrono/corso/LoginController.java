@@ -209,7 +209,7 @@ public class LoginController {
 		request.getSession().setAttribute("isLogged", false);	
 		request.getSession().removeAttribute("username");
 		request.getSession().removeAttribute("categoria");
-		m.addAttribute("error_login", false);
+		m.addAttribute("error_login", 0);
 		return "Login";
 	}
 
