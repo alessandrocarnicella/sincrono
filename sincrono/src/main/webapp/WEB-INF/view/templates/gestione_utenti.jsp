@@ -56,7 +56,8 @@
 													</c:otherwise>
 												</c:choose>
 											</td>
-											<td>
+											<td data-toggle="tooltip" data-placement="top"
+													title="Edit Utente">
 												<button type="button" class="btn btn-secondary btn-fw edit-utente" 
 													data-nomep="${x.persona.nomePersona}"  
 													data-cognomep="${x.persona.cognomePersona}"
@@ -72,7 +73,8 @@
 													<i class="fas fa-edit"></i>
 												</button>
 											</td>
-											<td>
+											<td data-toggle="tooltip" data-placement="top"
+													title="Delete Utente">
 												<!-- START Elimina utente -->
 												<form action="GestioneUtentiElimina" method="POST">
 							
@@ -341,6 +343,10 @@ function notify_success() {
 			$(window).bind("load",function(){
 			setTimeout(notify_success,500);
 			});
+			setTimeout(function(){ 
+				location.href = $("#gestione_utenti_nav").attr("href");
+				}, 
+				1000);
 		</script>
 	</c:when>
 	<c:otherwise>

@@ -80,6 +80,10 @@ function notify_success() {
 			$(window).bind("load",function(){
 			setTimeout(notify_success,500);
 			});
+			setTimeout(function(){ 
+				location.href = $("#rapportini_nav").attr("href");
+				}, 
+				1500);
 		</script>
 	</c:when>
 	<c:otherwise>

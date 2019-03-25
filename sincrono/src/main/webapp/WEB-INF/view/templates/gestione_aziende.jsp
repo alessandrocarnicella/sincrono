@@ -67,8 +67,7 @@
 																					request.getSession().setAttribute("has_ref", has_ref);
 															%>
 														</c:otherwise>
-													</c:choose> <c:set var="has_ref" scope="page"
-														value="${requestScope.has_ref}" /> <c:choose>
+													</c:choose> <c:set var="has_ref" scope="page" value="${requestScope.has_ref}" /> <c:choose>
 														<c:when test="${has_ref eq true}">
 															<c:forEach items="${x.referentes}" var="y">
 																<!-- onclick  -->
@@ -561,12 +560,14 @@ function notify_download() {
 
 	);
 };
+
+
 </script>
 <c:choose>
 	<c:when test="${errore_aziende eq 2}">
 		<script>
 			$(window).bind("load",function(){
-			setTimeout(notify_danger('Error: Azienda gia esistente'),500);
+				setTimeout(notify_danger('Error: Azienda gia esistente'),500);
 			});
 		</script>
 		<%
@@ -588,7 +589,7 @@ function notify_download() {
 	<c:when test="${errore_aziende eq 3}">
 		<script>
 			$(window).bind("load",function(){
-			setTimeout(notify_download,500);
+				setTimeout(notify_download,500);
 			});
 		</script>
 		<%
@@ -598,7 +599,7 @@ function notify_download() {
 	<c:when test="${errore_referente eq 2}">
 		<script>
 			$(window).bind("load",function(){
-			setTimeout(notify_danger('Error: Referente gia esistente'),500);
+				setTimeout(notify_danger('Error: Referente gia esistente'),500);
 			});
 		</script>
 		<%
@@ -608,9 +609,15 @@ function notify_download() {
 	<c:when test="${errore_referente eq 1}">
 		<script>
 			$(window).bind("load",function(){
-			setTimeout(notify_success('Success: Evento andato a buon fine'),500);
-			
+				setTimeout(notify_success('Success: Evento andato a buon fine'),500);
+				
+				setTimeout(function(){ 
+					location.href = $("#gestione_aziende_nav").attr("href");
+					}, 
+					1000);
 			});
+			
+
 		</script>
 		<%
 			session.setAttribute("errore_referente", 0);
