@@ -1,8 +1,11 @@
 package com.sincrono.corso;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,12 +16,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -33,62 +39,62 @@ import com.sincrono.corso.model.ReferenteService;
 @Controller
 public class AziendeController {
 
-	
+
 	@Autowired
 	AziendaService as;
-	
+
 	@Autowired
 	ReferenteService ref;
-	
+
 	@Autowired
 	CommessaService com;
-	
+
 	@RequestMapping(value = "/Aziende")
 	public String getAziende(Model m, HttpServletRequest request) {
-		
+
 		/** Blocca l'accesso alla pagina */		
 		if(!isLog(request))
 			return "Login";
-		
+
 		m.addAttribute("list_az", as.findAll());
-		
+
 		return "Aziende";
 	}
-	
+
 	@RequestMapping(value = "/GestioneAziende")
 	public String getGestioneAziende(Model m, HttpServletRequest request) {
-		
+
 		/** Blocca l'accesso alla pagina */		
 		if(!isLog(request)) 
 			return "Login";
-		
+
 		request.getSession().setAttribute("errore_aziende", 0);
 		m.addAttribute("list_az", as.findAll());
-		
+
 		return "GestioneAziende";
 	}
-	
+
 	@RequestMapping(value = "/GestioneAziendeAdd")
 	public String getGestioneAziendeAdd(Model m,HttpServletRequest request, 
 			@RequestParam("nomeAzienda") String nomeAzienda,
-            @RequestParam("emailAzienda") String emailAzienda, 
-            @RequestParam("indirizzoAzienda") String indirizzoAzienda,
-            @RequestParam("numdipAzienda") Integer numdipAzienda, 
-            @RequestParam("pivaAzienda") String pivaAzienda,
-            @RequestParam("societa") String societa,
-            @RequestParam("telefonoAzienda") String telefonoAzienda,
-            @RequestParam("statusAziendaAdd") byte statusAzienda) {
-		
+			@RequestParam("emailAzienda") String emailAzienda, 
+			@RequestParam("indirizzoAzienda") String indirizzoAzienda,
+			@RequestParam("numdipAzienda") Integer numdipAzienda, 
+			@RequestParam("pivaAzienda") String pivaAzienda,
+			@RequestParam("societa") String societa,
+			@RequestParam("telefonoAzienda") String telefonoAzienda,
+			@RequestParam("statusAziendaAdd") byte statusAzienda) {
+
 		/** Blocca l'accesso alla pagina */	
 		if(!isLog(request))
 			return "Login";
-		
+
 		boolean error = false;
-	
+
 		if(as.findByNomeAzienda(nomeAzienda).isEmpty() && as.findByEmailAzienda(emailAzienda).isEmpty() && as.findByPivaAzienda(pivaAzienda).isEmpty()) {
-			
+
 			error = false;
-			
+
 			Azienda azienda = new Azienda();
 			azienda.setNomeAzienda(nomeAzienda);
 			azienda.setTelefonoAzienda(telefonoAzienda);
@@ -99,61 +105,61 @@ public class AziendeController {
 			azienda.setNumdipAzienda(numdipAzienda);
 			azienda.setPivaAzienda(pivaAzienda);
 			as.save(azienda);
-	
+
 		}else {
-			
+
 			error = true;
-			
+
 			request.getSession().setAttribute("errore_aziende", 2);
 			m.addAttribute("list_az", as.findAll());
 			return "GestioneAziende";
 		}
-		
+
 		request.getSession().setAttribute("errore_aziende", 1);
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
 	}
-	
-	
-	
+
+
+
 	@RequestMapping(value = "/GestioneAziendeElimina")
 	public String getGestioneAziendeElimina(Model m, HttpServletRequest request, 
 			@RequestParam("nomeAziendaElimina") String nomeAzienda){
-		
+
 		/** Blocca l'accesso alla pagina */		
 		if(!isLog(request))
 			return "Login";
 
 		/** Elimina l'azienda, richiede l'identificativo */
 		as.deleteById(nomeAzienda);
-		
+
 		request.getSession().setAttribute("errore_aziende", 1);
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
 	}
-	
+
 	@RequestMapping(value = "/GestioneAziendeUpdate")
 	public String getGestioneAziendeModifica(Model m, HttpServletRequest request,
 			@RequestParam("nomeAzienda") String nomeAzienda,
-            @RequestParam("emailAzienda") String emailAzienda, 
-            @RequestParam("indirizzoAzienda") String indirizzoAzienda,
-            @RequestParam("numdipAzienda") Integer numdipAzienda, 
-            @RequestParam("pivaAzienda") String pivaAzienda,
-            @RequestParam("societa") String societa,
-            @RequestParam("telefonoAzienda") String telefonoAzienda,
-            @RequestParam("status_azienda_edit") byte statusAzienda){
-		
+			@RequestParam("emailAzienda") String emailAzienda, 
+			@RequestParam("indirizzoAzienda") String indirizzoAzienda,
+			@RequestParam("numdipAzienda") Integer numdipAzienda, 
+			@RequestParam("pivaAzienda") String pivaAzienda,
+			@RequestParam("societa") String societa,
+			@RequestParam("telefonoAzienda") String telefonoAzienda,
+			@RequestParam("status_azienda_edit") byte statusAzienda){
+
 		/** Blocca l'accesso alla pagina */
 		if(!isLog(request))
 			return "Login";
-		
+
 		as.updateAzienda(nomeAzienda, emailAzienda, indirizzoAzienda, numdipAzienda, pivaAzienda, societa, statusAzienda, telefonoAzienda);
-		
+
 		request.getSession().setAttribute("errore_aziende", 1);
 		m.addAttribute("list_az", as.findAll());
 		return "GestioneAziende";
 	}
-	
+
 	@RequestMapping("/GestioneAziendePrint")
 	public String getPrint(Model m, HttpServletRequest request,  
 			@RequestParam("nomeAziendaPrint") String nomeAzienda,
@@ -171,7 +177,7 @@ public class AziendeController {
 		createPDF(nomeAzienda, emailAzienda, indirizzoAzienda,
 				numdipAzienda, pivaAzienda, societa ,
 				telefonoAzienda );
-		
+
 		request.getSession().setAttribute("errore_aziende", 3);
 		m.addAttribute("list_az", as.findAll());
 
@@ -180,7 +186,7 @@ public class AziendeController {
 	}
 
 	/** Questo metodo crea il PDF con i dettagli dell'azienda, del referente e delle commesse */
-	
+
 	private void createPDF(String nomeAzienda,String emailAzienda, String indirizzoAzienda,
 			Integer numdipAzienda, String pivaAzienda, String societa ,
 			String telefonoAzienda ) {
@@ -194,6 +200,21 @@ public class AziendeController {
 		}
 
 		document.open();
+
+		Image image1;
+		try {
+			
+			image1 = Image.getInstance("src/main/resources/static/images/logo.PNG");
+			image1.setAbsolutePosition(450f, 750f);
+			//Scale to new height and new width of image
+			image1.scaleAbsolute(110, 80);
+			//Add to document
+			document.add(image1);
+			document.add(new Paragraph("\n\n\n"));
+			
+		} catch (Exception e2) {
+		}
+
 
 		PdfPTable table = new PdfPTable(2);
 
@@ -229,14 +250,13 @@ public class AziendeController {
 		table.addCell(new Phrase(indirizzoAzienda,font_val));
 		table.addCell(new Phrase("Numero Dipendenti",font_label));
 		table.addCell(new Phrase(Integer.toString(numdipAzienda),font_val));
-		
+
 		try {
 			document.add(table);
 		} catch (DocumentException e1) {
-			
-			e1.printStackTrace();
+
 		}
-		
+
 		//-------------------TABELLA REFERENTE--------------
 
 		PdfPTable table2 = new PdfPTable(2);
@@ -252,10 +272,10 @@ public class AziendeController {
 		azienda.setTelefonoAzienda(telefonoAzienda);
 
 		try {
-			
+
 			int idRef = ref.findIdRefByAziendaName(azienda);
 			Optional<Referente> referente = ref.findById(idRef);
-			
+
 			//---------------- add header -------
 			//		Font font_header2 = new Font(FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.BLACK);
 
@@ -327,10 +347,10 @@ public class AziendeController {
 			try {
 				document.add(table3);
 			} catch (DocumentException e) {
-				e.printStackTrace();
 			}
 		}
-		document.close();
+		document.close();	
+
 	}
 
 	/** Ritorna true se l'utente in sessione è loggato **/		
@@ -340,7 +360,7 @@ public class AziendeController {
 		}
 		return true;
 	}
-	
-	
-	
+
+
+
 }
