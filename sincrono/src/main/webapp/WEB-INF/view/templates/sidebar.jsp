@@ -79,7 +79,14 @@
 	    </li>
 
 	</c:if>
-
+	
+	<li class="nav-item" >
+      <a class="nav-link" href="ContactUs" id="contact_us"> 
+        <i class="fas fa-envelope-open"></i> &nbsp
+        <span class="menu-title">ContactUs</span>
+      </a>
+    </li>
+	
   </ul>
 </nav>
 
