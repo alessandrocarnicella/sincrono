@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -203,7 +201,7 @@ public class AziendeController {
 
 		Image image1;
 		try {
-			
+
 			image1 = Image.getInstance("src/main/resources/static/images/logo.PNG");
 			image1.setAbsolutePosition(450f, 750f);
 			//Scale to new height and new width of image
@@ -211,7 +209,7 @@ public class AziendeController {
 			//Add to document
 			document.add(image1);
 			document.add(new Paragraph("\n\n\n"));
-			
+
 		} catch (Exception e2) {
 		}
 
@@ -350,6 +348,27 @@ public class AziendeController {
 			}
 		}
 		document.close();	
+
+
+		String home = System.getProperty("user.home");
+		home = home + "/Downloads/";
+		File file = new File(home+"DETTAGLIO_AZIENDA_"+nomeAzienda+".pdf");
+		if (file.toString().endsWith(".pdf"))
+			try {
+				Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + file);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		else {
+			Desktop desktop = Desktop.getDesktop();
+			try {
+				desktop.open(file);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 
