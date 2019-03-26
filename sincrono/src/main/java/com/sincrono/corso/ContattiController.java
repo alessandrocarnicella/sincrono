@@ -18,10 +18,10 @@ public class ContattiController {
 		if(!isLog(request)) 
 			return "Login";
 	
-		return "ContactUS";
+		return "ContactUs";
 	}
 	
-	@RequestMapping(value = "/ContactUsMsg")
+	@RequestMapping(value = "/Contact_Msg")
 	public String getContattiMsg(Model m, HttpServletRequest request,
 			@RequestParam("cognome") String cognomePersona,
 			@RequestParam("nome") String nomePersona, 
@@ -31,9 +31,11 @@ public class ContattiController {
 		if(!isLog(request)) 
 			return "Login";
 		
-		inviaEmailInfo(cognomePersona,nomePersona,emailPersona,msg);
+		System.out.println("ciao");
 		
-		return "ContactUS";
+		inviaEmailInfo(cognomePersona,nomePersona,emailPersona,msg);
+		request.getSession().setAttribute("errore_contact", 1);
+		return "ContactUs";
 	}
 	
 	
@@ -51,7 +53,8 @@ public class ContattiController {
 	private void inviaEmailInfo(String cognomePersona, String nomePersona, String emailPersona, String msg) {
 
 		Mailer mail = new Mailer();
-		mail.send("nomec443@gmail.com","sincrono","nomec443@gmail.com","Sincronia "+ nomePersona+cognomePersona+" Problem",msg+ "\n\n\n Rispondere a: "+emailPersona);
+		mail.send("nomec443@gmail.com","sincrono","nomec443@gmail.com","[Sincronia-Ticket] ---"+ nomePersona +  " " + cognomePersona, msg+ "\n\n\n Rispondere a: "+emailPersona);
+		mail.send("nomec443@gmail.com","sincrono",emailPersona,"[Sincronia-Ticket] ---" + nomePersona + " " + cognomePersona, msg);
 
 	}
 }

@@ -24,7 +24,7 @@
 				<%@ include file="templates/sidebar.jsp"%>
 				<div class="main-panel  padd-55">
 					<div class="content-wrapper">
-						<%@ include file="templates/aziende.jsp"%>
+						<%@ include file="templates/contact_us.jsp"%>
 					</div>
 					<%@ include file="templates/footer.jsp"%>
 				</div>
