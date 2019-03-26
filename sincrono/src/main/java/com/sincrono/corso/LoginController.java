@@ -129,7 +129,7 @@ public class LoginController {
 
 		/* Aggiunge i parametri necessari in sessione */
 
-		m.addAttribute("error_login", false);
+		m.addAttribute("error_login", 0);
 		request.getSession().setAttribute("list_andamenti", andamenti);   
 
 		return "Dashboard";

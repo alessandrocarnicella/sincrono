@@ -13,7 +13,7 @@
 
 	<c:forEach items="${list_dip}" var="x" varStatus="count">
 		<div
-			class="col-xl-3 col-lg-4 col-sm-6 grid-margin stretch-card" id="U${count.count}"
+			class="col-xl-4 col-lg-4 col-sm-6 grid-margin stretch-card" id="U${count.count}"
 			onclick="launch_modal_utenti(id=${count.count})"
 			data-nomep="${x.persona.nomePersona}"  
 			data-cognomep="${x.persona.cognomePersona}"

@@ -16,6 +16,7 @@ import com.sincrono.corso.model.CategoriaService;
 import com.sincrono.corso.model.CommessaService;
 import com.sincrono.corso.model.Dipendente;
 import com.sincrono.corso.model.DipendenteService;
+import com.sincrono.corso.model.Mailer;
 import com.sincrono.corso.model.Persona;
 import com.sincrono.corso.model.PersonaService;
 
@@ -43,17 +44,16 @@ public class DipendenteController {
 
 		/* Aggiunge i parametri necessari in sessione */
 		m.addAttribute("list_dip", dip.findAll());
-		
+
 		return "Utenti";
 	}
 
 	@RequestMapping(value = "/GestioneUtenti")
 	public String getGestioneUtent(Model m,HttpServletRequest request) {
 
-		
 		//Optional<Dipendente> dipendente =(Optional<Dipendente>)request.getSession().getAttribute("dipendente");
 		//|| !dipendente.get().getCategoria().getId().getRuoloCat().equals("amministratore")
-	
+
 		/** Blocca l'accesso alla pagina */
 		if(!isLog(request))
 			return "Login";
@@ -62,7 +62,7 @@ public class DipendenteController {
 		/* Aggiunge i parametri necessari in sessione */
 		request.getSession().setAttribute("errore_dipendenti", 0);
 		m.addAttribute("list_dip", dip.findAll());
-		
+
 		return "GestioneUtenti";
 	}
 
@@ -84,15 +84,15 @@ public class DipendenteController {
 		boolean error = false;
 
 		/* Controlla l'esistena della persona tramite email */
-		
+
 		if(per.findByEmailPersona(emailPersona).isEmpty()) {
 
 			/** Crea la categoriaPK */
 			CategoriaPK categoriaPk = creaCategoriaPK(nome_cat,ruolo_cat);
-			
+
 			/** Crea la perosna */
 			Persona persona = creaPersona(nomePersona,cognomePersona,emailPersona);
-			
+
 			/** Aggiunge la persona */
 			per.save(persona);
 
@@ -100,7 +100,7 @@ public class DipendenteController {
 			Dipendente dipendente =  creaDipendente(statusDip,passwordDip,tariffaOraria,persona.getIdPersona());		
 
 			Categoria categoria = new Categoria();
-			
+
 			/* Controlla se esiste la categoria e se non esiste la crea */
 			try {
 				Optional<Categoria> opCat = cat.findById(categoriaPk);
@@ -111,12 +111,14 @@ public class DipendenteController {
 			}
 
 			dipendente.setCategoria(categoria);
-			
+
 			/** Aggiunge la persona */
 			dip.save(dipendente);
+
 		}else {
 			error = true;
-			
+
+
 			/* Aggiunge i parametri necessari in sessione */
 			request.getSession().setAttribute("errore_dipendenti", 2);
 			m.addAttribute("error_insert_persona", error);
@@ -124,7 +126,7 @@ public class DipendenteController {
 			return "GestioneUtenti";
 		}
 		error = false;
-		
+
 		/* Aggiunge i parametri necessari in sessione */
 		request.getSession().setAttribute("errore_dipendenti", 1);
 		m.addAttribute("error_insert_persona", error);
@@ -140,9 +142,8 @@ public class DipendenteController {
 		if(!isLog(request)) 
 			return "Login";
 
-		
 		Optional<Persona> pers = (Optional<Persona>)per.findById(idPersonadip);
-		
+
 		/** Elimina la commessa associata alla persona */
 		try {
 			int idCommessa = coms.findIdRefByPersona(pers.get());
@@ -150,18 +151,25 @@ public class DipendenteController {
 		}catch(Exception e) {
 
 		}
+		
+		/** Invio email Eliminazione */
+		Dipendente dipendente =  dip.findById(idPersonadip).get();
+		inviaEmailEliminaAccount(dipendente);
 
 		/** Elimina il dipendente associato alla persona */
 		dip.deleteById(idPersonadip);
-		
+
 		/** Elimina la persona  */
 		per.deleteById(idPersonadip);
 
 		/* Aggiunge i parametri necessari in sessione */
+
 		request.getSession().setAttribute("errore_dipendenti", 1);
 		m.addAttribute("list_dip", dip.findAll());
 		return "GestioneUtenti";
 	}
+
+
 
 	@RequestMapping(value = "/GestioneUtenteUpdate")
 	public String getGestioneAziendeModifica(Model m, HttpServletRequest request,
@@ -192,20 +200,26 @@ public class DipendenteController {
 			categoria.setId(categoriaPk);
 			cat.save(categoria);
 		}
-		
+
 		/** Aggiorna la persona */
 		per.updatePersona(idPersonadip, cognomePersona, nomePersona, emailPersona);
 
 		/** Aggiorna il dipendente */
 		dip.updateDipendente(idPersonadip, passwordDip, nome_cat, ruolo_cat, tariffaOraria, statusDip);
 
+		/** Invio email Disabilitazione */
+		if(statusDip == 0) {
+			Dipendente dipendente =  dip.findById(idPersonadip).get();
+			inviaEmailDisableAccount(dipendente);
+		}
+
 		/* Aggiunge i parametri necessari in sessione */
 		request.getSession().setAttribute("errore_dipendenti", 1);
 		m.addAttribute("list_dip", dip.findAll());
 		return "GestioneUtenti";
 	}
-	
-	
+
+
 	/** Questo metodo crea un dipendente, ritorna il dipendente creato **/
 	private Dipendente creaDipendente(byte statusDip, String passwordDip, double tariffaOraria, int idPersona) {
 		Dipendente dipendente =  new Dipendente();
@@ -232,13 +246,43 @@ public class DipendenteController {
 		categoriaPk.setRuoloCat(ruolo_cat);
 		return categoriaPk;
 	}
-	
+
 	/** Ritorna true se l'utente in sessione è loggato **/
 	private boolean isLog(HttpServletRequest request) {
 		if(!(boolean) request.getSession().getAttribute("isLogged")) {
 			return false;
 		}
 		return true;
+	}
+
+	/** Invia email di Disabilitazione account */
+	private void inviaEmailDisableAccount(Dipendente dipendente) {
+
+		String msg = " Ciao "+dipendente.getPersona().getNomePersona()+ " "+ dipendente.getPersona().getCognomePersona()+",\n\n il tuo account è stato disabilitato.\n\n Per ulteriori informazioni scrivi a nomec443@gmail.com.\n\n Cordiali saluti,\n Sincronia";
+		Mailer mail = new Mailer();
+		mail.send("nomec443@gmail.com","sincrono",dipendente.getPersona().getEmailPersona(),"Sincronia Disabilitazione account",msg);
+
+
+	}
+	
+	/** Invia email di Creazione account */
+	private void inviaEmailCreateAccount(Dipendente dipendente) {
+
+		String msg = " Ciao "+dipendente.getPersona().getNomePersona()+ " "+ dipendente.getPersona().getCognomePersona()+",\n\n il tuo account è stato cretao con successo.\n\n Cordiali saluti,\n\n Sincronia";
+		Mailer mail = new Mailer();
+		mail.send("nomec443@gmail.com","sincrono",dipendente.getPersona().getEmailPersona(),"Sincronia Creazione account",msg);
+
+
+	}
+	
+	/** Invia email di Eliminazione account */
+	private void inviaEmailEliminaAccount(Dipendente dipendente) {
+
+		String msg = " Ciao "+dipendente.getPersona().getNomePersona()+ " "+ dipendente.getPersona().getCognomePersona()+",\n\n il tuo account è stato eliminato.\n\n Cordiali saluti,\n\n Sincronia";
+		Mailer mail = new Mailer();
+		mail.send("nomec443@gmail.com","sincrono",dipendente.getPersona().getEmailPersona(),"Sincronia Eliminazione account",msg);
+
+
 	}
 
 }
