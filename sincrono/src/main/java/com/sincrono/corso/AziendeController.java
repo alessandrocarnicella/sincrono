@@ -230,7 +230,7 @@ public class AziendeController {
 		Image image1;
 		try {
 
-			image1 = Image.getInstance("src/main/resources/static/images/logo.PNG");
+			image1 = Image.getInstance("src/main/resources/static/images/logo.png");
 			image1.setAbsolutePosition(450f, 750f);
 			//Scale to new height and new width of image
 			image1.scaleAbsolute(110, 80);
