@@ -5,15 +5,22 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -158,8 +165,8 @@ public class AziendeController {
 		return "GestioneAziende";
 	}
 
-	@RequestMapping("/GestioneAziendePrint")
-	public String getPrint(Model m, HttpServletRequest request,  
+	@RequestMapping(value="/GestioneAziendePrint", method=RequestMethod.POST)
+	public ResponseEntity<byte[]> getPrint(Model m, HttpServletRequest request,  
 			@RequestParam("nomeAziendaPrint") String nomeAzienda,
 			@RequestParam("emailAzienda") String emailAzienda, 
 			@RequestParam("indirizzoAzienda") String indirizzoAzienda,
@@ -168,26 +175,47 @@ public class AziendeController {
 			@RequestParam("societa") String societa ,
 			@RequestParam("telefonoAzienda") String telefonoAzienda) {
 
-		/*Blocco accesso alla pagina se non loggato*/		
-		if(!isLog(request))
-			return "Login";
-
 		createPDF(nomeAzienda, emailAzienda, indirizzoAzienda,
 				numdipAzienda, pivaAzienda, societa ,
 				telefonoAzienda );
+		
+		String home = System.getProperty("user.home");
+		home = home + "/Downloads/DETTAGLIO_AZIENDA_"+nomeAzienda+".pdf";
+		
+		File file = new File(home);
+		
+		byte[] contents = null;
+		
+		try {
+			contents = Files.readAllBytes(file.toPath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.parseMediaType("application/pdf"));
+	   
+	    // Here you have to set the actual filename of your pdf
+	    String filename = "dettaglio_azienda_"+nomeAzienda+".pdf";
+	    headers.setContentDispositionFormData(filename, filename);
+	    headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+	    ResponseEntity<byte[]> response = new ResponseEntity<>(contents, headers, HttpStatus.OK);
+	    
+	    return response;
+		
 
-		request.getSession().setAttribute("errore_aziende", 3);
-		m.addAttribute("list_az", as.findAll());
-
-		return "GestioneAziende";
 
 	}
 
-	/** Questo metodo crea il PDF con i dettagli dell'azienda, del referente e delle commesse */
+	/** Questo metodo crea il PDF con i dettagli dell'azienda, del referente e delle commesse 
+	 **/
 
 	private void createPDF(String nomeAzienda,String emailAzienda, String indirizzoAzienda,
 			Integer numdipAzienda, String pivaAzienda, String societa ,
 			String telefonoAzienda ) {
+		
 		Document document = new Document();
 		try {
 			String home = System.getProperty("user.home");
@@ -349,26 +377,7 @@ public class AziendeController {
 		}
 		document.close();	
 
-
-		String home = System.getProperty("user.home");
-		home = home + "/Downloads/";
-		File file = new File(home+"DETTAGLIO_AZIENDA_"+nomeAzienda+".pdf");
-		if (file.toString().endsWith(".pdf"))
-			try {
-				Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + file);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		else {
-			Desktop desktop = Desktop.getDesktop();
-			try {
-				desktop.open(file);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+	
 
 	}
 
