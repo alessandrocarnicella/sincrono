@@ -313,6 +313,9 @@
 				</div>
 			</div>
 		</div>
+		<button onclick="topFunction()" id="myBtn" title="Go to top">
+			<i class="fas fa-arrow-up fa-2x text-primary"></i>
+		</button>
 		<!-- ######################################## END ROW CONTAINER GESTIONE AZIENDE ############################################################## -->
 
 		<!-- ######################################## START MODAL ############################################################## -->
@@ -669,6 +672,23 @@ function edit(id){
 	
 	$("#save-ref"+id).prop("disabled",false);
 	
+}
+
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
 }
 
 </script>

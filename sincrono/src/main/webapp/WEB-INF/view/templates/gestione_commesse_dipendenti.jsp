@@ -79,8 +79,11 @@
 				</div>
 			</div>
 	</div>
+	<button onclick="topFunction()" id="myBtn" title="Go to top">
+		<i class="fas fa-arrow-up fa-2x text-primary"></i>
+	</button>
 	
-			<!--  START MODAL ADD COMMESSE -->
+	<!--  START MODAL ADD COMMESSE -->
 	<div class="modal fade" id="modal-add-commessa" role="dialog">
 		<div class="modal-dialog">
 
@@ -294,4 +297,23 @@ function notify_success() {
 
 };
 </script>
-	
+
+
+<script>
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
+</script>

@@ -65,33 +65,27 @@
 	
 	</c:when>
 	<c:otherwise>
+		<div class="row">
+			<div class="col-3"></div>
+			<div class="col-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+               	  	<img src="images/sirena.gif" class="w-50px" >
+               		<h4 class="card-title d-inline">Benvenuto in Sincronia!</h4>
+                  	<div class="media">
+                    	<div class="media-body">
+                      		<p class="card-text">Testo provvisorio</p>
+                    	</div>
+                  	</div>                  
+                </div>
+              </div>
+           	</div>
+		</div>
 	</c:otherwise>
 </c:choose>
 
 
-
-<style>
-
-#myBtn {
-  	display: none;
-	position: fixed;
-    bottom: 45px;
-    right: 30px;
-    z-index: 99;
-    font-size: 15px;
-    border: none;
-    outline: none;
-    background-color: #FFF0;
-    color: white;
-    cursor: pointer;
-    padding: 10px;
-}
-
-
-</style>
-
 <script>
-// When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
@@ -107,6 +101,7 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
 </script>
 
 

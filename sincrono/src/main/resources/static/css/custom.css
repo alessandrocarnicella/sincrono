@@ -57,3 +57,18 @@
 .w-50px{
 	width: 50px;
 }
+
+#myBtn {
+  	display: none;
+	position: fixed;
+    bottom: 45px;
+    right: 30px;
+    z-index: 99;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    background-color: #FFF0;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+}
