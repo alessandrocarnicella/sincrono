@@ -45,7 +45,7 @@
 										<tr>
 											<td class="py-1"><img src="../../images/faces-clipart/pic-1.png" alt="image"></td>
 											<td>${x.persona.nomePersona}&nbsp${x.persona.cognomePersona}</td>
-											<td>${x.tariffaOraria}</td>
+											<td class="text-center">${x.tariffaOraria}</td>
 											<td class="text-center">
 												<c:choose>
 													<c:when test="${x.statusDip eq 1}">

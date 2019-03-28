@@ -1,6 +1,5 @@
 <c:choose>
-	<c:when
-		test="${categoria == 'Amministratore' or categoria == 'Commerciale'}">
+	<c:when test="${categoria == 'Amministratore' or categoria == 'Commerciale'}">
 
 		<!-- ######################################## START ROW CONTAINER GESTIONE AZIENDE ############################################################## -->
 		<div class="row">

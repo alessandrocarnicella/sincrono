@@ -185,7 +185,7 @@
 							<select class="form-control form-control-sm" name="idDipendente" id="select-option-commessadip" required>
 								<option selected disabled="disabled" value="">Identificativo Dipendente</option>
 								<c:forEach items="${list_dip}" var="x">
-									<option value="${x.persona.idPersona}">${x.persona.nomePersona}&nbsp${x.persona.cognomePersona}</option>
+									<option value="${x.persona.idPersona}">${x.persona.nomePersona}&nbsp${x.persona.cognomePersona}&nbsp[${x.tariffaOraria}Euro]</option>
 								</c:forEach>
 							</select>
 						</div>
