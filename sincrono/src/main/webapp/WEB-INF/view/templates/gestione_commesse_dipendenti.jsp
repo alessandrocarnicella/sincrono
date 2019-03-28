@@ -109,7 +109,7 @@
 		                    <select class="form-control form-control-sm" name="idDipendente" required>
 	                    	  <option selected disabled="disabled" value="">Dipendente Associato</option>    
 		                     	<c:forEach items="${list_dip}" var="x">
-		                     		<option value="${x.persona.idPersona}">${x.persona.nomePersona}&nbsp${x.persona.cognomePersona}</option> 
+		                     		<option value="${x.persona.idPersona}">${x.persona.nomePersona}&nbsp${x.persona.cognomePersona}&nbsp[${x.tariffaOraria}Euro/Ora]</option> 
 		                     	</c:forEach>
 		                    </select>
 		                  </div>
