@@ -66,20 +66,21 @@
 	</c:when>
 	<c:otherwise>
 		<div class="row">
-			<div class="col-3"></div>
-			<div class="col-6 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-               	  	<img src="images/sirena.gif" class="w-50px" >
-               		<h4 class="card-title d-inline">Benvenuto in Sincronia!</h4>
-                  	<div class="media">
-                    	<div class="media-body">
-                      		<p class="card-text">Testo provvisorio</p>
-                    	</div>
-                  	</div>                  
-                </div>
-              </div>
-           	</div>
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-body">
+					<i class="fab fa-twitter"></i>
+						<h4 class="card-title d-inline">Sincrono!</h4>
+						<div class="media">
+							<div class="media-body">
+								<p class="card-text">Bentornato!</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			
 		</div>
 	</c:otherwise>
 </c:choose>
