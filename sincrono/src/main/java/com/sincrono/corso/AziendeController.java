@@ -239,6 +239,7 @@ public class AziendeController {
 			document.add(new Paragraph("\n\n\n"));
 
 		} catch (Exception e2) {
+			System.out.println("errore: "+e2);
 		}
 
 

@@ -58,7 +58,7 @@ public class LoginController {
 		/* Crea la sessione */
 
 		boolean isLogged = false;
-
+			
 		/* Aggiunge i parametri necessari in sessione */
 
 		request.getSession().setAttribute("isLogged", isLogged);

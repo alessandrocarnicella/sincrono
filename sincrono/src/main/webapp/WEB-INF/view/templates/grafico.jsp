@@ -31,8 +31,6 @@
 		<i class="fas fa-arrow-up fa-2x text-primary"></i>
 	</button>
 	
-	<c:choose>
-		<c:when test="${categoria == 'Amministratore' or categoria == 'Commerciale'}">	
 			<div class="col-lg-12 grid-margin stretch-card">
 				<div class="card">
 	
@@ -91,10 +89,7 @@
 				</div>
 			</div>
 		</c:forEach>
-		</c:when>
-		<c:otherwise>
-		</c:otherwise>
-	</c:choose>
+
 </div>
 
 <script
